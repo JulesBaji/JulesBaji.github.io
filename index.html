@@ -1,80 +1,40 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Gaussiennes Sphériques : Comparatif</title>
-    <meta charset="UTF-8">
+    <title>Test JuxtaposeJS</title>
+    <!-- Charger les styles de JuxtaposeJS -->
+    <link rel="stylesheet" href="https://cdn.knightlab.com/libs/juxtapose/latest/css/juxtapose.css">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-            line-height: 1.6;
-        }
-        h1 {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-        .slider-container {
-            margin: 40px 0;
-            border: 1px solid #eee;
-            padding: 20px;
-            border-radius: 8px;
-        }
-        h2 {
-            color: #333;
-            font-size: 1.4em;
-            margin-bottom: 15px;
+        .juxtapose {
+            max-width: 800px; /* Taille réduite pour le test */
+            margin: 40px auto; /* Espace entre les sliders */
         }
     </style>
-    <!-- Charger JuxtaposeJS - Version spécifique pour stabilité -->
-    <link rel="stylesheet" href="https://cdn.knightlab.com/libs/juxtapose/1.1.10/css/juxtapose.css">
 </head>
 <body>
-    <h1>Comparaison visuelle Gsplat/SGsplat</h1>
+    <h1>Test avec plusieurs sliders</h1>
+    <p>Si cette page fonctionne, le problème vient du chemin de vos images.</p>
+
+    <!-- Premier slider avec des images de test -->
+    <div class="juxtapose">
+        <img src="https://picsum.photos/id/237/800/600" data-label="Chien" />
+        <img src="https://picsum.photos/id/1025/800/600" data-label="Autre Chien" />
+    </div>
+
+    <!-- Deuxième slider avec d'autres images de test -->
+    <div class="juxtapose">
+        <img src="https://picsum.photos/id/1062/800/600" data-label="Paysage 1" />
+        <img src="https://picsum.photos/id/1074/800/600" data-label="Paysage 2" />
+    </div>
     
-    <!-- Premier slider -->
-    <div class="slider-container">
-        <h2>Comparaison principale</h2>
-        <div class="juxtapose" id="slider1">
-            <img src="images/gsplat.png" data-label="Reference" />
-            <img src="images/sg.png" data-label="Ours" />
-        </div>
+    <!-- Troisième slider pour bien prouver que ça marche -->
+    <div class="juxtapose">
+        <img src="https://picsum.photos/id/433/800/600" data-label="Ville" />
+        <img src="https://picsum.photos/id/494/800/600" data-label="Train" />
     </div>
 
-    <!-- Deuxième slider -->
-    <div class="slider-container">
-        <h2>Comparaison secondaire</h2>
-        <div class="juxtapose" id="slider2">
-            <img src="images/gsplat2.jpg" data-label="Avant" />
-            <img src="images/sg2.jpg" data-label="Après" />
-        </div>
-    </div>
 
-    <!-- Script JuxtaposeJS avec initialisation garantie -->
-    <script src="https://cdn.knightlab.com/libs/juxtapose/1.1.10/js/juxtapose.min.js"></script>
-    <script>
-        // Solution infaillible pour l'initialisation
-        function initSliders() {
-            // Vérifie si la lib est chargée
-            if (typeof juxtapose === 'undefined') {
-                setTimeout(initSliders, 100);
-                return;
-            }
-            
-            // Crée les sliders avec des IDs uniques
-            new juxtapose.JXSlider(document.getElementById('slider1'));
-            new juxtapose.JXSlider(document.getElementById('slider2'));
-            
-            console.log("Sliders initialisés avec succès");
-        }
-
-        // Lance l'initialisation quand tout est prêt
-        if (document.readyState !== 'loading') {
-            initSliders();
-        } else {
-            document.addEventListener('DOMContentLoaded', initSliders);
-        }
-    </script>
+    <!-- Script JuxtaposeJS -->
+    <script src="https://cdn.knightlab.com/libs/juxtapose/latest/js/juxtapose.min.js"></script>
 </body>
 </html>
