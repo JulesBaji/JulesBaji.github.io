@@ -5,14 +5,27 @@
     <!-- Charger JuxtaposeJS -->
     <link rel="stylesheet" href="https://cdn.knightlab.com/libs/juxtapose/latest/css/juxtapose.css">
     <style>
-        /* Limite la largeur du slider et centre-le */
-        .juxtapose {
-            max-width: 1920px;  /* Ajustez cette valeur */
-            margin: 0 auto;   /* Centre le slider */
+        /* Style général */
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
         }
-        /* Optionnel : réduit la taille des étiquettes "Reference/Ours" */
-        .jx-label {
-            font-size: 14px !important;
+        
+        /* Conteneur du slider */
+        .slider-container {
+            margin: 40px 0;
+        }
+        
+        /* Style des sliders Juxtapose */
+        .juxtapose {
+            width: 100%;
+            margin: 20px 0;
+        }
+        
+        .jx-arrow {
+            color: white !important;
         }
     </style>
 </head>
@@ -20,18 +33,36 @@
     <h1>Gsplat/SGsplat Slider</h1>
     
     <!-- Premier slider -->
-    <div class="juxtapose">
-        <img src="images/gsplat.png" data-label="Reference" />
-        <img src="images/sg.png" data-label="Ours" />
+    <div class="slider-container">
+        <h2>Comparaison 1</h2>
+        <div class="juxtapose" data-startingposition="50%">
+            <img src="images/gsplat.png" data-label="Reference" />
+            <img src="images/sg.png" data-label="Ours" />
+        </div>
     </div>
 
     <!-- Deuxième slider -->
-    <div class="juxtapose">
-        <img src="images/gsplat.jpg" data-label="Reference" />
-        <img src="images/sg.jpg" data-label="Ours" />
+    <div class="slider-container">
+        <h2>Comparaison 2</h2>
+        <div class="juxtapose" data-startingposition="50%">
+            <img src="images/gsplat2.jpg" data-label="Avant" />
+            <img src="images/sg2.jpg" data-label="Après" />
+        </div>
     </div>
 
-    <!-- Script JuxtaposeJS -->
+    <!-- Script JuxtaposeJS avec initialisation manuelle -->
     <script src="https://cdn.knightlab.com/libs/juxtapose/latest/js/juxtapose.min.js"></script>
+    <script>
+        // Initialisation manuelle après le chargement de la page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Sélectionne tous les sliders
+            const sliders = document.querySelectorAll('.juxtapose');
+            
+            // Initialise chaque slider
+            sliders.forEach(slider => {
+                new juxtapose.JXSlider(slider);
+            });
+        });
+    </script>
 </body>
 </html>
