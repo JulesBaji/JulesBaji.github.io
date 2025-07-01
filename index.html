@@ -1,44 +1,186 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
-    <title>Test JuxtaposeJS</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rapport de Stage - Annexes</title>
+    
+    <!-- Charger la police depuis Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Montserrat:wght@600&display=swap" rel="stylesheet">
+
     <!-- Charger les styles de JuxtaposeJS -->
     <link rel="stylesheet" href="https://cdn.knightlab.com/libs/juxtapose/latest/css/juxtapose.css">
+    
+    <!-- Nos styles personnalisés -->
     <style>
-        .juxtapose {
-            max-width: 1920px; /* Taille réduite pour le test */
-            margin: 40px auto; /* Espace entre les sliders */
+        /* Variables de couleur pour changer facilement le design */
+        :root {
+            --bg-color: #f4f7f6; /* Fond gris très clair */
+            --card-color: #ffffff; /* Fond des cartes */
+            --text-color: #333333; /* Couleur du texte principal */
+            --title-color: #2c3e50; /* Couleur du titre principal (bleu marine foncé) */
+            --subtitle-color: #7f8c8d; /* Couleur du sous-titre (gris) */
+            --accent-color: #3498db; /* Couleur d'accent pour les titres de section (bleu) */
+            --shadow-color: rgba(0, 0, 0, 0.08); /* Couleur de l'ombre */
         }
+
+        /* Styles globaux */
+        body {
+            font-family: 'Lato', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* En-tête de la page */
+        header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        header h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5rem;
+            color: var(--title-color);
+            margin-bottom: 0.5rem;
+        }
+
+        header h2 {
+            font-size: 1.2rem;
+            font-weight: 400;
+            color: var(--subtitle-color);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Cartes pour chaque dataset */
+        .dataset-card {
+            background-color: var(--card-color);
+            border-radius: 12px;
+            padding: 2rem 2.5rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 6px 20px var(--shadow-color);
+            transition: transform 0.2s ease-in-out;
+        }
+        
+        .dataset-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .dataset-card h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.8rem;
+            color: var(--accent-color);
+            border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 0.75rem;
+            margin-top: 0;
+            margin-bottom: 2rem;
+        }
+
+        /* Conteneur pour chaque slider */
+        .slider-container {
+            margin-bottom: 2.5rem;
+        }
+        
+        .slider-container:last-child {
+            margin-bottom: 0;
+        }
+
+        .slider-title {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #555;
+            margin-bottom: 1rem;
+        }
+
+        /* Style du slider Juxtapose */
+        .juxtapose {
+            border-radius: 8px; /* Coins arrondis pour le slider */
+            overflow: hidden;   /* S'assure que les images ne dépassent pas */
+        }
+
+        /* Pied de page */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            font-size: 0.9rem;
+            color: #95a5a6;
+            margin-top: 2rem;
+        }
+
     </style>
 </head>
 <body>
-    <h1>Test avec plusieurs sliders</h1>
-    <p>Si cette page fonctionne, le problème vient du chemin de vos images.</p>
 
-    <!-- Premier slider avec des images de test -->
-    <div class="juxtapose">
-        <img src="images/gsplat.png" data-label="Reference" />
-        <img src="images/sg.png" data-label="Ours" />
+    <div class="container">
+
+        <header>
+            <h1>Rapport de stage - Annexes</h1>
+            <h2>Rendu gaussien basé sur le ray tracing pour les réfractions et réflexions</h2>
+        </header>
+
+        <main>
+            <!-- CARTE POUR LE DATASET "TWINGO" -->
+            <section class="dataset-card">
+                <h3>Dataset: Scène Twingo</h3>
+
+                <div class="slider-container">
+                    <p class="slider-title">Comparaison 1 : Vue d'ensemble</p>
+                    <div class="juxtapose">
+                        <img src="images/gsplat.png" data-label="Reference (gsplat)" />
+                        <img src="images/sg.png" data-label="Ours (sg-splat)" />
+                    </div>
+                </div>
+
+                <div class="slider-container">
+                    <p class="slider-title">Comparaison 2 : Zoom sur les reflets de la carrosserie</p>
+                    <div class="juxtapose">
+                        <img src="images/gsplat2.png" data-label="Reference (gsplat)" />
+                        <img src="images/sg2.png" data-label="Ours (sg-splat)" />
+                    </div>
+                </div>
+            </section>
+
+            <!-- CARTE POUR LE DATASET "GARDEN" -->
+            <section class="dataset-card">
+                <h3>Dataset: Scène Jardin</h3>
+
+                <div class="slider-container">
+                    <p class="slider-title">Comparaison 1 : Réfractions à travers la sphère de verre</p>
+                    <div class="juxtapose">
+                        <img src="images/garden_gsplat.png" data-label="Reference (gsplat)" />
+                        <img src="images/garden_sg.png" data-label="Ours (sg-splat)" />
+                    </div>
+                </div>
+
+                <div class="slider-container">
+                    <p class="slider-title">Comparaison 2 : Détails des caustiques</p>
+                    <div class="juxtapose">
+                        <img src="images/garden_gsplat2.png" data-label="Reference (gsplat)" />
+                        <img src="images/garden_sg2.png" data-label="Ours (sg-splat)" />
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>© 2024 - Votre Nom</p>
+        </footer>
+
     </div>
 
-    <!-- Deuxième slider avec d'autres images de test -->
-    <div class="juxtapose">
-        <img src="images/gsplat2.png" data-label="Reference" />
-        <img src="images/sg2.png" data-label="Ours" />
-    </div>
-    
-    <!-- Troisième slider pour bien prouver que ça marche -->
-    <div class="juxtapose">
-        <img src="images/garden_gsplat.png" data-label="Reference" />
-        <img src="images/garden_sg.png" data-label="Ours" />
-    </div>
-
-    <div class="juxtapose">
-        <img src="images/garden_gsplat2.png" data-label="Reference" />
-        <img src="images/garden_sg2.png" data-label="Ours" />
-    </div>
-
-    <!-- Script JuxtaposeJS -->
+    <!-- Script JuxtaposeJS (à la fin) -->
     <script src="https://cdn.knightlab.com/libs/juxtapose/latest/js/juxtapose.min.js"></script>
+
 </body>
 </html>
