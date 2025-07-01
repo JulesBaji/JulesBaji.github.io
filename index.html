@@ -3,58 +3,90 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Annexes - [Votre Nom/Titre du Projet]</title>
-    <!-- Lien vers la librairie Swiper.js (CSS) -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
-    <!-- Lien vers votre propre CSS -->
+    <title>Comparaison d'images</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
     <header>
-        <h1>Annexes du Projet</h1>
-        <p>Faites glisser les images pour naviguer.</p>
+        <h1>Comparaison d'images</h1>
+        <p>Déplacez le curseur pour comparer les deux images.</p>
     </header>
 
-    <!-- La structure du Slider -->
-    <div class="swiper">
-        <div class="swiper-wrapper">
-            <!-- Chaque "swiper-slide" est une image de votre slider -->
-            <div class="swiper-slide">
-                <img src="images/image1.jpg" alt="Description de l'image 1">
-                <div class="caption">Légende pour l'image 1</div>
-            </div>
-            <div class="swiper-slide">
-                <img src="images/image2.jpg" alt="Description de l'image 2">
-                <div class="caption">Légende pour l'image 2</div>
-            </div>
-            <div class="swiper-slide">
-                <img src="images/image3.png" alt="Description de l'image 3">
-                <div class="caption">Légende pour l'image 3</div>
-            </div>
-            <!-- Ajoutez autant de slides que vous voulez -->
+    <!-- Le conteneur pour la comparaison d'images -->
+    <div class="image-compare-container">
+        <!-- L'image de droite (superposée) -->
+        <div class="image-compare-after">
+            <img src="images/gsplat.png" alt="Image après (gsplat.png)">
         </div>
-        <!-- Boutons de navigation -->
-        <div class="swiper-button-prev"></div>
-        <div class="swiper-button-next"></div>
-        <!-- Pagination (les petits points) -->
-        <div class="swiper-pagination"></div>
+        <!-- L'image de gauche (en dessous) -->
+        <div class="image-compare-before">
+            <img src="images/sg.png" alt="Image avant (sg.png)">
+        </div>
+        <!-- Le curseur/la barre verticale -->
+        <div class="image-compare-slider"></div>
     </div>
 
-    <!-- Lien vers la librairie Swiper.js (JavaScript) -->
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
-    <!-- Votre script pour initialiser le slider -->
     <script>
-        const swiper = new Swiper('.swiper', {
-            loop: true, // Pour que le slider boucle
-            pagination: {
-                el: '.swiper-pagination',
-            },
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            },
+        // On sélectionne les éléments nécessaires
+        const container = document.querySelector('.image-compare-container');
+        const slider = document.querySelector('.image-compare-slider');
+        const afterImage = document.querySelector('.image-compare-after');
+
+        // Une variable pour savoir si on est en train de faire glisser le curseur
+        let isDragging = false;
+
+        // Fonction pour déplacer le curseur et l'image
+        function moveSlider(x) {
+            // On calcule la position du curseur par rapport au conteneur
+            const containerRect = container.getBoundingClientRect();
+            let position = x - containerRect.left;
+
+            // On s'assure que le curseur ne sorte pas du conteneur
+            if (position < 0) position = 0;
+            if (position > containerRect.width) position = containerRect.width;
+
+            // On met à jour la position du curseur et la largeur de l'image de droite
+            const percentage = (position / containerRect.width) * 100;
+            slider.style.left = percentage + '%';
+            afterImage.style.width = percentage + '%';
+        }
+
+        // On écoute les événements de la souris
+        slider.addEventListener('mousedown', () => {
+            isDragging = true;
         });
+
+        // On écoute aussi sur le conteneur pour une meilleure expérience utilisateur
+        container.addEventListener('mousemove', (e) => {
+            if (isDragging) {
+                moveSlider(e.clientX);
+            }
+        });
+
+        // On arrête le déplacement quand on relâche le bouton de la souris
+        window.addEventListener('mouseup', () => {
+            isDragging = false;
+        });
+
+        // On fait la même chose pour les écrans tactiles
+        slider.addEventListener('touchstart', () => {
+            isDragging = true;
+        });
+
+        container.addEventListener('touchmove', (e) => {
+            if (isDragging) {
+                // On empêche le défilement de la page pendant le glissement
+                e.preventDefault(); 
+                moveSlider(e.touches[0].clientX);
+            }
+        });
+
+        window.addEventListener('touchend', () => {
+            isDragging = false;
+        });
+
     </script>
 </body>
 </html>

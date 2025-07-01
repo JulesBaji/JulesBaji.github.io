@@ -1,12 +1,13 @@
 body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    background-color: #f4f4f9;
+    background-color: #f0f2f5;
     color: #333;
     margin: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 2rem;
+    box-sizing: border-box;
 }
 
 header {
@@ -14,28 +15,85 @@ header {
     margin-bottom: 2rem;
 }
 
-.swiper {
-    width: 80%;
+/* Le conteneur principal */
+.image-compare-container {
+    position: relative; /* Indispensable pour positionner les éléments enfants */
+    width: 90%;
     max-width: 800px;
-    height: auto;
     border-radius: 10px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    overflow: hidden; /* Cache ce qui dépasse */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    /* On force un ratio pour éviter les sauts de page au chargement */
+    aspect-ratio: 16 / 9; 
 }
 
-.swiper-slide {
-    text-align: center;
-    background: #fff;
+/* Styles communs aux deux conteneurs d'images */
+.image-compare-before,
+.image-compare-after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
 }
 
-.swiper-slide img {
+/* Le conteneur de l'image de droite (celle qui est coupée) */
+.image-compare-after {
+    /* On commence à 50% de largeur pour voir les deux images */
+    width: 50%; 
+    z-index: 2; /* Pour être au-dessus de l'image "before" */
+}
+
+/* Styles pour les images elles-mêmes */
+.image-compare-container img {
     display: block;
     width: 100%;
-    height: auto;
-    object-fit: cover;
+    height: 100%;
+    /* S'assure que l'image remplit le conteneur sans se déformer */
+    object-fit: cover; 
+    /* Empêche l'utilisateur de glisser l'image, ce qui gênerait notre slider */
+    user-select: none;
+    -webkit-user-drag: none;
 }
 
-.caption {
-    padding: 15px;
-    font-size: 0.9em;
-    color: #555;
+/* Le curseur (la barre verticale) */
+.image-compare-slider {
+    position: absolute;
+    top: 50%;
+    left: 50%; /* Positionné au milieu au départ */
+    width: 40px;
+    height: 40px;
+    background-color: white;
+    border: 2px solid #333;
+    border-radius: 50%;
+    /* On le centre parfaitement sur sa position */
+    transform: translate(-50%, -50%); 
+    cursor: ew-resize; /* Curseur "gauche-droite" pour indiquer l'action */
+    z-index: 3; /* Pour être au-dessus de tout */
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+/* La ligne verticale qui traverse toute l'image */
+.image-compare-slider::before {
+    content: '';
+    position: absolute;
+    width: 2px;
+    height: 100vh; /* Assez haut pour toujours traverser l'image */
+    background-color: white;
+    /* On la centre et on la positionne derrière le cercle */
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+    mix-blend-mode: difference; /* Effet de couleur intéressant sur l'image */
+}
+
+/* Les petites flèches dans le curseur */
+.image-compare-slider::after {
+    content: '◀▶';
+    font-size: 14px;
+    color: #333;
 }
