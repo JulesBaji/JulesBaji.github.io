@@ -2,40 +2,41 @@
 <html>
 <head>
     <title>Gaussiennes Sphériques : Comparatif</title>
-    <!-- Charger JuxtaposeJS -->
-    <link rel="stylesheet" href="https://cdn.knightlab.com/libs/juxtapose/latest/css/juxtapose.css">
+    <meta charset="UTF-8">
     <style>
-        /* Style général */
         body {
             font-family: Arial, sans-serif;
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
+            line-height: 1.6;
         }
-        
-        /* Conteneur du slider */
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
         .slider-container {
             margin: 40px 0;
+            border: 1px solid #eee;
+            padding: 20px;
+            border-radius: 8px;
         }
-        
-        /* Style des sliders Juxtapose */
-        .juxtapose {
-            width: 100%;
-            margin: 20px 0;
-        }
-        
-        .jx-arrow {
-            color: white !important;
+        h2 {
+            color: #333;
+            font-size: 1.4em;
+            margin-bottom: 15px;
         }
     </style>
+    <!-- Charger JuxtaposeJS - Version spécifique pour stabilité -->
+    <link rel="stylesheet" href="https://cdn.knightlab.com/libs/juxtapose/1.1.10/css/juxtapose.css">
 </head>
 <body>
-    <h1>Gsplat/SGsplat Slider</h1>
+    <h1>Comparaison visuelle Gsplat/SGsplat</h1>
     
     <!-- Premier slider -->
     <div class="slider-container">
-        <h2>Comparaison 1</h2>
-        <div class="juxtapose" data-startingposition="50%">
+        <h2>Comparaison principale</h2>
+        <div class="juxtapose" id="slider1">
             <img src="images/gsplat.png" data-label="Reference" />
             <img src="images/sg.png" data-label="Ours" />
         </div>
@@ -43,26 +44,37 @@
 
     <!-- Deuxième slider -->
     <div class="slider-container">
-        <h2>Comparaison 2</h2>
-        <div class="juxtapose" data-startingposition="50%">
+        <h2>Comparaison secondaire</h2>
+        <div class="juxtapose" id="slider2">
             <img src="images/gsplat2.jpg" data-label="Avant" />
             <img src="images/sg2.jpg" data-label="Après" />
         </div>
     </div>
 
-    <!-- Script JuxtaposeJS avec initialisation manuelle -->
-    <script src="https://cdn.knightlab.com/libs/juxtapose/latest/js/juxtapose.min.js"></script>
+    <!-- Script JuxtaposeJS avec initialisation garantie -->
+    <script src="https://cdn.knightlab.com/libs/juxtapose/1.1.10/js/juxtapose.min.js"></script>
     <script>
-        // Initialisation manuelle après le chargement de la page
-        document.addEventListener('DOMContentLoaded', function() {
-            // Sélectionne tous les sliders
-            const sliders = document.querySelectorAll('.juxtapose');
+        // Solution infaillible pour l'initialisation
+        function initSliders() {
+            // Vérifie si la lib est chargée
+            if (typeof juxtapose === 'undefined') {
+                setTimeout(initSliders, 100);
+                return;
+            }
             
-            // Initialise chaque slider
-            sliders.forEach(slider => {
-                new juxtapose.JXSlider(slider);
-            });
-        });
+            // Crée les sliders avec des IDs uniques
+            new juxtapose.JXSlider(document.getElementById('slider1'));
+            new juxtapose.JXSlider(document.getElementById('slider2'));
+            
+            console.log("Sliders initialisés avec succès");
+        }
+
+        // Lance l'initialisation quand tout est prêt
+        if (document.readyState !== 'loading') {
+            initSliders();
+        } else {
+            document.addEventListener('DOMContentLoaded', initSliders);
+        }
     </script>
 </body>
 </html>
