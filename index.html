@@ -1,17 +1,34 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Image Comparison Slider</title>
+    <title>Gaussiennes Sphériques : Comparatif</title>
     <!-- Charger JuxtaposeJS -->
     <link rel="stylesheet" href="https://cdn.knightlab.com/libs/juxtapose/latest/css/juxtapose.css">
+    <style>
+        /* Limite la largeur du slider et centre-le */
+        .juxtapose {
+            max-width: 800px;  /* Ajustez cette valeur */
+            margin: 0 auto;   /* Centre le slider */
+        }
+        /* Optionnel : réduit la taille des étiquettes "Reference/Ours" */
+        .jx-label {
+            font-size: 14px !important;
+        }
+    </style>
 </head>
 <body>
-    <h1>Before/After Slider</h1>
+    <h1>Gsplat/SGsplat Slider</h1>
     
-    <!-- Slider avec vos images -->
+    <!-- Premier slider -->
     <div class="juxtapose">
-        <img src="images/sg.png" data-label="Before" />
-        <img src="images/gsplat.png" data-label="After" />
+        <img src="images/gsplat.png" data-label="Reference" />
+        <img src="images/sg.png" data-label="Ours" />
+    </div>
+
+    <!-- Deuxième slider -->
+    <div class="juxtapose">
+        <img src="images/gsplat2.jpg" data-label="Avant" />
+        <img src="images/sg2.jpg" data-label="Après" />
     </div>
 
     <!-- Script JuxtaposeJS -->
