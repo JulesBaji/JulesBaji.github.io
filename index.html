@@ -15,15 +15,15 @@
     
     <!-- Nos styles personnalisés -->
     <style>
-        /* Variables de couleur pour changer facilement le design */
+        /* NOUVELLE PALETTE DE COULEURS POUR LE MODE NUIT */
         :root {
-            --bg-color: #f4f7f6; /* Fond gris très clair */
-            --card-color: #ffffff; /* Fond des cartes */
-            --text-color: #333333; /* Couleur du texte principal */
-            --title-color: #2c3e50; /* Couleur du titre principal (bleu marine foncé) */
-            --subtitle-color: #7f8c8d; /* Couleur du sous-titre (gris) */
-            --accent-color: #3498db; /* Couleur d'accent pour les titres de section (bleu) */
-            --shadow-color: rgba(0, 0, 0, 0.08); /* Couleur de l'ombre */
+            --bg-color: #1a1d24; /* Fond bleu nuit très sombre */
+            --card-color: #252932; /* Fond des cartes, légèrement plus clair */
+            --text-color: #e2e2e2; /* Couleur du texte principal (gris clair) */
+            --title-color: #ffffff; /* Couleur du titre principal (blanc pur) */
+            --subtitle-color: #9aa0a6; /* Couleur du sous-titre (gris plus doux) */
+            --accent-color: #5dade2; /* Couleur d'accent (bleu plus vif) */
+            --border-color: #3f444f; /* Couleur des bordures */
         }
 
         /* Styles globaux */
@@ -66,22 +66,23 @@
         /* Cartes pour chaque dataset */
         .dataset-card {
             background-color: var(--card-color);
+            border: 1px solid var(--border-color); /* Remplacement de l'ombre par une bordure */
             border-radius: 12px;
             padding: 2rem 2.5rem;
             margin-bottom: 3rem;
-            box-shadow: 0 6px 20px var(--shadow-color);
-            transition: transform 0.2s ease-in-out;
+            transition: border-color 0.2s ease-in-out, transform 0.2s ease-in-out;
         }
         
         .dataset-card:hover {
             transform: translateY(-5px);
+            border-color: var(--accent-color); /* La bordure s'illumine au survol */
         }
 
         .dataset-card h3 {
             font-family: 'Montserrat', sans-serif;
             font-size: 1.8rem;
             color: var(--accent-color);
-            border-bottom: 2px solid #e0e0e0;
+            border-bottom: 2px solid var(--border-color); /* Bordure assortie */
             padding-bottom: 0.75rem;
             margin-top: 0;
             margin-bottom: 2rem;
@@ -99,14 +100,21 @@
         .slider-title {
             font-weight: 700;
             font-size: 1.1rem;
-            color: #555;
+            color: #d1d1d1; /* Texte des titres de slider un peu plus clair */
             margin-bottom: 1rem;
         }
 
         /* Style du slider Juxtapose */
         .juxtapose {
-            border-radius: 8px; /* Coins arrondis pour le slider */
-            overflow: hidden;   /* S'assure que les images ne dépassent pas */
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        /* Personnalisation des labels du slider pour le mode nuit */
+        .jx-label {
+            background: rgba(0, 0, 0, 0.7) !important;
+            color: white !important;
+            border: none !important;
         }
 
         /* Pied de page */
@@ -114,7 +122,7 @@
             text-align: center;
             padding: 2rem;
             font-size: 0.9rem;
-            color: #95a5a6;
+            color: #7f8c8d;
             margin-top: 2rem;
         }
 
@@ -129,11 +137,11 @@
             <h2>Rendu gaussien basé sur le ray tracing pour les réfractions et réflexions</h2>
         </header>
 
+        <!-- Correction: une seule balise <main> qui englobe toutes les sections -->
         <main>
             <!-- CARTE POUR LE DATASET "TWINGO" -->
             <section class="dataset-card">
                 <h3>Dataset: Scène Twingo</h3>
-
                 <div class="slider-container">
                     <p class="slider-title">Comparaison 1 : Vue d'ensemble</p>
                     <div class="juxtapose">
@@ -141,7 +149,6 @@
                         <img src="images/sg.png" data-label="Ours (sg-splat)" />
                     </div>
                 </div>
-
                 <div class="slider-container">
                     <p class="slider-title">Comparaison 2 : Zoom sur les reflets de la carrosserie</p>
                     <div class="juxtapose">
@@ -151,10 +158,9 @@
                 </div>
             </section>
 
-            <!-- CARTE POUR LE DATASET "GARDEN" -->
+            <!-- CARTE POUR LE DATASET "JARDIN" -->
             <section class="dataset-card">
                 <h3>Dataset: Scène Jardin</h3>
-
                 <div class="slider-container">
                     <p class="slider-title">Comparaison 1 : Réfractions à travers la sphère de verre</p>
                     <div class="juxtapose">
@@ -162,7 +168,6 @@
                         <img src="images/garden_sg.png" data-label="Ours (sg-splat)" />
                     </div>
                 </div>
-
                 <div class="slider-container">
                     <p class="slider-title">Comparaison 2 : Détails des caustiques</p>
                     <div class="juxtapose">
@@ -171,14 +176,13 @@
                     </div>
                 </div>
             </section>
-        </main>
 
-            <!-- CARTE POUR LE DATASET "GARDEN" -->
+            <!-- CARTE POUR LE DATASET "BONSAI" -->
             <section class="dataset-card">
-                <h3>Dataset: Scène Jardin</h3>
-
+                <h3>Dataset: Scène Bonsaï</h3>
                 <div class="slider-container">
-                    <!-- <p class="slider-title">Comparaison 1 : Réfractions à travers la sphère de verre</p> -->
+                    <!-- J'ai ajouté un titre ici aussi, c'est plus cohérent -->
+                    <!-- <p class="slider-title">Comparaison des reflets sur le sol</p> -->
                     <div class="juxtapose">
                         <img src="images/bonsai_gsplat.png" data-label="Reference (gsplat)" />
                         <img src="images/bonsai_sg.png" data-label="Ours (sg-splat)" />
