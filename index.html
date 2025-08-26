@@ -113,7 +113,7 @@
             border: none !important;
         }
 
-        /* NOUVEAUX STYLES POUR LES VIDÉOS */
+        /* STYLES POUR LES VIDÉOS */
         .video-container video {
             width: 100%;
             height: auto;
@@ -205,23 +205,42 @@
                     </div>
                 </div>
             </section>
+
+            <!-- NOUVELLE CARTE POUR LA COMPARAISON AVEC LA VÉRITÉ TERRAIN -->
+            <section class="dataset-card">
+                <h3>Comparaison : Vérité Terrain (Ground Truth) vs Notre Méthode (sg-splat)</h3>
+                <div class="slider-container">
+                    <p class="slider-title">Scène Bonsaï</p>
+                    <div class="juxtapose">
+                        <img src="images/gt_bonsai.JPG" data-label="Vérité Terrain (Ground Truth)" />
+                        <img src="images/bonsai_sg.png" data-label="Ours (sg-splat)" />
+                    </div>
+                </div>
+                <div class="slider-container">
+                    <p class="slider-title">Scène Garden</p>
+                    <div class="juxtapose">
+                        <img src="images/gt_garden.JPG" data-label="Vérité Terrain (Ground Truth)" />
+                        <img src="images/garden_sg2.png" data-label="Ours (sg-splat)" />
+                    </div>
+                </div>
+            </section>
             
-            <!-- NOUVELLES CARTES POUR LES VIDÉOS -->
+            <!-- CARTES POUR LES VIDÉOS -->
 
             <!-- CARTE POUR LE DATASET "SAC" -->
             <section class="dataset-card">
                 <h3>Dataset: Scène SAC - Comparaisons Vidéos</h3>
                 <div class="video-container">
                     <p class="video-title">Comparaison : 3DGS vs RayGauss</p>
-                    <video controls autoplay loop muted playsinline src="videos/comparaison_3dgs_rg.mkv"></video>
+                    <video controls autoplay loop muted playsinline src="videos/comparaison_3dgs_rg.mp4"></video>
                 </div>
                 <div class="video-container">
                     <p class="video-title">Rendu avec 3DGS_DR</p>
-                    <video controls autoplay loop muted playsinline src="videos/3DGS_DR_SAC.mkv"></video>
+                    <video controls autoplay loop muted playsinline src="videos/3DGS_DR_SAC.mp4"></video>
                 </div>
                 <div class="video-container">
                     <p class="video-title">Rendu avec 3D-GRUT</p>
-                    <video controls autoplay loop muted playsinline src="videos/3d_grut_sac.mkv"></video>
+                    <video controls autoplay loop muted playsinline src="videos/3d_grut_sac.mp4"></video>
                 </div>
             </section>
             
@@ -230,15 +249,15 @@
                 <h3>Dataset: Scène Cornell Box - Comparaisons Vidéos</h3>
                 <div class="video-container">
                     <p class="video-title">Rendu avec 3DGS</p>
-                    <video controls autoplay loop muted playsinline src="videos/2025-05-22 10-31-38.mkv"></video>
+                    <video controls autoplay loop muted playsinline src="videos/2025-05-22 10-31-38.mp4"></video>
                 </div>
                 <div class="video-container">
                     <p class="video-title">Rendu avec RayGauss</p>
-                    <video controls autoplay loop muted playsinline src="videos/rg_cbox.mkv"></video>
+                    <video controls autoplay loop muted playsinline src="videos/rg_cbox.mp4"></video>
                 </div>
                  <div class="video-container">
                     <p class="video-title">Rendu avec 3DGS_DR</p>
-                    <video controls autoplay loop muted playsinline src="videos/3DGS_DR_cbox.mkv"></video>
+                    <video controls autoplay loop muted playsinline src="videos/3DGS_DR_cbox.mp4"></video>
                 </div>
             </section>
 
