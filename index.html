@@ -60,6 +60,9 @@
   .btn.primary { background: var(--accent); border-color: var(--accent); color: #111; }
   .btn:hover { text-decoration: none; filter: brightness(1.08); }
 
+  .skills-line { margin: 0 0 18px; }
+  .skills-line .chip { font-size: 13.5px; padding: 4px 10px; font-weight: 500; }
+  .hero p.lead { max-width: 760px; }
   .skills { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px 22px; }
   .skills h2 { font-size: 15px; text-transform: uppercase; letter-spacing: .08em; margin: 0 0 14px; color: var(--title); }
   .skills .row { display: grid; grid-template-columns: 118px 1fr; gap: 10px; align-items: start; padding: 7px 0; border-top: 1px solid var(--line); }
@@ -74,9 +77,11 @@
   .sub { color: var(--muted); margin: 0 0 22px; font-size: 14.5px; }
 
   /* Parcours : expériences + formation */
-  .parcours { display: grid; grid-template-columns: 2fr 1fr; gap: 18px; }
+  .parcours { display: grid; grid-template-columns: 1fr; gap: 14px; }
   @media (max-width: 860px) { .parcours { grid-template-columns: 1fr; } }
   .stack { display: grid; gap: 14px; align-content: start; }
+  #experiences .stack { grid-template-columns: 1.4fr 1fr; align-items: start; }
+  @media (max-width: 860px) { #experiences .stack { grid-template-columns: 1fr; } }
   .item { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px 20px; }
   .item header { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 2px 16px; align-items: baseline; }
   .item h3 { margin: 0; font-size: 17px; color: var(--title); }
@@ -148,44 +153,35 @@
   <div class="wrap">
     <span class="brand">Jules Baji</span>
     <ul>
-      <li class="opt"><a href="#parcours">Parcours</a></li>
-      <li class="opt"><a href="#resultats">Résultats CEA</a></li>
+      <li class="opt"><a href="#experiences">Expériences</a></li>
       <li class="opt"><a href="#projets">Projets</a></li>
+      <li class="opt"><a href="#resultats">Résultats CEA</a></li>
+      <li class="opt"><a href="#formation">Formation</a></li>
       <li><a class="contact-btn" href="#contact">Contact</a></li>
     </ul>
   </div>
 </nav>
 
 <header class="hero">
-  <div class="wrap cols">
-    <div>
-      <div class="kicker">Ingénieur R&amp;D · Graphics, géométrie &amp; 3D ML</div>
-      <h1>Jules Baji</h1>
-      <p class="lead">Diplômé d'un master en informatique spécialisé en rendu, géométrie et performance pour la 3D. Machine learning en PyTorch et en C++/CUDA natif. Expérience récente au CEA Saclay sur le Gaussian Splatting pour la réalité virtuelle. Basé à Paris, mobile en France et en Europe.</p>
-      <div class="contact-line">
-        <a class="btn primary" href="mailto:julesbaji1@gmail.com">✉ julesbaji1@gmail.com</a>
-        <a class="btn" href="https://www.linkedin.com/in/julesbaji" target="_blank" rel="noopener">LinkedIn</a>
-        <a class="btn" href="rapport/rapport_stage_cea_jules_baji.pdf" download>Rapport de stage (PDF, 6 Mo)</a>
-      </div>
+  <div class="wrap">
+    <div class="kicker">Ingénieur R&amp;D · Graphics, géométrie &amp; 3D ML</div>
+    <h1>Jules Baji</h1>
+    <div class="chips skills-line"><span class="chip">C++</span><span class="chip">CUDA</span><span class="chip">Python</span><span class="chip">PyTorch</span><span class="chip">3D Gaussian Splatting</span><span class="chip">OpenGL</span><span class="chip">GLSL</span><span class="chip">Ray Tracing</span><span class="chip">OpenMP</span><span class="chip">MPI</span><span class="chip">NumPy</span><span class="chip">WebGL</span><span class="chip">JavaScript</span><span class="chip">Linux</span><span class="chip">Git</span></div>
+    <p class="lead">Diplômé d'un master en informatique spécialisé en rendu, géométrie et performance pour la 3D. Machine learning en PyTorch et en C++/CUDA natif. Expérience récente au CEA Saclay sur le Gaussian Splatting pour la réalité virtuelle. Basé à Paris, mobile en France et en Europe. Français, anglais C1.</p>
+    <div class="contact-line">
+      <a class="btn primary" href="mailto:julesbaji1@gmail.com">✉ julesbaji1@gmail.com</a>
+      <a class="btn" href="https://www.linkedin.com/in/julesbaji" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="btn" href="rapport/rapport_stage_cea_jules_baji.pdf" download>Rapport de stage (PDF, 6 Mo)</a>
     </div>
-    <aside class="skills" aria-labelledby="skills-title">
-      <h2 id="skills-title">Compétences</h2>
-      <div class="row"><b>Langages</b><div class="chips"><span class="chip">C++</span><span class="chip">Python</span><span class="chip">GLSL</span><span class="chip">JavaScript</span></div></div>
-      <div class="row"><b>GPU &amp; parallélisme</b><div class="chips"><span class="chip">CUDA</span><span class="chip">OpenMP</span><span class="chip">MPI</span></div></div>
-      <div class="row"><b>Rendu &amp; 3D</b><div class="chips"><span class="chip">3D Gaussian Splatting</span><span class="chip">OpenGL</span><span class="chip">WebGL</span><span class="chip">Ray Tracing</span></div></div>
-      <div class="row"><b>Machine learning</b><div class="chips"><span class="chip">PyTorch</span><span class="chip">NumPy</span></div></div>
-      <div class="row"><b>Outils</b><div class="chips"><span class="chip">Linux</span><span class="chip">Git</span></div></div>
-      <div class="row"><b>Langues</b><p class="extra">Français · Anglais C1</p></div>
-    </aside>
   </div>
 </header>
 
 <main>
 
-<section id="parcours">
+<section id="experiences">
   <div class="wrap">
-    <h2 class="sec">Parcours</h2>
-    <p class="sub">Expériences et formation.</p>
+    <h2 class="sec">Expériences</h2>
+    <p class="sub">Stages en recherche appliquée et en industrie.</p>
     <div class="parcours">
       <div class="stack">
         <article class="item">
@@ -210,21 +206,21 @@
           <div class="chips"><span class="chip">C++</span><span class="chip">OpenMP</span></div>
         </article>
       </div>
-      <div class="stack">
-        <article class="item">
-          <p class="label">Formation</p>
-          <header><h3>Master Informatique ISICG</h3><span class="when">2023 – 2025</span></header>
-          <p>Université de Limoges · informatique graphique, image et géométrie</p>
-        </article>
-        <article class="item">
-          <header><h3>Licence Informatique</h3><span class="when">2020 – 2023</span></header>
-          <p>Université de Limoges</p>
-        </article>
-        <article class="item">
-          <p class="label">Centres d'intérêt</p>
-          <p>Trompette et solfège au conservatoire (2011-2019) · trésorier de l'association étudiante du master · escalade</p>
-        </article>
-      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projets">
+  <div class="wrap">
+    <h2 class="sec">Projets de master</h2>
+    <p class="sub">Université de Limoges, 2025.</p>
+    <div class="grid">
+      <article class="card"><h3>Synthèse d'image réaliste</h3><p>Path tracer avec BRDF à microfacettes, géométrie SDF et CSG, accéléré par BVH.</p><div class="chips"><span class="chip">C++</span><span class="chip">OpenMP</span></div></article>
+      <article class="card"><h3>Moteur 3D temps réel</h3><p>Maillages, textures, caméras, lumières et shaders.</p><div class="chips"><span class="chip">C++</span><span class="chip">OpenGL</span><span class="chip">GLSL</span><span class="chip">OpenMP</span></div></article>
+      <article class="card"><h3>Détection de collisions 3D</h3><p>Sweep and Prune, BVH et test triangle-triangle de Möller.</p><div class="chips"><span class="chip">WebGL</span><span class="chip">JavaScript</span></div></article>
+      <article class="card"><h3>Parallélisme</h3><p>Kernels CUDA optimisés pour une carte de hauteur ; recherche de sous-image hybride MPI et OpenMP.</p><div class="chips"><span class="chip">CUDA</span><span class="chip">MPI</span><span class="chip">OpenMP</span></div></article>
+      <article class="card"><h3>Vision par ordinateur</h3><p>Génération de visages, super-résolution et détection de photos recapturées d'après un article de recherche.</p><div class="chips"><span class="chip">Python</span><span class="chip">Keras</span></div></article>
+      <article class="card"><h3>Simulation de fluide</h3><p>Simulation SPH temps réel d'après un article de recherche, voisins par grille.</p><div class="chips"><span class="chip">Java</span></div></article>
     </div>
   </div>
 </section>
@@ -253,17 +249,23 @@
   </div>
 </section>
 
-<section id="projets">
+<section id="formation">
   <div class="wrap">
-    <h2 class="sec">Projets de master</h2>
-    <p class="sub">Université de Limoges, 2025.</p>
+    <h2 class="sec">Formation et centres d'intérêt</h2>
+    <p class="sub">Master et licence à l'Université de Limoges.</p>
     <div class="grid">
-      <article class="card"><h3>Synthèse d'image réaliste</h3><p>Path tracer avec BRDF à microfacettes, géométrie SDF et CSG, accéléré par BVH.</p><div class="chips"><span class="chip">C++</span><span class="chip">OpenMP</span></div></article>
-      <article class="card"><h3>Moteur 3D temps réel</h3><p>Maillages, textures, caméras, lumières et shaders.</p><div class="chips"><span class="chip">C++</span><span class="chip">OpenGL</span><span class="chip">GLSL</span><span class="chip">OpenMP</span></div></article>
-      <article class="card"><h3>Détection de collisions 3D</h3><p>Sweep and Prune, BVH et test triangle-triangle de Möller.</p><div class="chips"><span class="chip">WebGL</span><span class="chip">JavaScript</span></div></article>
-      <article class="card"><h3>Parallélisme</h3><p>Kernels CUDA optimisés pour une carte de hauteur ; recherche de sous-image hybride MPI et OpenMP.</p><div class="chips"><span class="chip">CUDA</span><span class="chip">MPI</span><span class="chip">OpenMP</span></div></article>
-      <article class="card"><h3>Vision par ordinateur</h3><p>Génération de visages, super-résolution et détection de photos recapturées d'après un article de recherche.</p><div class="chips"><span class="chip">Python</span><span class="chip">Keras</span></div></article>
-      <article class="card"><h3>Simulation de fluide</h3><p>Simulation SPH temps réel d'après un article de recherche, voisins par grille.</p><div class="chips"><span class="chip">Java</span></div></article>
+        <article class="item">
+          <header><h3>Master Informatique ISICG</h3><span class="when">2023 – 2025</span></header>
+          <p>Université de Limoges · informatique graphique, image et géométrie</p>
+        </article>
+        <article class="item">
+          <header><h3>Licence Informatique</h3><span class="when">2020 – 2023</span></header>
+          <p>Université de Limoges</p>
+        </article>
+        <article class="item">
+          <p class="label" style="margin:0">Centres d'intérêt</p>
+          <p>Trompette et solfège au conservatoire (2011-2019) · trésorier de l'association étudiante du master · escalade</p>
+        </article>
     </div>
   </div>
 </section>
@@ -301,7 +303,7 @@
   function pair(a, b, la, lb, fa, fb) { return { a: 'images/web/' + a + '.webp', b: 'images/web/' + b + '.webp', la: la, lb: lb, fa: 'images/' + fa, fb: 'images/' + fb }; }
   function gs(scene, n) { var s = n > 1 ? n : ''; return pair(scene + '_gsplat' + s, scene + '_sg' + s, G, S, scene + '_gsplat' + s + '.png', scene + '_sg' + s + '.png'); }
   var SCENES = [
-    { name: 'Bonsaï', meta: 'Résolution 1:1 · PSNR <b>30,68</b> → <b>31,52</b>', views: [gs('bonsai', 1), gs('bonsai', 2)] },
+    { name: 'Bonsaï', meta: 'Résolution 1:1 · PSNR <b>30,68</b> → <b>31,52</b>', views: [gs('bonsai', 2), gs('bonsai', 1)] },
     { name: 'Bicycle', meta: 'Résolution 1:2 · PSNR <b>25,82</b> → <b>26,25</b>', views: [gs('bicycle', 1), gs('bicycle', 2), gs('bicycle', 3), gs('bicycle', 4)] },
     { name: 'Garden', meta: 'Résolution 1:2 · PSNR <b>26,86</b> → <b>27,34</b>', views: [gs('garden', 1), gs('garden', 2), gs('garden', 3)] },
     { name: 'Face à la vérité terrain', meta: 'Photographie réelle à droite', views: [
