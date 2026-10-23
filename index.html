@@ -1,276 +1,365 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rapport de Stage - Annexes</title>
-    
-    <!-- Charger la police depuis Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Montserrat:wght@600&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jules Baji · Ingénieur R&amp;D graphics, géométrie et 3D ML</title>
+<meta name="description" content="Jules Baji, ingénieur R&D en informatique graphique : rendu, géométrie, Gaussian Splatting, C++/CUDA et PyTorch. Résultats de stage au CEA Saclay.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0f1216;
+    --bg-2: #151a20;
+    --card: #1a2027;
+    --line: #2a323c;
+    --text: #d9dee4;
+    --muted: #8f9aa6;
+    --title: #ffffff;
+    --accent: #f2a541;
+    --accent-2: #5fb3d9;
+    --radius: 14px;
+    --mono: 'JetBrains Mono', ui-monospace, monospace;
+  }
+  @media (prefers-color-scheme: light) {
+    :root {
+      --bg: #f6f5f2;
+      --bg-2: #efede8;
+      --card: #ffffff;
+      --line: #e1ddd5;
+      --text: #2a2d31;
+      --muted: #6b7178;
+      --title: #111316;
+      --accent: #c76d00;
+      --accent-2: #1f7aa8;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: 'Inter', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    font-size: 16px;
+  }
+  a { color: var(--accent-2); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 20px; }
 
-    <!-- Charger les styles de JuxtaposeJS -->
-    <link rel="stylesheet" href="https://cdn.knightlab.com/libs/juxtapose/latest/css/juxtapose.css">
-    
-    <!-- Nos styles personnalisés -->
-    <style>
-        /* PALETTE DE COULEURS POUR LE MODE NUIT */
-        :root {
-            --bg-color: #1a1d24;
-            --card-color: #252932;
-            --text-color: #e2e2e2;
-            --title-color: #ffffff;
-            --subtitle-color: #9aa0a6;
-            --accent-color: #5dade2;
-            --border-color: #3f444f;
-        }
+  /* Navigation */
+  nav {
+    position: sticky; top: 0; z-index: 10;
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 56px; gap: 16px; }
+  nav .brand { font-weight: 700; color: var(--title); letter-spacing: .02em; }
+  nav ul { list-style: none; display: flex; gap: 22px; margin: 0; padding: 0; font-size: 14px; }
+  nav ul a { color: var(--muted); }
+  nav ul a:hover { color: var(--title); text-decoration: none; }
+  @media (max-width: 720px) { nav ul { display: none; } }
 
-        /* Styles globaux */
-        body {
-            font-family: 'Lato', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            margin: 0;
-            padding: 0;
-            line-height: 1.6;
-        }
+  /* Hero */
+  .hero { padding: 88px 0 64px; border-bottom: 1px solid var(--line); }
+  .hero .kicker { font-family: var(--mono); color: var(--accent); font-size: 14px; letter-spacing: .04em; }
+  .hero h1 { font-size: clamp(40px, 7vw, 72px); line-height: 1.02; margin: 14px 0 18px; color: var(--title); letter-spacing: -.02em; }
+  .hero p.lead { font-size: 19px; max-width: 720px; color: var(--text); margin: 0 0 28px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip { font-family: var(--mono); font-size: 13px; padding: 4px 10px; border: 1px solid var(--line); border-radius: 999px; color: var(--muted); background: var(--bg-2); }
+  .cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+  .btn { display: inline-block; padding: 10px 18px; border-radius: 10px; font-weight: 600; font-size: 15px; border: 1px solid var(--line); color: var(--title); background: var(--card); }
+  .btn.primary { background: var(--accent); border-color: var(--accent); color: #111; }
+  .btn:hover { text-decoration: none; filter: brightness(1.08); }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
+  /* Sections */
+  section { padding: 72px 0; border-bottom: 1px solid var(--line); }
+  section:last-of-type { border-bottom: 0; }
+  h2 { font-size: 30px; margin: 0 0 8px; color: var(--title); letter-spacing: -.01em; }
+  .sub { color: var(--muted); margin: 0 0 36px; max-width: 760px; }
 
-        /* En-tête de la page */
-        header {
-            text-align: center;
-            margin-bottom: 4rem;
-        }
+  /* Expériences */
+  .timeline { display: grid; gap: 20px; }
+  .item { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 26px 28px; }
+  .item header { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 20px; align-items: baseline; }
+  .item h3 { margin: 0; font-size: 20px; color: var(--title); }
+  .item .where { color: var(--accent); font-weight: 600; }
+  .item .when { font-family: var(--mono); font-size: 13px; color: var(--muted); }
+  .item ul { margin: 14px 0 0; padding-left: 20px; }
+  .item li { margin: 6px 0; }
+  .item .chips { margin-top: 14px; }
+  .item .more { margin-top: 14px; display: inline-block; font-weight: 600; }
 
-        header h1 {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 2.5rem;
-            color: var(--title-color);
-            margin-bottom: 0.5rem;
-        }
+  /* Projets */
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 18px; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 22px 24px; display: flex; flex-direction: column; }
+  .card h3 { margin: 0 0 8px; font-size: 18px; color: var(--title); }
+  .card p { margin: 0 0 14px; color: var(--text); flex: 1; }
+  .card .chips { margin-top: auto; }
 
-        header h2 {
-            font-size: 1.2rem;
-            font-weight: 400;
-            color: var(--subtitle-color);
-            max-width: 800px;
-            margin: 0 auto;
-        }
+  /* Résultats */
+  .scene { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; margin-bottom: 26px; }
+  .scene h3 { margin: 0 0 4px; font-size: 20px; color: var(--title); }
+  .scene .meta { font-family: var(--mono); font-size: 13px; color: var(--muted); margin-bottom: 18px; }
+  .scene .meta b { color: var(--accent); font-weight: 500; }
+  .compare-list { display: grid; gap: 18px; }
+  .compare { position: relative; overflow: hidden; border-radius: 10px; background: #000; user-select: none; touch-action: pan-y; }
+  .compare img { display: block; width: 100%; height: auto; }
+  .compare .top { position: absolute; inset: 0; clip-path: inset(0 0 0 50%); }
+  .compare .top img { height: 100%; object-fit: cover; }
+  .compare .bar { position: absolute; top: 0; bottom: 0; left: 50%; width: 2px; background: #fff; transform: translateX(-1px); pointer-events: none; box-shadow: 0 0 6px rgba(0,0,0,.6); }
+  .compare .knob { position: absolute; top: 50%; left: 50%; width: 38px; height: 38px; margin: -19px 0 0 -19px; border-radius: 50%; background: #fff; color: #111; display: grid; place-items: center; font-size: 15px; font-weight: 700; pointer-events: none; box-shadow: 0 2px 10px rgba(0,0,0,.5); }
+  .compare .lbl { position: absolute; top: 12px; padding: 4px 10px; border-radius: 6px; background: rgba(0,0,0,.7); color: #fff; font-size: 13px; pointer-events: none; }
+  .compare .lbl.l { left: 12px; } .compare .lbl.r { right: 12px; }
+  @media (max-width: 520px) { .compare .lbl { top: 8px; font-size: 11px; padding: 3px 7px; } .compare .lbl.l { left: 8px; } .compare .lbl.r { right: 8px; } }
+  .compare input[type=range] { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: ew-resize; margin: 0; }
+  .full { font-size: 13px; margin-top: 6px; display: inline-block; color: var(--muted); }
+  .full a { color: var(--muted); text-decoration: underline; }
+  .compare-title { font-weight: 600; color: var(--title); margin: 0 0 8px; }
 
-        /* Cartes pour chaque dataset */
-        .dataset-card {
-            background-color: var(--card-color);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 2rem 2.5rem;
-            margin-bottom: 3rem;
-        }
+  .videos { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 18px; }
+  figure { margin: 0; }
+  figure video { width: 100%; display: block; border-radius: 10px; border: 1px solid var(--line); background: #000; }
+  figcaption { font-size: 14px; color: var(--muted); margin-top: 8px; }
+  figcaption b { color: var(--title); font-weight: 600; }
 
-        .dataset-card h3 {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1.8rem;
-            color: var(--accent-color);
-            border-bottom: 2px solid var(--border-color);
-            padding-bottom: 0.75rem;
-            margin-top: 0;
-            margin-bottom: 2rem;
-        }
+  /* Formation, compétences */
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  @media (max-width: 760px) { .two { grid-template-columns: 1fr; } }
+  .skills { display: grid; gap: 14px; }
+  .skills .row b { display: block; font-size: 13px; color: var(--muted); font-weight: 500; margin-bottom: 6px; text-transform: uppercase; letter-spacing: .06em; }
 
-        /* Conteneur pour chaque slider ou vidéo */
-        .slider-container,
-        .video-container {
-            margin-bottom: 2.5rem;
-        }
-        
-        .slider-container:last-child,
-        .video-container:last-child {
-            margin-bottom: 0;
-        }
-
-        .slider-title,
-        .video-title {
-            font-weight: 700;
-            font-size: 1.1rem;
-            color: #d1d1d1;
-            margin-bottom: 1rem;
-        }
-
-        /* Style du slider Juxtapose */
-        .juxtapose {
-            border-radius: 8px;
-            overflow: hidden;
-        }
-        
-        .jx-label {
-            background: rgba(0, 0, 0, 0.7) !important;
-            color: white !important;
-            border: none !important;
-        }
-
-        /* STYLES POUR LES VIDÉOS */
-        .video-container video {
-            width: 100%;
-            height: auto;
-            border-radius: 8px;
-            border: 1px solid var(--border-color);
-            display: block; /* Évite les marges indésirables */
-        }
-
-        /* Pied de page */
-        footer {
-            text-align: center;
-            padding: 2rem;
-            font-size: 0.9rem;
-            color: #7f8c8d;
-            margin-top: 2rem;
-        }
-
-    </style>
+  footer { padding: 48px 0 60px; color: var(--muted); font-size: 14px; }
+  footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; }
+</style>
 </head>
 <body>
 
-    <div class="container">
+<nav>
+  <div class="wrap">
+    <span class="brand">Jules Baji</span>
+    <ul>
+      <li><a href="#experiences">Expériences</a></li>
+      <li><a href="#projets">Projets</a></li>
+      <li><a href="#resultats">Résultats CEA</a></li>
+      <li><a href="#formation">Formation</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
 
+<header class="hero">
+  <div class="wrap">
+    <div class="kicker">Ingénieur R&amp;D · Graphics, géométrie &amp; 3D ML</div>
+    <h1>Jules Baji</h1>
+    <p class="lead">Diplômé d'un master en informatique spécialisé en rendu, géométrie et performance pour la 3D. Machine learning en PyTorch et en C++/CUDA natif. Expérience récente au CEA Saclay sur le Gaussian Splatting pour la réalité virtuelle.</p>
+    <div class="chips">
+      <span class="chip">C++</span><span class="chip">CUDA</span><span class="chip">Python</span><span class="chip">PyTorch</span><span class="chip">OpenGL / GLSL</span><span class="chip">3D Gaussian Splatting</span><span class="chip">Linux</span>
+    </div>
+    <div class="cta">
+      <a class="btn primary" href="#resultats">Voir les résultats du stage</a>
+      <a class="btn" href="mailto:julesbaji1@gmail.com">julesbaji1@gmail.com</a>
+      <a class="btn" href="https://www.linkedin.com/in/julesbaji" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<section id="experiences">
+  <div class="wrap">
+    <h2>Expériences</h2>
+    <p class="sub">Basé à Paris, mobilité en France et à l'international.</p>
+    <div class="timeline">
+      <article class="item">
         <header>
-            <h1>Rapport de stage - Annexes</h1>
-            <h2>Rendu gaussien avec Gaussiennes Sphériques et Comparaisons Vidéos</h2>
+          <h3>Stage de fin d'études : Gaussian Splatting · <span class="where">CEA Saclay</span></h3>
+          <span class="when">01/2025 – 07/2025</span>
         </header>
+        <p>Amélioration du rendu photoréaliste de Gaussian Splatting pour des applications de réalité virtuelle, avec un focus sur les réflexions complexes et la performance temps réel.</p>
+        <ul>
+          <li>Analyse de l'état de l'art et implémentation d'un prototype par lancer de rayons.</li>
+          <li>Pivot vers un pipeline par rastérisation intégrant des Gaussiennes Sphériques pour modéliser les réflexions dépendantes du point de vue, avec un rendu proche de la vérité terrain, compatible avec la VR (+50 % de stockage, +15 % de temps d'entraînement).</li>
+        </ul>
+        <div class="chips"><span class="chip">C++</span><span class="chip">CUDA</span><span class="chip">OpenMP</span><span class="chip">PyTorch</span><span class="chip">Gaussian Splatting</span><span class="chip">Ray Tracing</span><span class="chip">VR</span></div>
+        <a class="more" href="#resultats">Voir les comparaisons visuelles et les vidéos ↓</a>
+      </article>
+      <article class="item">
+        <header>
+          <h3>Stage de licence : géométrie CAO · <span class="where">Kreon Technologies</span></h3>
+          <span class="when">04/2023 – 05/2023</span>
+        </header>
+        <p>Détection de primitives géométriques et correction d'algorithmes de tessellation (continuité topologique, cohérence des normales) dans un logiciel de CAO en production.</p>
+        <div class="chips"><span class="chip">C++</span><span class="chip">OpenMP</span></div>
+      </article>
+    </div>
+  </div>
+</section>
 
-        <main>
-            <!-- CARTE POUR LE DATASET "BONSAI" -->
-            <section class="dataset-card">
-                <h3>Dataset: Scène Bonsaï : Résolution 1:1, PSNR : 30.68 VS 31.52</h3>
-                <div class="slider-container">
-                    <div class="juxtapose">
-                        <img src="images/bonsai_gsplat.png" data-label="Reference (gsplat)" />
-                        <img src="images/bonsai_sg.png" data-label="Ours (sg-splat)" />
-                    </div>
-                </div>
-                <div class="slider-container">
-                    <div class="juxtapose">
-                        <img src="images/bonsai_gsplat2.png" data-label="Reference (gsplat)" />
-                        <img src="images/bonsai_sg2.png" data-label="Ours (sg-splat)" />
-                    </div>
-                </div>
-            </section>
+<section id="projets">
+  <div class="wrap">
+    <h2>Projets de master</h2>
+    <p class="sub">Université de Limoges, 2025.</p>
+    <div class="grid">
+      <article class="card">
+        <h3>Synthèse d'image réaliste</h3>
+        <p>Path tracer avec BRDF à microfacettes, géométrie SDF et CSG, accéléré par une hiérarchie de volumes englobants (BVH).</p>
+        <div class="chips"><span class="chip">C++</span><span class="chip">OpenMP</span></div>
+      </article>
+      <article class="card">
+        <h3>Moteur 3D temps réel</h3>
+        <p>Moteur 3D gérant maillages, textures, caméras, lumières et shaders.</p>
+        <div class="chips"><span class="chip">C++</span><span class="chip">OpenGL</span><span class="chip">GLSL</span><span class="chip">OpenMP</span></div>
+      </article>
+      <article class="card">
+        <h3>Détection de collisions 3D</h3>
+        <p>Système de collisions combinant Sweep and Prune, BVH et test triangle-triangle de Möller.</p>
+        <div class="chips"><span class="chip">WebGL</span><span class="chip">JavaScript</span></div>
+      </article>
+      <article class="card">
+        <h3>Parallélisme</h3>
+        <p>Implémentation et optimisation de kernels CUDA pour une carte de hauteur ; recherche de sous-image hybride MPI et OpenMP.</p>
+        <div class="chips"><span class="chip">CUDA</span><span class="chip">MPI</span><span class="chip">OpenMP</span></div>
+      </article>
+      <article class="card">
+        <h3>Vision par ordinateur</h3>
+        <p>Génération de visages, super-résolution d'images et détection de photos recapturées d'après un article de recherche.</p>
+        <div class="chips"><span class="chip">Python</span><span class="chip">Keras</span></div>
+      </article>
+      <article class="card">
+        <h3>Simulation de fluide</h3>
+        <p>Simulation SPH temps réel d'après un article de recherche, avec recherche de voisins par grille.</p>
+        <div class="chips"><span class="chip">Java</span></div>
+      </article>
+    </div>
+  </div>
+</section>
 
-            <!-- CARTE POUR LE DATASET "BICYCLE" -->
-            <section class="dataset-card">
-                <h3>Dataset: Scène Bicycle : Résolution 1:2, PSNR : 25.82 VS 26.25</h3>
-                <div class="slider-container">
-                    <div class="juxtapose">
-                        <img src="images/bicycle_gsplat.png" data-label="Reference (gsplat)" />
-                        <img src="images/bicycle_sg.png" data-label="Ours (sg-splat)" />
-                    </div>
-                </div>
-                <div class="slider-container">
-                    <div class="juxtapose">
-                        <img src="images/bicycle_gsplat2.png" data-label="Reference (gsplat)" />
-                        <img src="images/bicycle_sg2.png" data-label="Ours (sg-splat)" />
-                    </div>
-                </div>
-                <div class="slider-container">
-                    <div class="juxtapose">
-                        <img src="images/bicycle_gsplat3.png" data-label="Reference (gsplat)" />
-                        <img src="images/bicycle_sg3.png" data-label="Ours (sg-splat)" />
-                    </div>
-                </div>
-            </section>
+<section id="resultats">
+  <div class="wrap">
+    <h2>Résultats du stage au CEA</h2>
+    <p class="sub">Comparaisons entre la référence gsplat et notre méthode à base de Gaussiennes Sphériques, sur des scènes du jeu de données Mip-NeRF 360. Faites glisser le curseur sur chaque image.</p>
 
-            <!-- CARTE POUR LE DATASET "GARDEN" -->
-            <section class="dataset-card">
-                <h3>Dataset: Scène Garden : Résolution 1:2, PSNR : 26.86 VS 27.34</h3>
-                <div class="slider-container">
-                    <div class="juxtapose">
-                        <img src="images/garden_gsplat.png" data-label="Reference (gsplat)" />
-                        <img src="images/garden_sg.png" data-label="Ours (sg-splat)" />
-                    </div>
-                </div>
-                <div class="slider-container">
-                    <div class="juxtapose">
-                        <img src="images/garden_gsplat2.png" data-label="Reference (gsplat)" />
-                        <img src="images/garden_sg2.png" data-label="Ours (sg-splat)" />
-                    </div>
-                </div>
-                <div class="slider-container">
-                    <div class="juxtapose">
-                        <img src="images/garden_gsplat3.png" data-label="Reference (gsplat)" />
-                        <img src="images/garden_sg3.png" data-label="Ours (sg-splat)" />
-                    </div>
-                </div>
-            </section>
-
-            <!-- NOUVELLE CARTE POUR LA COMPARAISON AVEC LA VÉRITÉ TERRAIN -->
-            <section class="dataset-card">
-                <h3>Comparaison : Vérité Terrain (Ground Truth) vs Notre Méthode (sg-splat)</h3>
-                <div class="slider-container">
-                    <p class="slider-title">Scène Bonsaï</p>
-                    <div class="juxtapose">
-                        <img src="images/bonsai_sg.png" data-label="Ours (sg-splat)" /> 
-                        <img src="images/gt_bonsai.JPG" data-label="Vérité Terrain (Ground Truth)" />
-                    </div>
-                </div>
-                <div class="slider-container">
-                    <p class="slider-title">Scène Garden</p>
-                    <div class="juxtapose">
-                        <img src="images/garden_sg.png" data-label="Ours (sg-splat)" /> 
-                        <img src="images/gt_garden.JPG" data-label="Vérité Terrain (Ground Truth)" />
-                    </div>
-                </div>
-            </section>
-            
-            <!-- CARTES POUR LES VIDÉOS -->
-
-            <!-- CARTE POUR LE DATASET "SAC" -->
-            <section class="dataset-card">
-                <h3>Dataset: Scène SAC - Comparaisons Vidéos</h3>
-                <div class="video-container">
-                    <p class="video-title">Comparaison : 3DGS vs RayGauss</p>
-                    <video controls autoplay loop muted playsinline src="videos/comparaison_3dgs_rg.mp4"></video>
-                </div>
-                <div class="video-container">
-                    <p class="video-title">Rendu avec 3DGS_DR</p>
-                    <video controls autoplay loop muted playsinline src="videos/3DGS_DR_SAC.mp4"></video>
-                </div>
-                <div class="video-container">
-                    <p class="video-title">Rendu avec 3D-GRUT</p>
-                    <video controls autoplay loop muted playsinline src="videos/3d_grut_sac.mp4"></video>
-                </div>
-            </section>
-            
-            <!-- CARTE POUR LE DATASET "CORNELL BOX" -->
-            <section class="dataset-card">
-                <h3>Dataset: Scène Cornell Box - Comparaisons Vidéos</h3>
-                <div class="video-container">
-                    <p class="video-title">Rendu avec 3DGS</p>
-                    <video controls autoplay loop muted playsinline src="videos/2025-05-22 10-31-38.mp4"></video>
-                </div>
-                <div class="video-container">
-                    <p class="video-title">Rendu avec RayGauss</p>
-                    <video controls autoplay loop muted playsinline src="videos/rg_cbox.mp4"></video>
-                </div>
-                 <div class="video-container">
-                    <p class="video-title">Rendu avec 3DGS_DR</p>
-                    <video controls autoplay loop muted playsinline src="videos/3DGS_DR_cbox.mp4"></video>
-                </div>
-            </section>
-
-        </main>
-
-        <footer>
-            <p>© 2025 - Jules Baji</p>
-        </footer>
-
+    <div class="scene">
+      <h3>Scène Bonsaï</h3>
+      <div class="meta">Résolution 1:1 · PSNR <b>30,68</b> (gsplat) → <b>31,52</b> (Gaussiennes Sphériques)</div>
+      <div class="compare-list">
+        <div><div class="compare" data-left="images/web/bonsai_gsplat.webp" data-right="images/web/bonsai_sg.webp" data-ll="Référence (gsplat)" data-rl="Notre méthode"></div><span class="full">Pleine résolution : <a href="images/bonsai_gsplat.png">gsplat</a> · <a href="images/bonsai_sg.png">notre méthode</a></span></div>
+        <div><div class="compare" data-left="images/web/bonsai_gsplat2.webp" data-right="images/web/bonsai_sg2.webp" data-ll="Référence (gsplat)" data-rl="Notre méthode"></div><span class="full">Pleine résolution : <a href="images/bonsai_gsplat2.png">gsplat</a> · <a href="images/bonsai_sg2.png">notre méthode</a></span></div>
+      </div>
     </div>
 
-    <!-- Script JuxtaposeJS (à la fin) -->
-    <script src="https://cdn.knightlab.com/libs/juxtapose/latest/js/juxtapose.min.js"></script>
+    <div class="scene">
+      <h3>Scène Bicycle</h3>
+      <div class="meta">Résolution 1:2 · PSNR <b>25,82</b> (gsplat) → <b>26,25</b> (Gaussiennes Sphériques)</div>
+      <div class="compare-list">
+        <div><div class="compare" data-left="images/web/bicycle_gsplat.webp" data-right="images/web/bicycle_sg.webp" data-ll="Référence (gsplat)" data-rl="Notre méthode"></div><span class="full">Pleine résolution : <a href="images/bicycle_gsplat.png">gsplat</a> · <a href="images/bicycle_sg.png">notre méthode</a></span></div>
+        <div><div class="compare" data-left="images/web/bicycle_gsplat2.webp" data-right="images/web/bicycle_sg2.webp" data-ll="Référence (gsplat)" data-rl="Notre méthode"></div><span class="full">Pleine résolution : <a href="images/bicycle_gsplat2.png">gsplat</a> · <a href="images/bicycle_sg2.png">notre méthode</a></span></div>
+        <div><div class="compare" data-left="images/web/bicycle_gsplat3.webp" data-right="images/web/bicycle_sg3.webp" data-ll="Référence (gsplat)" data-rl="Notre méthode"></div><span class="full">Pleine résolution : <a href="images/bicycle_gsplat3.png">gsplat</a> · <a href="images/bicycle_sg3.png">notre méthode</a></span></div>
+        <div><div class="compare" data-left="images/web/bicycle_gsplat4.webp" data-right="images/web/bicycle_sg4.webp" data-ll="Référence (gsplat)" data-rl="Notre méthode"></div><span class="full">Pleine résolution : <a href="images/bicycle_gsplat4.png">gsplat</a> · <a href="images/bicycle_sg4.png">notre méthode</a></span></div>
+      </div>
+    </div>
 
+    <div class="scene">
+      <h3>Scène Garden</h3>
+      <div class="meta">Résolution 1:2 · PSNR <b>26,86</b> (gsplat) → <b>27,34</b> (Gaussiennes Sphériques)</div>
+      <div class="compare-list">
+        <div><div class="compare" data-left="images/web/garden_gsplat.webp" data-right="images/web/garden_sg.webp" data-ll="Référence (gsplat)" data-rl="Notre méthode"></div><span class="full">Pleine résolution : <a href="images/garden_gsplat.png">gsplat</a> · <a href="images/garden_sg.png">notre méthode</a></span></div>
+        <div><div class="compare" data-left="images/web/garden_gsplat2.webp" data-right="images/web/garden_sg2.webp" data-ll="Référence (gsplat)" data-rl="Notre méthode"></div><span class="full">Pleine résolution : <a href="images/garden_gsplat2.png">gsplat</a> · <a href="images/garden_sg2.png">notre méthode</a></span></div>
+        <div><div class="compare" data-left="images/web/garden_gsplat3.webp" data-right="images/web/garden_sg3.webp" data-ll="Référence (gsplat)" data-rl="Notre méthode"></div><span class="full">Pleine résolution : <a href="images/garden_gsplat3.png">gsplat</a> · <a href="images/garden_sg3.png">notre méthode</a></span></div>
+      </div>
+    </div>
+
+    <div class="scene">
+      <h3>Notre méthode face à la vérité terrain</h3>
+      <div class="meta">Photographie réelle à droite</div>
+      <div class="compare-list">
+        <div><p class="compare-title">Bonsaï</p><div class="compare" data-left="images/web/bonsai_sg.webp" data-right="images/web/gt_bonsai.webp" data-ll="Notre méthode" data-rl="Vérité terrain"></div><span class="full">Pleine résolution : <a href="images/bonsai_sg.png">notre méthode</a> · <a href="images/gt_bonsai.JPG">vérité terrain</a></span></div>
+        <div><p class="compare-title">Garden</p><div class="compare" data-left="images/web/garden_sg.webp" data-right="images/web/gt_garden.webp" data-ll="Notre méthode" data-rl="Vérité terrain"></div><span class="full">Pleine résolution : <a href="images/garden_sg.png">notre méthode</a> · <a href="images/gt_garden.JPG">vérité terrain</a></span></div>
+      </div>
+    </div>
+
+    <div class="scene">
+      <h3>Vidéos : scène SAC</h3>
+      <div class="meta">Captures des méthodes étudiées pendant l'état de l'art</div>
+      <div class="videos">
+        <figure><video controls muted loop playsinline preload="none" poster="videos/web/comparaison_3dgs_rg.jpg" src="videos/web/comparaison_3dgs_rg.mp4"></video><figcaption><b>3DGS et RayGauss</b> · comparaison</figcaption></figure>
+        <figure><video controls muted loop playsinline preload="none" poster="videos/web/3dgs_dr_sac.jpg" src="videos/web/3dgs_dr_sac.mp4"></video><figcaption><b>3DGS-DR</b></figcaption></figure>
+        <figure><video controls muted loop playsinline preload="none" poster="videos/web/3d_grut_sac.jpg" src="videos/web/3d_grut_sac.mp4"></video><figcaption><b>3D-GRUT</b></figcaption></figure>
+      </div>
+    </div>
+
+    <div class="scene">
+      <h3>Vidéos : Cornell Box</h3>
+      <div class="meta">Réflexions et réfractions sur une scène synthétique</div>
+      <div class="videos">
+        <figure><video controls muted loop playsinline preload="none" poster="videos/web/3dgs_cbox.jpg" src="videos/web/3dgs_cbox.mp4"></video><figcaption><b>3DGS</b></figcaption></figure>
+        <figure><video controls muted loop playsinline preload="none" poster="videos/web/rg_cbox.jpg" src="videos/web/rg_cbox.mp4"></video><figcaption><b>RayGauss</b></figcaption></figure>
+        <figure><video controls muted loop playsinline preload="none" poster="videos/web/3dgs_dr_cbox.jpg" src="videos/web/3dgs_dr_cbox.mp4"></video><figcaption><b>3DGS-DR</b></figcaption></figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="formation">
+  <div class="wrap">
+    <div class="two">
+      <div>
+        <h2>Formation</h2>
+        <div class="timeline" style="margin-top:24px">
+          <article class="item">
+            <header><h3>Master Informatique ISICG</h3><span class="when">09/2023 – 09/2025</span></header>
+            <p style="margin:6px 0 0">Université de Limoges · informatique graphique, image et géométrie</p>
+          </article>
+          <article class="item">
+            <header><h3>Licence Informatique</h3><span class="when">09/2020 – 06/2023</span></header>
+            <p style="margin:6px 0 0">Université de Limoges</p>
+          </article>
+        </div>
+      </div>
+      <div>
+        <h2>Compétences</h2>
+        <div class="item skills" style="margin-top:24px">
+          <div class="row"><b>Langages</b><div class="chips"><span class="chip">C++</span><span class="chip">CUDA</span><span class="chip">Python</span><span class="chip">GLSL</span><span class="chip">JavaScript</span></div></div>
+          <div class="row"><b>Graphique et calcul</b><div class="chips"><span class="chip">OpenGL</span><span class="chip">WebGL</span><span class="chip">PyTorch</span><span class="chip">NumPy</span><span class="chip">MPI</span><span class="chip">OpenMP</span><span class="chip">3D Gaussian Splatting</span></div></div>
+          <div class="row"><b>Outils</b><div class="chips"><span class="chip">Linux</span><span class="chip">Git</span></div></div>
+          <div class="row"><b>Langues</b><div class="chips"><span class="chip">Français</span><span class="chip">Anglais C1</span></div></div>
+          <div class="row"><b>Centres d'intérêt</b><p style="margin:0">Trompette et solfège au conservatoire (2011-2019) · trésorier de l'association étudiante du master · escalade</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer id="contact">
+  <div class="wrap">
+    <span>© 2026 Jules Baji · Paris</span>
+    <span><a href="mailto:julesbaji1@gmail.com">julesbaji1@gmail.com</a> · <a href="https://www.linkedin.com/in/julesbaji" target="_blank" rel="noopener">LinkedIn</a> · références sur demande</span>
+  </div>
+</footer>
+
+<script>
+  // Curseur avant/après sans dépendance externe
+  document.querySelectorAll('.compare').forEach(function (el) {
+    el.innerHTML =
+      '<img loading="lazy" alt="' + el.dataset.ll + '" src="' + el.dataset.left + '">' +
+      '<div class="top"><img loading="lazy" alt="' + el.dataset.rl + '" src="' + el.dataset.right + '"></div>' +
+      '<div class="bar"></div><div class="knob">⇆</div>' +
+      '<span class="lbl l">' + el.dataset.ll + '</span><span class="lbl r">' + el.dataset.rl + '</span>' +
+      '<input type="range" min="0" max="100" value="50" aria-label="Comparer ' + el.dataset.ll + ' et ' + el.dataset.rl + '">';
+    var top = el.querySelector('.top'), bar = el.querySelector('.bar'), knob = el.querySelector('.knob');
+    el.querySelector('input').addEventListener('input', function (e) {
+      var v = e.target.value;
+      top.style.clipPath = 'inset(0 0 0 ' + v + '%)';
+      bar.style.left = v + '%';
+      knob.style.left = v + '%';
+    });
+  });
+</script>
 </body>
 </html>
