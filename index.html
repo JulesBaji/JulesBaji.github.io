@@ -60,7 +60,7 @@
   .btn.primary { background: var(--accent); border-color: var(--accent); color: #111; }
   .btn:hover { text-decoration: none; filter: brightness(1.08); }
 
-  .skills-line { margin: 0 0 18px; }
+  .skills-line { margin: 0 0 18px; display: flex; flex-wrap: wrap; gap: 8px 18px; }
   .skills-line .chip { font-size: 13.5px; padding: 4px 10px; font-weight: 500; }
   .hero p.lead { max-width: 760px; }
   .skills { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px 22px; }
@@ -137,8 +137,8 @@
 
   /* Contact */
   #contact { background: var(--bg-2); border-bottom: 0; padding: 48px 0 56px; }
-  .contact-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 6px; }
-  @media (max-width: 760px) { .contact-grid { grid-template-columns: 1fr; } }
+  .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px; margin-top: 6px; }
+  
   .contact-card { display: block; background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px 20px; color: var(--text); }
   .contact-card:hover { text-decoration: none; border-color: var(--accent); }
   .contact-card .k { font-size: 12.5px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); }
@@ -166,7 +166,7 @@
   <div class="wrap">
     <div class="kicker">Ingénieur R&amp;D · Graphics, géométrie &amp; 3D ML</div>
     <h1>Jules Baji</h1>
-    <div class="chips skills-line"><span class="chip">C++</span><span class="chip">CUDA</span><span class="chip">Python</span><span class="chip">PyTorch</span><span class="chip">3D Gaussian Splatting</span><span class="chip">OpenGL</span><span class="chip">GLSL</span><span class="chip">Ray Tracing</span><span class="chip">OpenMP</span><span class="chip">MPI</span><span class="chip">NumPy</span><span class="chip">WebGL</span><span class="chip">JavaScript</span><span class="chip">Linux</span><span class="chip">Git</span></div>
+    <div class="skills-line"><div class="chips"><span class="chip">C++</span><span class="chip">Python</span><span class="chip">GLSL</span><span class="chip">JavaScript</span></div><div class="chips"><span class="chip">CUDA</span><span class="chip">OpenMP</span><span class="chip">MPI</span></div><div class="chips"><span class="chip">3D Gaussian Splatting</span><span class="chip">Ray Tracing</span><span class="chip">OpenGL</span><span class="chip">WebGL</span></div><div class="chips"><span class="chip">PyTorch</span><span class="chip">NumPy</span></div><div class="chips"><span class="chip">Linux</span><span class="chip">Git</span></div></div>
     <p class="lead">Diplômé d'un master en informatique spécialisé en rendu, géométrie et performance pour la 3D. Machine learning en PyTorch et en C++/CUDA natif. Expérience récente au CEA Saclay sur le Gaussian Splatting pour la réalité virtuelle. Basé à Paris, mobile en France et en Europe. Français, anglais C1.</p>
     <div class="contact-line">
       <a class="btn primary" href="mailto:julesbaji1@gmail.com">✉ julesbaji1@gmail.com</a>
@@ -276,10 +276,10 @@
     <p class="sub">Disponible immédiatement. Réponse rapide par e-mail.</p>
     <div class="contact-grid">
       <a class="contact-card" href="mailto:julesbaji1@gmail.com"><div class="k">E-mail</div><div class="v">julesbaji1@gmail.com</div></a>
-      <a class="contact-card" href="https://www.linkedin.com/in/julesbaji" target="_blank" rel="noopener"><div class="k">LinkedIn</div><div class="v">linkedin.com/in/julesbaji</div></a>
-      <a class="contact-card" href="rapport/rapport_stage_cea_jules_baji.pdf" download><div class="k">Rapport de stage CEA</div><div class="v">Télécharger (PDF, 6 Mo)</div></a>
+      <a class="contact-card" href="https://www.linkedin.com/in/julesbaji" target="_blank" rel="noopener"><div class="k">LinkedIn</div><div class="v">/in/julesbaji</div></a>
+      <a class="contact-card" href="rapport/rapport_stage_cea_jules_baji.pdf" download><div class="k">Rapport de stage CEA</div><div class="v">PDF · 6 Mo</div></a>
+      <div class="contact-card"><div class="k">Références</div><div class="v">Sur demande</div></div>
     </div>
-    <p class="contact-note">Références sur demande.</p>
   </div>
 </section>
 
