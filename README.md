@@ -5,3 +5,4 @@ Site personnel : présentation, parcours et résultats de stage au CEA Saclay (G
 - `images/` et `videos/` : fichiers d'origine, conservés.
 - `images/web/` et `videos/web/` : versions allégées affichées sur le site.
 - `rapport/` : rapport de stage CEA (PDF allégé, images recompressées).
+- `cv/` : CV en PDF.
