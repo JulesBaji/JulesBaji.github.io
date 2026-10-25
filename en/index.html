@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jules Baji · R&amp;D Engineer, graphics, geometry and 3D ML</title>
+<meta name="description" content="Jules Baji, R&D engineer in computer graphics: rendering, geometry, Gaussian Splatting, C++/CUDA and PyTorch. Internship results at CEA Saclay.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0f1216; --bg-2: #151a20; --card: #1a2027; --line: #2a323c;
+    --text: #d9dee4; --muted: #8f9aa6; --title: #ffffff;
+    --accent: #f2a541; --accent-2: #5fb3d9; --radius: 12px;
+    --mono: 'JetBrains Mono', ui-monospace, monospace;
+    /* couleurs des compétences */
+    --k-lang: #f2a541; --k-gpu: #6cc070; --k-gfx: #5fb3d9; --k-ml: #c48ef0; --k-tool: #9aa5b1;
+  }
+  @media (prefers-color-scheme: light) {
+    :root {
+      --bg: #f6f5f2; --bg-2: #efede8; --card: #ffffff; --line: #e1ddd5;
+      --text: #2a2d31; --muted: #6b7178; --title: #111316;
+      --accent: #c76d00; --accent-2: #1f7aa8;
+      --k-lang: #c76d00; --k-gpu: #2e8b3e; --k-gfx: #1f7aa8; --k-ml: #8a4bc4; --k-tool: #66707a;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: 64px; }
+  body { margin: 0; font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color: var(--text); line-height: 1.55; font-size: 15.5px; }
+  a { color: var(--accent-2); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 20px; }
+
+  /* Navigation */
+  nav { position: sticky; top: 0; z-index: 10; background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+  nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 56px; gap: 16px; }
+  nav .brand { font-weight: 700; color: var(--title); }
+  nav ul { list-style: none; display: flex; align-items: center; gap: 20px; margin: 0; padding: 0; font-size: 14px; }
+  nav ul a { color: var(--muted); }
+  nav ul a:hover { color: var(--title); text-decoration: none; }
+  nav .contact-btn { color: #111; background: var(--accent); padding: 7px 14px; border-radius: 8px; font-weight: 600; }
+  nav .contact-btn:hover { color: #111; filter: brightness(1.08); }
+  @media (max-width: 720px) { nav ul li.opt { display: none; } }
+
+  /* Chips colorées par catégorie */
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .chip { --k: var(--k-tool); font-family: var(--mono); font-size: 12.5px; padding: 3px 9px; border-radius: 6px; color: var(--k); border: 1px solid color-mix(in srgb, var(--k) 45%, transparent); background: color-mix(in srgb, var(--k) 12%, transparent); white-space: nowrap; }
+  .chip.lang { --k: var(--k-lang); } .chip.gpu { --k: var(--k-gpu); } .chip.gfx { --k: var(--k-gfx); } .chip.ml { --k: var(--k-ml); } .chip.tool { --k: var(--k-tool); }
+
+  /* Hero */
+  .hero { padding: 48px 0 40px; border-bottom: 1px solid var(--line); }
+  .hero .cols { display: grid; grid-template-columns: 1.25fr 1fr; gap: 36px; align-items: start; }
+  @media (max-width: 860px) { .hero .cols { grid-template-columns: 1fr; gap: 28px; } }
+  .kicker { font-family: var(--mono); color: var(--accent); font-size: 13.5px; letter-spacing: .04em; }
+  .hero h1 { font-size: clamp(38px, 6vw, 60px); line-height: 1.02; margin: 10px 0 14px; color: var(--title); letter-spacing: -.02em; }
+  .hero p.lead { font-size: 17.5px; margin: 0 0 22px; }
+  .contact-line { display: flex; flex-wrap: wrap; gap: 10px; }
+  .btn { display: inline-flex; align-items: center; gap: 6px; padding: 9px 16px; border-radius: 9px; font-weight: 600; font-size: 14.5px; border: 1px solid var(--line); color: var(--title); background: var(--card); }
+  .btn.primary { background: var(--accent); border-color: var(--accent); color: #111; }
+  .btn:hover { text-decoration: none; filter: brightness(1.08); }
+
+  .skills-line { margin: 0 0 18px; display: flex; flex-wrap: wrap; gap: 8px 18px; }
+  .skills-line { flex-direction: column; gap: 8px; }
+  .skills-line .main .chip { font-size: 14.5px; padding: 5px 12px; font-weight: 600; }
+  .skills-line .minor .chip { font-size: 12px; padding: 2px 8px; opacity: .85; }
+  .hero p.lead { max-width: 760px; }
+  .skills { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px 22px; }
+  .skills h2 { font-size: 15px; text-transform: uppercase; letter-spacing: .08em; margin: 0 0 14px; color: var(--title); }
+  .skills .row { display: grid; grid-template-columns: 118px 1fr; gap: 10px; align-items: start; padding: 7px 0; border-top: 1px solid var(--line); }
+  .skills .row:first-of-type { border-top: 0; padding-top: 0; }
+  .skills .row b { font-size: 12.5px; color: var(--muted); font-weight: 500; padding-top: 3px; }
+  .skills .chip { font-size: 13.5px; padding: 4px 10px; font-weight: 500; }
+  .skills .extra { font-size: 13.5px; color: var(--muted); margin: 0; }
+
+  /* Sections */
+  section { padding: 44px 0; border-bottom: 1px solid var(--line); }
+  h2.sec { font-size: 25px; margin: 0 0 4px; color: var(--title); letter-spacing: -.01em; }
+  .sub { color: var(--muted); margin: 0 0 22px; font-size: 14.5px; }
+
+  /* Parcours : expériences + formation */
+  .parcours { display: grid; grid-template-columns: 1fr; gap: 14px; }
+  @media (max-width: 860px) { .parcours { grid-template-columns: 1fr; } }
+  .stack { display: grid; gap: 14px; align-content: start; }
+  #experiences .stack { grid-template-columns: 1.4fr 1fr; align-items: start; }
+  @media (max-width: 860px) { #experiences .stack { grid-template-columns: 1fr; } }
+  .item { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px 20px; }
+  .item header { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 2px 16px; align-items: baseline; }
+  .item h3 { margin: 0; font-size: 17px; color: var(--title); }
+  .item .where { color: var(--accent); font-weight: 600; }
+  .item .when { font-family: var(--mono); font-size: 12.5px; color: var(--muted); }
+  .item p { margin: 8px 0 0; }
+  .item ul { margin: 8px 0 0; padding-left: 18px; }
+  .item li { margin: 3px 0; }
+  .item .chips { margin-top: 10px; }
+  .item .links { margin-top: 10px; font-weight: 600; font-size: 14.5px; }
+  .label { font-size: 12.5px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin: 0 0 2px; }
+
+  /* Résultats */
+  .explain { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 4px 0 16px; }
+  @media (max-width: 760px) { .explain { grid-template-columns: 1fr; } }
+  .explain > div { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 14px 16px; }
+  .explain p { margin: 0; font-size: 14.5px; }
+  .explain .label { margin-bottom: 4px; }
+  nav .lang { color: var(--muted); font-weight: 600; border: 1px solid var(--line); padding: 5px 9px; border-radius: 7px; }
+  .tabs { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; }
+  .tab { font: inherit; font-size: 14px; font-weight: 600; padding: 7px 14px; border-radius: 8px; border: 1px solid var(--line); background: var(--card); color: var(--muted); cursor: pointer; }
+  .tab[aria-selected="true"] { background: var(--accent); border-color: var(--accent); color: #111; }
+  .viewer { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px; }
+  .viewer .top-line { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px 16px; margin-bottom: 12px; }
+  .viewer .meta { font-family: var(--mono); font-size: 12.5px; color: var(--muted); }
+  .viewer .meta b { color: var(--accent); font-weight: 500; }
+  .views { display: flex; gap: 6px; }
+  .views button { font: inherit; font-size: 13px; padding: 4px 10px; border-radius: 6px; border: 1px solid var(--line); background: var(--bg-2); color: var(--muted); cursor: pointer; }
+  .views button[aria-pressed="true"] { color: var(--title); border-color: var(--accent); }
+  .compare { position: relative; overflow: hidden; border-radius: 8px; background: #000; user-select: none; touch-action: pan-y; }
+  .compare img { display: block; width: 100%; height: auto; }
+  .compare .top { position: absolute; inset: 0; clip-path: inset(0 0 0 50%); }
+  .compare .top img { height: 100%; object-fit: cover; }
+  .compare .bar { position: absolute; top: 0; bottom: 0; left: 50%; width: 2px; background: #fff; transform: translateX(-1px); pointer-events: none; box-shadow: 0 0 6px rgba(0,0,0,.6); }
+  .compare .knob { position: absolute; top: 50%; left: 50%; width: 36px; height: 36px; margin: -18px 0 0 -18px; border-radius: 50%; background: #fff; color: #111; display: grid; place-items: center; font-size: 14px; font-weight: 700; pointer-events: none; box-shadow: 0 2px 10px rgba(0,0,0,.5); }
+  .compare .lbl { position: absolute; top: 10px; padding: 3px 9px; border-radius: 6px; background: rgba(0,0,0,.7); color: #fff; font-size: 12.5px; pointer-events: none; }
+  .compare .lbl.l { left: 10px; } .compare .lbl.r { right: 10px; }
+  @media (max-width: 520px) { .compare .lbl { top: 6px; font-size: 11px; padding: 2px 6px; } .compare .lbl.l { left: 6px; } .compare .lbl.r { right: 6px; } }
+  .compare input[type=range] { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: ew-resize; margin: 0; }
+  .full { font-size: 12.5px; margin-top: 8px; color: var(--muted); }
+  .full a { color: var(--muted); text-decoration: underline; }
+
+  .videos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 18px; }
+  @media (max-width: 760px) { .videos { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 480px) { .videos { grid-template-columns: 1fr; } }
+  figure { margin: 0; }
+  figure video { width: 100%; display: block; border-radius: 8px; border: 1px solid var(--line); background: #000; aspect-ratio: 16/9; object-fit: contain; }
+  figcaption { font-size: 13px; color: var(--muted); margin-top: 4px; }
+  figcaption b { color: var(--title); font-weight: 600; }
+  h3.small { font-size: 15px; color: var(--title); margin: 26px 0 0; }
+
+  /* Projets */
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  @media (max-width: 900px) { .grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 560px) { .grid { grid-template-columns: 1fr; } }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 14px 16px; display: flex; flex-direction: column; gap: 8px; }
+  .card h3 { margin: 0; font-size: 15.5px; color: var(--title); }
+  .card p { margin: 0; font-size: 14px; flex: 1; }
+  .card .repo { display: flex; flex-direction: column; gap: 6px; margin-top: 2px; }
+  .card .repo a { display: inline-flex; align-items: center; gap: 8px; color: var(--muted); font-family: var(--mono); font-size: 13px; font-weight: 500; }
+  .card .repo .arr { font-family: inherit; }
+  .card .repo a:hover { color: var(--title); text-decoration: none; }
+
+  /* Contact */
+  #contact { background: var(--bg-2); border-bottom: 0; padding: 48px 0 56px; }
+  .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px; margin-top: 6px; }
+  
+  @media (min-width: 1000px) { .contact-grid { grid-template-columns: 1fr 1.45fr 1fr 1fr 1fr; } }
+  .contact-card { display: block; background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px 20px; color: var(--text); }
+  .contact-card:hover { text-decoration: none; border-color: var(--accent); }
+  .contact-card .k { font-size: 12.5px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); }
+  .contact-card .v { font-size: 17px; font-weight: 600; color: var(--title); margin-top: 4px; word-break: break-word; }
+  .ref-sub { font-size: 13px; color: var(--muted); margin-top: 2px; }
+  .contact-note { color: var(--muted); font-size: 14px; margin: 16px 0 0; }
+  footer { padding: 18px 0 26px; color: var(--muted); font-size: 13px; text-align: center; background: var(--bg-2); }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <span class="brand">Jules Baji</span>
+    <ul>
+      <li class="opt"><a href="#experiences">Experience</a></li>
+      <li class="opt"><a href="#resultats">CEA results</a></li>
+      <li class="opt"><a href="#projets">Projects</a></li>
+      <li class="opt"><a href="#formation">Education</a></li>
+      <li><a class="lang" href="../" hreflang="fr" lang="fr" title="Version française">FR</a></li>
+      <li><a class="contact-btn" href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="kicker">R&amp;D Engineer · Graphics, geometry &amp; 3D ML</div>
+    <h1>Jules Baji</h1>
+    <div class="skills-line"><div class="chips main"><span class="chip">C++</span><span class="chip">CUDA</span><span class="chip">Python</span><span class="chip">PyTorch</span><span class="chip">OpenGL</span><span class="chip">3D Gaussian Splatting</span><span class="chip">Ray Tracing</span></div><div class="chips minor"><span class="chip">GLSL</span><span class="chip">OpenMP</span><span class="chip">MPI</span><span class="chip">NumPy</span><span class="chip">WebGL</span><span class="chip">JavaScript</span><span class="chip">Linux</span><span class="chip">Git</span></div></div>
+    <p class="lead">MSc in Computer Science specialising in rendering, geometry and performance for 3D. Machine learning in PyTorch and in native C++/CUDA. Recent experience at CEA Saclay on Gaussian Splatting for VR. Open to international relocation.</p>
+    <div class="contact-line">
+      <a class="btn primary" href="../cv/Resume_Jules_Baji.pdf" download>Download my resume (PDF)</a>
+      <a class="btn" href="mailto:julesbaji1@gmail.com">✉ julesbaji1@gmail.com</a>
+      <a class="btn" href="https://www.linkedin.com/in/julesbaji" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="btn" href="../rapport/rapport_stage_cea_jules_baji.pdf" download>Internship report (PDF, French, 6 MB)</a>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<section id="experiences">
+  <div class="wrap">
+    <h2 class="sec">Experience</h2>
+    <p class="sub">Two C++ internships: 3D rendering R&amp;D at CEA, production CAD software at Kreon.</p>
+    <div class="parcours">
+      <div class="stack">
+        <article class="item">
+          <header>
+            <h3>Master's thesis internship: Gaussian Splatting · <span class="where">CEA Saclay</span></h3>
+            <span class="when">01/2025 – 07/2025</span>
+          </header>
+          <p>Improving photorealistic Gaussian Splatting rendering for virtual reality, focusing on complex reflections and real-time performance.</p>
+          <ul>
+            <li>State-of-the-art review and implementation of a ray-tracing prototype.</li>
+            <li>Pivoted to a rasterization pipeline integrating Spherical Gaussians to model view-dependent reflections: rendering close to ground truth, VR-compatible (+50% storage, +15% training time).</li>
+          </ul>
+          <div class="chips"><span class="chip">C++</span><span class="chip">CUDA</span><span class="chip">OpenMP</span><span class="chip">PyTorch</span><span class="chip">3D Gaussian Splatting</span><span class="chip">Ray Tracing</span><span class="chip">VR</span></div>
+          <div class="links"><a href="#resultats">See the results ↓</a> · <a href="../rapport/rapport_stage_cea_jules_baji.pdf" download>Internship report (PDF, French)</a></div>
+        </article>
+        <article class="item">
+          <header>
+            <h3>Bachelor's internship: CAD geometry · <span class="where">Kreon Technologies</span></h3>
+            <span class="when">04/2023 – 05/2023</span>
+          </header>
+          <p>Geometric primitive detection (tori, B-splines) and fixes to tessellation algorithms (topological continuity, normal consistency) in production CAD software.</p>
+          <div class="chips"><span class="chip">C++</span><span class="chip">OpenMP</span></div>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="resultats">
+  <div class="wrap">
+    <h2 class="sec">CEA internship results</h2>
+    <div class="explain">
+      <div><p class="label">The problem</p><p>Gaussian Splatting reconstructs a 3D scene from photos and displays it in real time. But it renders reflections poorly, because they change with the viewing position.</p></div>
+      <div><p class="label">What I did</p><p>I added Spherical Gaussians to the rendering pipeline to represent these reflections, while keeping rendering fast enough for virtual reality.</p></div>
+      <div><p class="label">The result</p><p>Images closer to the real photo on all three test scenes (higher PSNR), still VR-compatible, at the cost of 50% more storage and 15% more training time.</p></div>
+    </div>
+    <p class="sub">Drag the slider: the reference method (gsplat) on the left, my method on the right. PSNR measures similarity to the real photo (higher is closer). Details in the <a href="../rapport/rapport_stage_cea_jules_baji.pdf" download>internship report</a> (in French).</p>
+
+    <div class="tabs" role="tablist" id="scene-tabs"></div>
+    <div class="viewer">
+      <div class="top-line"><span class="meta" id="scene-meta"></span><div class="views" id="scene-views"></div></div>
+      <div class="compare" id="cmp"></div>
+      <div class="full" id="cmp-full"></div>
+    </div>
+
+    <h3 class="small">Videos: methods studied during the state-of-the-art review</h3>
+    <div class="videos">
+      <figure><video controls muted loop playsinline preload="none" poster="../videos/web/comparaison_3dgs_rg.jpg" src="../videos/web/comparaison_3dgs_rg.mp4"></video><figcaption><b>3DGS and RayGauss</b> · SAC scene</figcaption></figure>
+      <figure><video controls muted loop playsinline preload="none" poster="../videos/web/3dgs_dr_sac.jpg" src="../videos/web/3dgs_dr_sac.mp4"></video><figcaption><b>3DGS-DR</b> · SAC scene</figcaption></figure>
+      <figure><video controls muted loop playsinline preload="none" poster="../videos/web/3d_grut_sac.jpg" src="../videos/web/3d_grut_sac.mp4"></video><figcaption><b>3D-GRUT</b> · SAC scene</figcaption></figure>
+      <figure><video controls muted loop playsinline preload="none" poster="../videos/web/3dgs_cbox.jpg" src="../videos/web/3dgs_cbox.mp4"></video><figcaption><b>3DGS</b> · Cornell Box</figcaption></figure>
+      <figure><video controls muted loop playsinline preload="none" poster="../videos/web/rg_cbox.jpg" src="../videos/web/rg_cbox.mp4"></video><figcaption><b>RayGauss</b> · Cornell Box</figcaption></figure>
+      <figure><video controls muted loop playsinline preload="none" poster="../videos/web/3dgs_dr_cbox.jpg" src="../videos/web/3dgs_dr_cbox.mp4"></video><figcaption><b>3DGS-DR</b> · Cornell Box</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section id="projets">
+  <div class="wrap">
+    <h2 class="sec">Master's projects</h2>
+    <p class="sub">University of Limoges, 2023-2025.</p>
+    <div class="grid">
+      <article class="card"><h3>Realistic image synthesis</h3><p>Path tracer with microfacet BRDFs, SDF geometry and CSG, accelerated by a BVH.</p><div class="chips"><span class="chip">C++</span><span class="chip">OpenMP</span></div><span class="repo"><a href="https://github.com/JulesBaji/Path-Tracer" target="_blank" rel="noopener" aria-label="GitHub repository Path-Tracer"><svg viewBox="0 0 16 16" width="18" height="18" aria-hidden="true" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg><span>Path-Tracer</span><span class="arr" aria-hidden="true">↗</span></a></span></article>
+      <article class="card"><h3>Parallel computing</h3><p>Optimised CUDA kernels for line-of-sight on a heightmap; hybrid MPI and OpenMP sub-image search.</p><div class="chips"><span class="chip">CUDA</span><span class="chip">MPI</span><span class="chip">OpenMP</span></div><span class="repo"><a href="https://github.com/JulesBaji/GPGPU" target="_blank" rel="noopener" aria-label="GitHub repository GPGPU"><svg viewBox="0 0 16 16" width="18" height="18" aria-hidden="true" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg><span>GPGPU</span><span class="arr" aria-hidden="true">↗</span></a><a href="https://github.com/JulesBaji/Parallelisme" target="_blank" rel="noopener" aria-label="GitHub repository Parallelisme"><svg viewBox="0 0 16 16" width="18" height="18" aria-hidden="true" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg><span>Parallelisme</span><span class="arr" aria-hidden="true">↗</span></a></span></article>
+      <article class="card"><h3>Real-time 3D engine</h3><p>Meshes, textures, cameras, lights, shaders and deferred rendering (G-buffer).</p><div class="chips"><span class="chip">C++</span><span class="chip">OpenGL</span><span class="chip">GLSL</span><span class="chip">OpenMP</span></div><span class="repo"><a href="https://github.com/JulesBaji/Moteur3D" target="_blank" rel="noopener" aria-label="GitHub repository Moteur3D"><svg viewBox="0 0 16 16" width="18" height="18" aria-hidden="true" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg><span>Moteur3D</span><span class="arr" aria-hidden="true">↗</span></a></span></article>
+      <article class="card"><h3>3D collision detection</h3><p>Sweep and Prune, BVH and Möller's triangle-triangle test.</p><div class="chips"><span class="chip">WebGL</span><span class="chip">JavaScript</span></div><span class="repo"><a href="https://github.com/JulesBaji/Modelisation-Collision-Detection" target="_blank" rel="noopener" aria-label="GitHub repository Modelisation-Collision-Detection"><svg viewBox="0 0 16 16" width="18" height="18" aria-hidden="true" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg><span>Modelisation-Collision-Detection</span><span class="arr" aria-hidden="true">↗</span></a></span></article>
+      <article class="card"><h3>Fluid simulation</h3><p>2D incompressible fluid simulation (DFSPH) based on a research paper, with vorticity confinement, a micropolar model and XSPH viscosity; grid-based neighbour search.</p><div class="chips"><span class="chip">Java</span></div><span class="repo"><a href="https://github.com/JulesBaji/SPH-Fluid" target="_blank" rel="noopener" aria-label="GitHub repository SPH-Fluid"><svg viewBox="0 0 16 16" width="18" height="18" aria-hidden="true" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg><span>SPH-Fluid</span><span class="arr" aria-hidden="true">↗</span></a></span></article>
+      <article class="card"><h3>3D printing</h3><p>Unfinished slicing prototype: mesh/plane intersection, Delaunay triangulation of slices, GPU rasterization, contour simplification (Ramer-Douglas-Peucker).</p><div class="chips"><span class="chip">Java</span><span class="chip">OpenGL</span></div><span class="repo"><a href="https://github.com/JulesBaji/Impression-3D-GPU" target="_blank" rel="noopener" aria-label="GitHub repository Impression-3D-GPU"><svg viewBox="0 0 16 16" width="18" height="18" aria-hidden="true" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg><span>Impression-3D-GPU</span><span class="arr" aria-hidden="true">↗</span></a></span></article>
+      <article class="card"><h3>Discrete geometry</h3><p>Shape analysis on images of rice grains: connected components, contour tracking, polygonization by digital straight segments, area, perimeter and circularity.</p><div class="chips"><span class="chip">C++</span><span class="chip">DGtal</span></div><span class="repo"><a href="https://github.com/JulesBaji/Geometrie-Discrete" target="_blank" rel="noopener" aria-label="GitHub repository Geometrie-Discrete"><svg viewBox="0 0 16 16" width="18" height="18" aria-hidden="true" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg><span>Geometrie-Discrete</span><span class="arr" aria-hidden="true">↗</span></a></span></article>
+      <article class="card"><h3>Computer vision</h3><p>Face generation, image super-resolution and recaptured-photo detection based on a research paper.</p><div class="chips"><span class="chip">Python</span><span class="chip">Keras</span></div><span class="repo"><a href="https://github.com/JulesBaji/Detection-Recapture" target="_blank" rel="noopener" aria-label="GitHub repository Detection-Recapture"><svg viewBox="0 0 16 16" width="18" height="18" aria-hidden="true" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg><span>Detection-Recapture</span><span class="arr" aria-hidden="true">↗</span></a></span></article>
+    </div>
+  </div>
+</section>
+
+<section id="formation">
+  <div class="wrap">
+    <h2 class="sec">Education and interests</h2>
+    <p class="sub">Master's and bachelor's degrees at the University of Limoges.</p>
+    <div class="grid">
+        <article class="item">
+          <header><h3>MSc Computer Science, ISICG</h3><span class="when">2023 – 2025</span></header>
+          <p>University of Limoges · computer graphics, imaging and geometry</p>
+        </article>
+        <article class="item">
+          <header><h3>BSc Computer Science</h3><span class="when">2020 – 2023</span></header>
+          <p>University of Limoges</p>
+        </article>
+        <article class="item">
+          <p class="label" style="margin:0">Interests</p>
+          <p>Trumpet and music theory at the conservatory (2011-2019) · treasurer of the master's student association · climbing</p>
+        </article>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <h2 class="sec">Contact</h2>
+    <p class="sub">Available immediately. Quick reply by email.</p>
+    <div class="contact-grid">
+      <a class="contact-card" href="../cv/Resume_Jules_Baji.pdf" download><div class="k">Resume</div><div class="v">PDF · 1 page</div></a>
+      <a class="contact-card" href="mailto:julesbaji1@gmail.com"><div class="k">Email</div><div class="v">julesbaji1@gmail.com</div></a>
+      <a class="contact-card" href="https://www.linkedin.com/in/julesbaji" target="_blank" rel="noopener"><div class="k">LinkedIn</div><div class="v">/in/julesbaji</div></a>
+      <a class="contact-card" href="../rapport/rapport_stage_cea_jules_baji.pdf" download><div class="k">Internship report</div><div class="v">PDF · French · 6 MB</div></a>
+      <div class="contact-card"><div class="k">Reference</div><div class="v">Research engineer, CEA</div><div class="ref-sub">Internship supervisor · contact on request</div></div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>© 2026 Jules Baji · Paris</footer>
+
+<script>
+  // Skill colours by category
+  var CAT = {
+    'C++':'lang','Python':'lang','GLSL':'lang','JavaScript':'lang','Java':'lang',
+    'CUDA':'gpu','OpenMP':'gpu','MPI':'gpu',
+    '3D Gaussian Splatting':'gfx','OpenGL':'gfx','WebGL':'gfx','Ray Tracing':'gfx','VR':'gfx',
+    'PyTorch':'ml','NumPy':'ml','Keras':'ml',
+    'Linux':'tool','Git':'tool'
+  };
+  document.querySelectorAll('.chip').forEach(function (c) { c.classList.add(CAT[c.textContent.trim()] || 'tool'); });
+
+  // Scenes and before/after views
+  var G = 'Reference (gsplat)', S = 'My method', T = 'Real photo';
+  function pair(a, b, la, lb, fa, fb) { return { a: '../images/web/' + a + '.webp', b: '../images/web/' + b + '.webp', la: la, lb: lb, fa: '../images/' + fa, fb: '../images/' + fb }; }
+  function gs(scene, n) { var s = n > 1 ? n : ''; return pair(scene + '_gsplat' + s, scene + '_sg' + s, G, S, scene + '_gsplat' + s + '.png', scene + '_sg' + s + '.png'); }
+  var SCENES = [
+    { name: 'Bonsaï', meta: 'Resolution 1:1 · PSNR <b>30.68</b> → <b>31.52</b>', views: [gs('bonsai', 2), gs('bonsai', 1)] },
+    { name: 'Bicycle', meta: 'Resolution 1:2 · PSNR <b>25.82</b> → <b>26.25</b>', views: [gs('bicycle', 1), gs('bicycle', 2), gs('bicycle', 3), gs('bicycle', 4)] },
+    { name: 'Garden', meta: 'Resolution 1:2 · PSNR <b>26.86</b> → <b>27.34</b>', views: [gs('garden', 1), gs('garden', 2), gs('garden', 3)] },
+    { name: 'Against the real photo', meta: 'Real photo on the right', views: [
+      Object.assign(pair('bonsai_sg', 'gt_bonsai', S, T, 'bonsai_sg.png', 'gt_bonsai.JPG'), { tag: 'Bonsaï' }),
+      Object.assign(pair('garden_sg', 'gt_garden', S, T, 'garden_sg.png', 'gt_garden.JPG'), { tag: 'Garden' }) ] }
+  ];
+  var tabs = document.getElementById('scene-tabs'), meta = document.getElementById('scene-meta'),
+      views = document.getElementById('scene-views'), cmp = document.getElementById('cmp'), full = document.getElementById('cmp-full');
+
+  function showView(v) {
+    cmp.innerHTML =
+      '<img alt="' + v.la + '" src="' + v.a + '">' +
+      '<div class="top"><img alt="' + v.lb + '" src="' + v.b + '"></div>' +
+      '<div class="bar"></div><div class="knob">⇆</div>' +
+      '<span class="lbl l">' + v.la + '</span><span class="lbl r">' + v.lb + '</span>' +
+      '<input type="range" min="0" max="100" value="50" aria-label="Compare ' + v.la + ' and ' + v.lb + '">';
+    var top = cmp.querySelector('.top'), bar = cmp.querySelector('.bar'), knob = cmp.querySelector('.knob');
+    cmp.querySelector('input').addEventListener('input', function (e) {
+      var x = e.target.value;
+      top.style.clipPath = 'inset(0 0 0 ' + x + '%)'; bar.style.left = x + '%'; knob.style.left = x + '%';
+    });
+    full.innerHTML = 'Full resolution: <a href="' + v.fa + '">' + v.la.toLowerCase() + '</a> · <a href="' + v.fb + '">' + v.lb.toLowerCase() + '</a>';
+  }
+  function showScene(i) {
+    var sc = SCENES[i];
+    tabs.querySelectorAll('.tab').forEach(function (t, j) { t.setAttribute('aria-selected', j === i ? 'true' : 'false'); });
+    meta.innerHTML = sc.meta;
+    views.innerHTML = '';
+    if (sc.views.length > 1) sc.views.forEach(function (v, j) {
+      var b = document.createElement('button');
+      b.textContent = v.tag || ('View ' + (j + 1));
+      b.setAttribute('aria-pressed', j === 0 ? 'true' : 'false');
+      b.onclick = function () { views.querySelectorAll('button').forEach(function (x) { x.setAttribute('aria-pressed', 'false'); }); b.setAttribute('aria-pressed', 'true'); showView(v); };
+      views.appendChild(b);
+    });
+    showView(sc.views[0]);
+  }
+  SCENES.forEach(function (sc, i) {
+    var t = document.createElement('button');
+    t.className = 'tab'; t.setAttribute('role', 'tab'); t.textContent = sc.name;
+    t.onclick = function () { showScene(i); };
+    tabs.appendChild(t);
+  });
+  showScene(0);
+</script>
+</body>
+</html>
