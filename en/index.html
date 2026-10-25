@@ -208,7 +208,7 @@
           <p>Improving photorealistic Gaussian Splatting rendering for virtual reality, focusing on complex reflections and real-time performance.</p>
           <ul>
             <li>State-of-the-art review and implementation of a ray-tracing prototype.</li>
-            <li>Pivoted to a rasterization pipeline integrating Spherical Gaussians to model view-dependent reflections: rendering close to ground truth, VR-compatible (+50% storage, +15% training time).</li>
+            <li>Pivoted to a rasterization pipeline integrating Spherical Gaussians to model view-dependent reflections: much more realistic reflections at the same frame rate.</li>
           </ul>
           <div class="chips"><span class="chip">C++</span><span class="chip">CUDA</span><span class="chip">OpenMP</span><span class="chip">PyTorch</span><span class="chip">3D Gaussian Splatting</span><span class="chip">Ray Tracing</span><span class="chip">VR</span></div>
           <div class="links"><a href="#resultats">See the results ↓</a> · <a href="../rapport/rapport_stage_cea_jules_baji.pdf" download>Internship report (PDF, French)</a></div>
@@ -232,7 +232,7 @@
     <div class="explain">
       <div><p class="label">The problem</p><p>Gaussian Splatting recreates a 3D scene from photos and displays it in real time, but it renders reflections poorly (shiny surfaces, glass, metal objects).</p></div>
       <div><p class="label">What I did</p><p>I first tested ray tracing, which simulates the path of light: accurate, but too slow for a virtual reality headset (60 frames per second minimum). I then added a mathematical model of reflections (Spherical Gaussians) to the standard renderer.</p></div>
-      <div><p class="label">The result</p><p>Images closer to the real photo on all three test scenes, at the same speed as the base method (about 300 frames per second).</p></div>
+      <div><p class="label">The result</p><p>Much more realistic reflections, closer to the real photo on all three test scenes, at the same speed as the base method (about 300 frames per second).</p></div>
     </div>
     <p class="sub">Drag the slider: the reference method (gsplat) on the left, my method on the right. PSNR measures similarity to the real photo (higher is closer). Details in the <a href="../rapport/rapport_stage_cea_jules_baji.pdf" download>internship report</a> (in French).</p>
 
