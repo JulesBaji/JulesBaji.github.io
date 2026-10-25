@@ -232,7 +232,7 @@
     <div class="explain">
       <div><p class="label">Le problème</p><p>Le Gaussian Splatting recrée une scène 3D à partir de photos et l'affiche en temps réel, mais il rend mal les reflets (surfaces brillantes, vitres, objets métalliques).</p></div>
       <div><p class="label">Ce que j'ai fait</p><p>J'ai d'abord testé le lancer de rayons, qui simule le trajet de la lumière : fidèle, mais trop lent pour un casque de réalité virtuelle (60 images par seconde minimum). J'ai ensuite ajouté au rendu classique un modèle mathématique des reflets (Gaussiennes Sphériques).</p></div>
-      <div><p class="label">Le résultat</p><p>Des images plus proches de la photo réelle sur les trois scènes testées, à la même vitesse d'affichage que la méthode de base (environ 300 images par seconde), pour un modèle 50&nbsp;% plus lourd et un entraînement 15&nbsp;% plus long.</p></div>
+      <div><p class="label">Le résultat</p><p>Des images plus proches de la photo réelle sur les trois scènes testées, à la même vitesse que la méthode de base (environ 300 images par seconde).</p></div>
     </div>
     <p class="sub">Faites glisser le curseur : à gauche la méthode de référence (gsplat), à droite ma méthode. Le PSNR mesure la ressemblance avec la photo réelle (plus haut = plus proche). Détails dans le <a href="rapport/rapport_stage_cea_jules_baji.pdf" download>rapport de stage</a>.</p>
 
