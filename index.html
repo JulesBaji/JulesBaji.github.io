@@ -134,6 +134,7 @@
   .card { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 14px 16px; display: flex; flex-direction: column; gap: 8px; }
   .card h3 { margin: 0; font-size: 15.5px; color: var(--title); }
   .card p { margin: 0; font-size: 14px; flex: 1; }
+  .card .repo { font-size: 13.5px; font-weight: 600; margin-top: 2px; }
 
   /* Contact */
   #contact { background: var(--bg-2); border-bottom: 0; padding: 48px 0 56px; }
@@ -217,8 +218,8 @@
     <h2 class="sec">Projets de master</h2>
     <p class="sub">Université de Limoges, 2025.</p>
     <div class="grid">
-      <article class="card"><h3>Synthèse d'image réaliste</h3><p>Path tracer avec BRDF à microfacettes, géométrie SDF et CSG, accéléré par BVH.</p><div class="chips"><span class="chip">C++</span><span class="chip">OpenMP</span></div></article>
-      <article class="card"><h3>Moteur 3D temps réel</h3><p>Maillages, textures, caméras, lumières et shaders.</p><div class="chips"><span class="chip">C++</span><span class="chip">OpenGL</span><span class="chip">GLSL</span><span class="chip">OpenMP</span></div></article>
+      <article class="card"><h3>Synthèse d'image réaliste</h3><p>Path tracer avec BRDF à microfacettes, géométrie SDF et CSG, accéléré par BVH.</p><div class="chips"><span class="chip">C++</span><span class="chip">OpenMP</span></div><a class="repo" href="https://github.com/JulesBaji/ISIR" target="_blank" rel="noopener">Code sur GitHub ↗</a></article>
+      <article class="card"><h3>Moteur 3D temps réel</h3><p>Maillages, textures, caméras, lumières et shaders.</p><div class="chips"><span class="chip">C++</span><span class="chip">OpenGL</span><span class="chip">GLSL</span><span class="chip">OpenMP</span></div><a class="repo" href="https://github.com/JulesBaji/Moteur3D" target="_blank" rel="noopener">Code sur GitHub ↗</a></article>
       <article class="card"><h3>Détection de collisions 3D</h3><p>Sweep and Prune, BVH et test triangle-triangle de Möller.</p><div class="chips"><span class="chip">WebGL</span><span class="chip">JavaScript</span></div></article>
       <article class="card"><h3>Parallélisme</h3><p>Kernels CUDA optimisés pour une carte de hauteur ; recherche de sous-image hybride MPI et OpenMP.</p><div class="chips"><span class="chip">CUDA</span><span class="chip">MPI</span><span class="chip">OpenMP</span></div></article>
       <article class="card"><h3>Vision par ordinateur</h3><p>Génération de visages, super-résolution et détection de photos recapturées d'après un article de recherche.</p><div class="chips"><span class="chip">Python</span><span class="chip">Keras</span></div></article>
