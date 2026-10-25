@@ -232,7 +232,7 @@
     <div class="explain">
       <div><p class="label">The problem</p><p>Gaussian Splatting recreates a 3D scene from photos and displays it in real time, but it renders reflections poorly (shiny surfaces, glass, metal objects).</p></div>
       <div><p class="label">What I did</p><p>I first tested ray tracing, which simulates the path of light: accurate, but too slow for a virtual reality headset (60 frames per second minimum). I then added a mathematical model of reflections (Spherical Gaussians) to the standard renderer.</p></div>
-      <div><p class="label">The result</p><p>Images closer to the real photo on all three test scenes, still fast enough for VR, with a 50% larger model and 15% longer training.</p></div>
+      <div><p class="label">The result</p><p>Images closer to the real photo on all three test scenes, still fast enough for VR, with a 50% larger scene file and 15% longer training.</p></div>
     </div>
     <p class="sub">Drag the slider: the reference method (gsplat) on the left, my method on the right. PSNR measures similarity to the real photo (higher is closer). Details in the <a href="../rapport/rapport_stage_cea_jules_baji.pdf" download>internship report</a> (in French).</p>
 
