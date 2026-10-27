@@ -174,7 +174,8 @@ UNILIM = ('<img class="logo logo-unilim on-dark" src="{p}images/logos/unilim-som
 # Animated card backgrounds: repo -> (file in images/web or (dark, light) pair, invert in light theme, object-position)
 PROJ_BG = {'Modelisation-Collision-Detection': ('collisions', True, '70% 50%'),
            'SPH-Fluid': (('fluide-dk', 'fluide-lt'), False, '50% 80%'),
-           'Moteur3D': ('moteur3d', False, '50% 40%')}
+           'Moteur3D': ('moteur3d', False, '50% 40%'),
+           'Detection-Recapture': ('recapture.jpg', False, '50% 50%')}
 
 def _video(f, p, cls, pos):
     return (f'<video class="{cls}" autoplay muted loop playsinline preload="metadata" aria-hidden="true" '
@@ -183,6 +184,8 @@ def _video(f, p, cls, pos):
 def proj_bg(r, p):
     if r not in PROJ_BG: return ''
     f, inv, pos = PROJ_BG[r]
+    if isinstance(f, str) and f.endswith('.jpg'):  # still image
+        return f'<img class="bg" src="{p}images/web/{f}" alt="" aria-hidden="true" style="object-position:{pos}">'
     if isinstance(f, tuple):
         return _video(f[0], p, 'bg on-dark', pos) + _video(f[1], p, 'bg on-light', pos)
     return _video(f, p, 'bg inv' if inv else 'bg', pos)
