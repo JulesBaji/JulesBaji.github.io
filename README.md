@@ -8,5 +8,5 @@ Site personnel : présentation, parcours et résultats de stage au CEA Saclay (G
 - `cv/` : CV en PDF.
 - `en/` : version anglaise du site.
 - `stage-cea.html`, `en/cea-internship.html` : page détaillée du stage au CEA.
-- `projets.html`, `en/projects.html` : page des projets de master.
+- `projets.html`, `en/projects.html` : redirections vers la liste des projets de l'accueil (anciens liens).
 - `assets/` : styles et scripts communs ; `tools/build_site.py` génère les pages FR et EN à partir des mêmes textes.
