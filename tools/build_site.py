@@ -20,12 +20,10 @@ L = {
   pitch="Diplômé d’un Master en Informatique spécialisé en rendu, géométrie et performance pour la 3D. Machine learning en PyTorch et en C++/CUDA natif. Expérience récente au CEA Saclay sur le Gaussian Splatting pour la VR. Mobilité internationale.",
   meta='Paris · disponible immédiatement',
   cv='CV (PDF)', cv_file='cv/CV_Jules_Baji.pdf', email='E-mail',
-  h_hl='À la une', all_proj='Voir tous les projets →', h_exp='Expérience', h_skills='Compétences', h_proj='Projets de master', h_form='Formation', h_contact='Contact',
+  h_hl='À la une', h_exp='Expérience', h_skills='Compétences', h_proj='Projets de master', prev='Projets précédents', next='Projets suivants', theme_label='Changer de thème (sombre/clair)', h_form='Formation', h_contact='Contact',
   hl_main=('Stage de fin d\'études · CEA Saclay · 2025', 'Des reflets plus réalistes en réalité virtuelle',
            "Amélioration du Gaussian Splatting, une technique qui recrée une scène 3D à partir de photos.", 'Voir les résultats →',
            'Comparaison avant/après : méthode de référence à gauche, ma méthode à droite'),
-  hl1=('Projet de master · 2024','Path tracer',"Moteur de rendu photoréaliste qui simule le trajet de la lumière, en C++.",'Path-Tracer'),
-  hl2=('Projet de master · 2024','Simulation de fluide',"Fluide SPH incompressible avec turbulences, d'après un article de recherche.",'SPH-Fluid'),
   exp=[('CEA Saclay','Stage de fin d\'études · R&amp;D en rendu 3D','Des reflets plus réalistes en Gaussian Splatting pour la réalité virtuelle.','01–07/2025',['C++','CUDA','PyTorch'], True),
        ('Kreon Technologies','Stage · logiciel de CAO','Correction d\'algorithmes de géométrie dans un logiciel en production.','04–05/2023',['C++'], False)],
   more='En savoir plus',
@@ -74,12 +72,10 @@ L = {
   pitch="MSc in Computer Science specialising in rendering, geometry and performance for 3D. Machine learning in PyTorch and in native C++/CUDA. Recent experience at CEA Saclay on Gaussian Splatting for VR. Open to international relocation.",
   meta='Paris · available immediately',
   cv='Resume (PDF)', cv_file='cv/Resume_Jules_Baji.pdf', email='Email',
-  h_hl='Highlights', all_proj='See all projects →', h_exp='Experience', h_skills='Skills', h_proj="Master's projects", h_form='Education', h_contact='Contact',
+  h_hl='Highlights', h_exp='Experience', h_skills='Skills', h_proj="Master's projects", prev='Previous projects', next='Next projects', theme_label='Switch theme (dark/light)', h_form='Education', h_contact='Contact',
   hl_main=("Master's thesis internship · CEA Saclay · 2025", 'More realistic reflections in virtual reality',
            "Improving Gaussian Splatting, a technique that recreates a 3D scene from photos.", 'See the results →',
            'Before/after comparison: reference method on the left, my method on the right'),
-  hl1=("Master's project · 2024",'Path tracer',"Photorealistic renderer that simulates the path of light, in C++.",'Path-Tracer'),
-  hl2=("Master's project · 2024",'Fluid simulation',"Incompressible SPH fluid with turbulence, based on a research paper.",'SPH-Fluid'),
   exp=[('CEA Saclay',"Master's thesis internship · 3D rendering R&amp;D",'More realistic reflections in Gaussian Splatting for virtual reality.','01–07/2025',['C++','CUDA','PyTorch'], True),
        ('Kreon Technologies','Internship · CAD software','Fixes to geometry algorithms in production software.','04–05/2023',['C++'], False)],
   more='Learn more',
@@ -130,19 +126,25 @@ def head(t, title, desc, p):
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{p}assets/style.css">
+<script>try{{if(localStorage.getItem('theme')==='light')document.documentElement.dataset.theme='light'}}catch(e){{}}</script>
 </head>
 <body>
 '''
 
+THEME_BTN = ('<button class="theme" type="button" aria-label="{l}" title="{l}">'
+  '<svg class="i-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 1.8v3M12 19.2v3M1.8 12h3M19.2 12h3M4.8 4.8l2.1 2.1M17.1 17.1l2.1 2.1M4.8 19.2l2.1-2.1M17.1 6.9l2.1-2.1"/></svg>'
+  '<svg class="i-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14.6A8.6 8.6 0 0 1 9.4 3.5 8.6 8.6 0 1 0 20.5 14.6z"/></svg></button>')
+
 def nav(t, home_prefix, other_href, current=''):
-    def href(h): return {'@cea': t['cea_page'], '@proj': t['proj_page']}.get(h, home_prefix + h)
+    def href(h): return {'@cea': t['cea_page'], '@proj': (home_prefix or '') + '#projets'}.get(h, home_prefix + h)
     items = ''.join(f'<li><a href="{href(h)}"' + (' aria-current="page"' if h == current else '') + f'>{l}</a></li>' for h, l in t['nav'])
     return f'''<nav>
   <div class="wrap">
     <a class="brand" href="{home_prefix or './'}">Jules Baji</a>
-    <div class="ctl-mobile"><a class="lang" href="{other_href}" hreflang="{t['other_hreflang']}" lang="{t['other_hreflang']}" title="{t['other_title']}">{t['other_label']}</a><a class="cta" href="{home_prefix}#contact">{t['contact']}</a></div>
+    <div class="ctl-mobile">{THEME_BTN.format(l=t['theme_label'])}<a class="lang" href="{other_href}" hreflang="{t['other_hreflang']}" lang="{t['other_hreflang']}" title="{t['other_title']}">{t['other_label']}</a><a class="cta" href="{home_prefix}#contact">{t['contact']}</a></div>
     <ul>
       {items}
+      <li class="ctl">{THEME_BTN.format(l=t['theme_label'])}</li>
       <li class="ctl"><a class="lang" href="{other_href}" hreflang="{t['other_hreflang']}" lang="{t['other_hreflang']}" title="{t['other_title']}">{t['other_label']}</a></li>
       <li class="ctl"><a class="cta" href="{home_prefix}#contact">{t['contact']}</a></li>
     </ul>
@@ -166,8 +168,16 @@ LOGOS = {
     'CEA Saclay': '<img class="logo logo-cea" src="{p}images/logos/cea.svg" alt="Logo du CEA" width="48" height="48">',
     'Kreon Technologies': '<img class="logo logo-kreon" src="{p}images/logos/kreon.png" alt="Logo de Kreon" width="110" height="28">',
 }
-UNILIM = ('<picture><source srcset="{p}images/logos/unilim-sombre.png" media="(prefers-color-scheme: dark)">'
-          '<img class="logo logo-unilim" src="{p}images/logos/unilim.png" alt="Logo de l\'Université de Limoges" width="110" height="36"></picture>')
+UNILIM = ('<img class="logo logo-unilim on-dark" src="{p}images/logos/unilim-sombre.png" alt="Logo de l\'Université de Limoges" width="110" height="36">'
+          '<img class="logo logo-unilim on-light" src="{p}images/logos/unilim.png" alt="" width="110" height="36">')
+
+PROJ_BG = {'Modelisation-Collision-Detection': 'collisions'}
+
+def proj_bg(r, p):
+    if r not in PROJ_BG: return ''
+    f = PROJ_BG[r]
+    return (f'<video class="bg" autoplay muted loop playsinline preload="metadata" aria-hidden="true" '
+            f'poster="{p}images/web/{f}.jpg"><source src="{p}images/web/{f}.mp4" type="video/mp4"></video>')
 
 def home(t):
     p = t['p']; cp = t['cea_page']
@@ -178,12 +188,9 @@ def home(t):
         return f'<span class="plain">{v}</span>' if last else chips([x.replace('Ray tracing', 'Ray Tracing') for x in v.split(' · ')])
     skills = ''.join(f'<div class="sk"><b>{k}</b>{sk(v, i == len(t["skills"]) - 1)}</div>' for i, (k, v) in enumerate(t['skills']))
     projs = ''.join(f'''
-      <article class="card proj"><h3>{n}</h3><p>{d}</p>{chips(c)}<div class="repo">{''.join(repo(r) for r in rs)}</div></article>''' for n, d, c, rs in t['projects'])
+      <article class="card proj{' has-bg' if rs[0] in PROJ_BG else ''}">{proj_bg(rs[0], p)}<h3>{n}</h3><p>{d}</p>{chips(c)}<div class="repo">{''.join(repo(r) for r in rs)}</div></article>''' for n, d, c, rs in t['projects'])
     form = ''.join(f'''
       <div class="entry"><div class="side"><span class="when">{c}</span>{UNILIM.format(p=p)}</div><div class="main"><h3>{a}</h3><p>{b}</p></div></div>''' for a, b, c in t['form'])
-    def side(h):
-        k, ti, d, r = h
-        return f'<a class="card hl" href="https://github.com/JulesBaji/{r}" target="_blank" rel="noopener"><p class="kicker">{k}</p><h3>{ti}</h3><p>{d}</p><span class="more">GitHub ↗</span></a>'
     return head(t, t['title'], t['desc'], p) + nav(t, '', t['other']) + f'''
 <header class="hero">
   <canvas id="cornell" aria-hidden="true"></canvas>
@@ -207,9 +214,15 @@ def home(t):
         <img src="{p}images/web/teaser_cea.webp" alt="{m[4]}" width="1200" height="615">
         <div class="body"><p class="kicker">{m[0]}</p><h3>{m[1]}</h3><p>{m[2]}</p><span class="more">{m[3]}</span></div>
       </a>
-      <div class="hl-side">{side(t['hl1'])}{side(t['hl2'])}</div>
     </div>
-    <p style="margin:14px 0 0"><a class="more" href="{t['proj_page']}">{t['all_proj']}</a></p>
+  </div>
+</section>
+
+<section id="projets">
+  <div class="wrap">
+    <div class="h2row"><h2>{t['h_proj']}</h2><div class="scroll-btns"><button type="button" class="sb prev" aria-label="{t['prev']}">←</button><button type="button" class="sb next" aria-label="{t['next']}">→</button></div></div>
+    <div class="scroller" tabindex="0" aria-label="{t['h_proj']}">{projs}
+    </div>
   </div>
 </section>
 
@@ -248,7 +261,9 @@ def home(t):
 
 <footer>{t['footer']}</footer>
 <script src="{p}assets/chips.js"></script>
+<script src="{p}assets/theme.js"></script>
 <script src="{p}assets/cornell.js"></script>
+<script src="{p}assets/scroller.js"></script>
 </body>
 </html>
 '''
@@ -307,49 +322,19 @@ window.CEA_TXT = {{ prefix: '{p}', ref: '{j['ref']}', mine: '{j['mine']}', photo
 <footer>{t['footer']}</footer>
 {jsconf}
 <script src="{p}assets/chips.js"></script>
+<script src="{p}assets/theme.js"></script>
 <script src="{p}assets/cea.js"></script>
 </body>
 </html>
 '''
 
-PROJ_BG = {'Modelisation-Collision-Detection': 'collisions'}
-
-def proj_bg(r, p):
-    if r not in PROJ_BG: return ''
-    f = PROJ_BG[r]
-    return (f'<video class="bg" autoplay muted loop playsinline preload="metadata" aria-hidden="true" '
-            f'poster="{p}images/web/{f}.jpg"><source src="{p}images/web/{f}.mp4" type="video/mp4"></video>')
-
-def projects_page(t):
-    p = t['p']
-    projs = ''.join(f'''
-      <article class="card proj{' has-bg' if rs[0] in PROJ_BG else ''}">{proj_bg(rs[0], p)}<h3>{n}</h3><p>{d}</p>{chips(c)}<div class="repo">{''.join(repo(r) for r in rs)}</div></article>''' for n, d, c, rs in t['projects'])
-    other_href = 'en/projects.html' if t['lang'] == 'fr' else '../projets.html'
-    return head(t, t['h_proj'] + ' · Jules Baji', t['desc'], p) + nav(t, './', other_href, '@proj') + f'''
-<main>
-<div class="wrap page-head">
-  <a class="back" href="./">{t['cea_back']}</a>
-  <h1>{t['h_proj']}</h1>
-  <p>{t['proj_sub']}</p>
-</div>
-<section style="border-top:0">
-  <div class="wrap">
-    <div class="grid">{projs}
-    </div>
-  </div>
-</section>
-</main>
-
-<footer>{t['footer']}</footer>
-<script src="{p}assets/chips.js"></script>
-</body>
-</html>
-'''
+def redirect(to):
+    return f'<!DOCTYPE html><html><head><meta charset="UTF-8"><meta http-equiv="refresh" content="0; url={to}"><link rel="canonical" href="{to}"><title>Jules Baji</title></head><body><a href="{to}">{to}</a></body></html>\n'
 
 for k, t in L.items():
     base = ROOT if k == 'fr' else os.path.join(ROOT, 'en')
     os.makedirs(base, exist_ok=True)
     open(os.path.join(base, 'index.html'), 'w').write(home(t))
     open(os.path.join(base, t['cea_page']), 'w').write(cea(t))
-    open(os.path.join(base, t['proj_page']), 'w').write(projects_page(t))
+    open(os.path.join(base, t['proj_page']), 'w').write(redirect('./#projets'))
 print('ok')

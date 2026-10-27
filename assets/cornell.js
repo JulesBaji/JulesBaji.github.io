@@ -198,10 +198,6 @@ void main(){
   }
   document.addEventListener('visibilitychange', function () { visible = !document.hidden; start(); });
   window.addEventListener('resize', function () { clearTimeout(resize.t); resize.t = setTimeout(resize, 200); });
-  if (window.matchMedia) {
-    var mq = window.matchMedia('(prefers-color-scheme: light)');
-    var on = function () { BG = bgColor(); frame = 0; start(); };
-    if (mq.addEventListener) mq.addEventListener('change', on);
-  }
+  document.addEventListener('themechange', function () { BG = bgColor(); frame = 0; start(); });
   resize();
 })();

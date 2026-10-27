@@ -9,14 +9,16 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../assets/style.css">
+<script>try{if(localStorage.getItem('theme')==='light')document.documentElement.dataset.theme='light'}catch(e){}</script>
 </head>
 <body>
 <nav>
   <div class="wrap">
     <a class="brand" href="./">Jules Baji</a>
-    <div class="ctl-mobile"><a class="lang" href="../stage-cea.html" hreflang="fr" lang="fr" title="Version française">FR</a><a class="cta" href="./#contact">Contact</a></div>
+    <div class="ctl-mobile"><button class="theme" type="button" aria-label="Switch theme (dark/light)" title="Switch theme (dark/light)"><svg class="i-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 1.8v3M12 19.2v3M1.8 12h3M19.2 12h3M4.8 4.8l2.1 2.1M17.1 17.1l2.1 2.1M4.8 19.2l2.1-2.1M17.1 6.9l2.1-2.1"/></svg><svg class="i-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14.6A8.6 8.6 0 0 1 9.4 3.5 8.6 8.6 0 1 0 20.5 14.6z"/></svg></button><a class="lang" href="../stage-cea.html" hreflang="fr" lang="fr" title="Version française">FR</a><a class="cta" href="./#contact">Contact</a></div>
     <ul>
-      <li><a href="cea-internship.html" aria-current="page">CEA internship</a></li><li><a href="projects.html">Projects</a></li>
+      <li><a href="cea-internship.html" aria-current="page">CEA internship</a></li><li><a href="./#projets">Projects</a></li>
+      <li class="ctl"><button class="theme" type="button" aria-label="Switch theme (dark/light)" title="Switch theme (dark/light)"><svg class="i-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 1.8v3M12 19.2v3M1.8 12h3M19.2 12h3M4.8 4.8l2.1 2.1M17.1 17.1l2.1 2.1M4.8 19.2l2.1-2.1M17.1 6.9l2.1-2.1"/></svg><svg class="i-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14.6A8.6 8.6 0 0 1 9.4 3.5 8.6 8.6 0 1 0 20.5 14.6z"/></svg></button></li>
       <li class="ctl"><a class="lang" href="../stage-cea.html" hreflang="fr" lang="fr" title="Version française">FR</a></li>
       <li class="ctl"><a class="cta" href="./#contact">Contact</a></li>
     </ul>
@@ -64,6 +66,7 @@ window.CEA_TXT = { prefix: '../', ref: 'Reference (gsplat)', mine: 'My method', 
   meta2: function (a, b) { return 'Resolution 1:2 · PSNR <b>' + a + '</b> → <b>' + b + '</b>'; } };
 </script>
 <script src="../assets/chips.js"></script>
+<script src="../assets/theme.js"></script>
 <script src="../assets/cea.js"></script>
 </body>
 </html>
