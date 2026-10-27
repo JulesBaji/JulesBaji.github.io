@@ -11,16 +11,16 @@ DOC = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2h9l5 5v15H6V2zm8
 L = {
  'fr': dict(
   lang='fr', other='en/', other_label='EN', other_title='English version', other_hreflang='en',
-  home='', p='', cea_page='stage-cea.html',
+  home='', p='', cea_page='stage-cea.html', proj_page='projets.html',
   title='Jules Baji · Ingénieur en informatique graphique',
   desc="Jules Baji, ingénieur en informatique graphique : rendu 3D, calcul GPU et IA pour la 3D. Stage au CEA Saclay sur le Gaussian Splatting pour la réalité virtuelle.",
-  nav=[('@cea','Stage CEA'),('#experience','Expérience'),('#projets','Projets'),('#formation','Formation')],
+  nav=[('@cea','Stage CEA'),('@proj','Projets')],
   contact='Contact',
   role='Ingénieur R&amp;D · Graphics, géométrie &amp; 3D ML',
   pitch="Jeune diplômé en informatique graphique : je développe en C++ et CUDA des moteurs de rendu 3D et des outils de calcul.",
   meta='Paris · disponible immédiatement · mobile en Europe',
   cv='CV (PDF)', cv_file='cv/CV_Jules_Baji.pdf', email='E-mail',
-  h_hl='Points forts', h_exp='Expérience', h_skills='Compétences', h_proj='Projets de master', h_form='Formation', h_contact='Contact',
+  h_hl='À la une', all_proj='Voir tous les projets →', h_exp='Expérience', h_skills='Compétences', h_proj='Projets de master', h_form='Formation', h_contact='Contact',
   hl_main=('Stage de fin d\'études · CEA Saclay · 2025', 'Des reflets plus réalistes en réalité virtuelle',
            "Amélioration du Gaussian Splatting, une technique qui recrée une scène 3D à partir de photos.", 'Voir les résultats →',
            'Comparaison avant/après : méthode de référence à gauche, ma méthode à droite'),
@@ -65,16 +65,16 @@ L = {
  ),
  'en': dict(
   lang='en', other='../', other_label='FR', other_title='Version française', other_hreflang='fr',
-  home='', p='../', cea_page='cea-internship.html',
+  home='', p='../', cea_page='cea-internship.html', proj_page='projects.html',
   title='Jules Baji · Computer graphics engineer',
   desc="Jules Baji, computer graphics engineer: 3D rendering, GPU computing and AI for 3D. Internship at CEA Saclay on Gaussian Splatting for virtual reality.",
-  nav=[('@cea','CEA internship'),('#experience','Experience'),('#projets','Projects'),('#formation','Education')],
+  nav=[('@cea','CEA internship'),('@proj','Projects')],
   contact='Contact',
   role='R&amp;D Engineer · Graphics, geometry &amp; 3D ML',
   pitch="Recent computer graphics graduate: I build 3D rendering engines and computing tools in C++ and CUDA.",
   meta='Paris · available immediately · open to relocation in Europe',
   cv='Resume (PDF)', cv_file='cv/Resume_Jules_Baji.pdf', email='Email',
-  h_hl='Highlights', h_exp='Experience', h_skills='Skills', h_proj="Master's projects", h_form='Education', h_contact='Contact',
+  h_hl='Highlights', all_proj='See all projects →', h_exp='Experience', h_skills='Skills', h_proj="Master's projects", h_form='Education', h_contact='Contact',
   hl_main=("Master's thesis internship · CEA Saclay · 2025", 'More realistic reflections in virtual reality',
            "Improving Gaussian Splatting, a technique that recreates a 3D scene from photos.", 'See the results →',
            'Before/after comparison: reference method on the left, my method on the right'),
@@ -135,7 +135,7 @@ def head(t, title, desc, p):
 '''
 
 def nav(t, home_prefix, other_href, current=''):
-    def href(h): return t['cea_page'] if h == '@cea' else home_prefix + h
+    def href(h): return {'@cea': t['cea_page'], '@proj': t['proj_page']}.get(h, home_prefix + h)
     items = ''.join(f'<li><a href="{href(h)}"' + (' aria-current="page"' if h == current else '') + f'>{l}</a></li>' for h, l in t['nav'])
     return f'''<nav>
   <div class="wrap">
@@ -199,6 +199,7 @@ def home(t):
       </a>
       <div class="hl-side">{side(t['hl1'])}{side(t['hl2'])}</div>
     </div>
+    <p style="margin:14px 0 0"><a class="more" href="{t['proj_page']}">{t['all_proj']}</a></p>
   </div>
 </section>
 
@@ -214,14 +215,6 @@ def home(t):
   <div class="wrap">
     <h2>{t['h_skills']}</h2>
     <div class="card skills">{skills}</div>
-  </div>
-</section>
-
-<section id="projets">
-  <div class="wrap">
-    <h2>{t['h_proj']} <span class="small">· {t['proj_sub']}</span></h2>
-    <div class="grid">{projs}
-    </div>
   </div>
 </section>
 
@@ -315,9 +308,36 @@ window.CEA_TXT = {{ prefix: '{p}', ref: '{j['ref']}', mine: '{j['mine']}', photo
 </html>
 '''
 
+def projects_page(t):
+    p = t['p']
+    projs = ''.join(f'''
+      <article class="card proj"><h3>{n}</h3><p>{d}</p>{chips(c)}<div class="repo">{''.join(repo(r) for r in rs)}</div></article>''' for n, d, c, rs in t['projects'])
+    other_href = 'en/projects.html' if t['lang'] == 'fr' else '../projets.html'
+    return head(t, t['h_proj'] + ' · Jules Baji', t['desc'], p) + nav(t, './', other_href, '@proj') + f'''
+<main>
+<div class="wrap page-head">
+  <a class="back" href="./">{t['cea_back']}</a>
+  <h1>{t['h_proj']}</h1>
+  <p>{t['proj_sub']}</p>
+</div>
+<section style="border-top:0">
+  <div class="wrap">
+    <div class="grid">{projs}
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>{t['footer']}</footer>
+<script src="{p}assets/chips.js"></script>
+</body>
+</html>
+'''
+
 for k, t in L.items():
     base = ROOT if k == 'fr' else os.path.join(ROOT, 'en')
     os.makedirs(base, exist_ok=True)
     open(os.path.join(base, 'index.html'), 'w').write(home(t))
     open(os.path.join(base, t['cea_page']), 'w').write(cea(t))
+    open(os.path.join(base, t['proj_page']), 'w').write(projects_page(t))
 print('ok')
