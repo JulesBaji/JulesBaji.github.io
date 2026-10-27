@@ -23,7 +23,8 @@ img { max-width: 100%; }
 
 /* Navigation */
 nav { position: sticky; top: 0; z-index: 10; background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
-nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 56px; gap: 16px; }
+nav .wrap { display: flex; align-items: center; justify-content: space-between; min-height: 56px; gap: 16px; }
+nav ul a[aria-current="page"] { color: var(--title); font-weight: 600; }
 nav .brand { font-weight: 700; color: var(--title); }
 nav .brand:hover { text-decoration: none; }
 nav ul { list-style: none; display: flex; align-items: center; gap: 20px; margin: 0; padding: 0; font-size: 14px; }
@@ -32,20 +33,23 @@ nav ul a:hover { color: var(--title); text-decoration: none; }
 nav .lang { color: var(--muted); font-weight: 600; border: 1px solid var(--line); padding: 5px 9px; border-radius: 7px; }
 nav .cta { color: #111; background: var(--accent); padding: 7px 14px; border-radius: 8px; font-weight: 600; }
 nav .cta:hover { color: #111; filter: brightness(1.08); }
-@media (max-width: 720px) { nav ul li.opt { display: none; } }
+@media (max-width: 720px) {
+  nav .wrap { flex-wrap: wrap; gap: 0 12px; padding-top: 8px; padding-bottom: 8px; }
+  nav ul { order: 3; width: 100%; overflow-x: auto; gap: 18px; padding: 10px 0 2px; scrollbar-width: none; white-space: nowrap; }
+  nav ul li.ctl { display: none; }
+  nav .ctl-mobile { display: flex; gap: 8px; align-items: center; }
+}
+@media (min-width: 721px) { nav .ctl-mobile { display: none; } }
 
 /* Hero */
 .hero { padding: 56px 0 44px; }
-.hero .wrap { display: grid; grid-template-columns: 150px 1fr; gap: 32px; align-items: center; }
+.hero .wrap { display: block; }
 .hero .photo { width: 150px; height: 150px; border-radius: 50%; object-fit: cover; border: 3px solid var(--line); }
 .hero h1 { font-size: clamp(36px, 6vw, 52px); line-height: 1.05; margin: 0 0 6px; color: var(--title); letter-spacing: -.02em; }
 .hero .role { font-size: 19px; color: var(--accent); font-weight: 600; margin: 0 0 10px; }
 .hero .pitch { font-size: 17px; margin: 0 0 6px; max-width: 640px; }
 .hero .meta { font-size: 14.5px; color: var(--muted); margin: 0 0 18px; }
 @media (max-width: 640px) {
-  .hero .wrap { grid-template-columns: 1fr; text-align: center; justify-items: center; gap: 18px; }
-  .hero .pitch { margin-left: auto; margin-right: auto; }
-  .links { justify-content: center; }
 }
 .links { display: flex; flex-wrap: wrap; gap: 10px; }
 .btn { display: inline-flex; align-items: center; gap: 8px; padding: 9px 15px; border-radius: 9px; font-weight: 600; font-size: 14.5px; border: 1px solid var(--line); color: var(--title); background: var(--card); }

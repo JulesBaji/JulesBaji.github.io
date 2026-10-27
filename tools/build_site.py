@@ -14,7 +14,7 @@ L = {
   home='', p='', cea_page='stage-cea.html',
   title='Jules Baji · Ingénieur en informatique graphique',
   desc="Jules Baji, ingénieur en informatique graphique : rendu 3D, calcul GPU et IA pour la 3D. Stage au CEA Saclay sur le Gaussian Splatting pour la réalité virtuelle.",
-  nav=[('#points-forts','Points forts'),('#experience','Expérience'),('#projets','Projets'),('#formation','Formation')],
+  nav=[('@cea','Stage CEA'),('#experience','Expérience'),('#projets','Projets'),('#formation','Formation')],
   contact='Contact',
   role='Ingénieur R&amp;D · Graphics, géométrie &amp; 3D ML',
   pitch="Jeune diplômé en informatique graphique : je développe en C++ et CUDA des moteurs de rendu 3D et des outils de calcul.",
@@ -68,7 +68,7 @@ L = {
   home='', p='../', cea_page='cea-internship.html',
   title='Jules Baji · Computer graphics engineer',
   desc="Jules Baji, computer graphics engineer: 3D rendering, GPU computing and AI for 3D. Internship at CEA Saclay on Gaussian Splatting for virtual reality.",
-  nav=[('#points-forts','Highlights'),('#experience','Experience'),('#projets','Projects'),('#formation','Education')],
+  nav=[('@cea','CEA internship'),('#experience','Experience'),('#projets','Projects'),('#formation','Education')],
   contact='Contact',
   role='R&amp;D Engineer · Graphics, geometry &amp; 3D ML',
   pitch="Recent computer graphics graduate: I build 3D rendering engines and computing tools in C++ and CUDA.",
@@ -134,15 +134,17 @@ def head(t, title, desc, p):
 <body>
 '''
 
-def nav(t, home_prefix, other_href):
-    items = ''.join(f'<li class="opt"><a href="{home_prefix}{h}">{l}</a></li>' for h, l in t['nav'])
+def nav(t, home_prefix, other_href, current=''):
+    def href(h): return t['cea_page'] if h == '@cea' else home_prefix + h
+    items = ''.join(f'<li><a href="{href(h)}"' + (' aria-current="page"' if h == current else '') + f'>{l}</a></li>' for h, l in t['nav'])
     return f'''<nav>
   <div class="wrap">
     <a class="brand" href="{home_prefix or './'}">Jules Baji</a>
+    <div class="ctl-mobile"><a class="lang" href="{other_href}" hreflang="{t['other_hreflang']}" lang="{t['other_hreflang']}" title="{t['other_title']}">{t['other_label']}</a><a class="cta" href="{home_prefix}#contact">{t['contact']}</a></div>
     <ul>
       {items}
-      <li><a class="lang" href="{other_href}" hreflang="{t['other_hreflang']}" lang="{t['other_hreflang']}" title="{t['other_title']}">{t['other_label']}</a></li>
-      <li><a class="cta" href="{home_prefix}#contact">{t['contact']}</a></li>
+      <li class="ctl"><a class="lang" href="{other_href}" hreflang="{t['other_hreflang']}" lang="{t['other_hreflang']}" title="{t['other_title']}">{t['other_label']}</a></li>
+      <li class="ctl"><a class="cta" href="{home_prefix}#contact">{t['contact']}</a></li>
     </ul>
   </div>
 </nav>
@@ -176,7 +178,6 @@ def home(t):
     return head(t, t['title'], t['desc'], p) + nav(t, '', t['other']) + f'''
 <header class="hero">
   <div class="wrap">
-    <img class="photo" src="{p}images/web/photo.webp" alt="Jules Baji" width="150" height="150">
     <div>
       <h1>Jules Baji</h1>
       <p class="role">{t['role']}</p>
@@ -265,7 +266,7 @@ window.CEA_TXT = {{ prefix: '{p}', ref: '{j['ref']}', mine: '{j['mine']}', photo
     other = ('../' + L['en']['cea_page']) if False else None
     other_href = 'en/cea-internship.html' if t['lang'] == 'fr' else '../stage-cea.html'
     home_prefix = './' if t['lang'] == 'fr' else './'
-    return head(t, t['cea_title'] + ' · Jules Baji', t['cea_desc'], p) + nav(t, './', other_href) + f'''
+    return head(t, t['cea_title'] + ' · Jules Baji', t['cea_desc'], p) + nav(t, './', other_href, '@cea') + f'''
 <main>
 <div class="wrap page-head">
   <a class="back" href="./">{t['cea_back']}</a>
