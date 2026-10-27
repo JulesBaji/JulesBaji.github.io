@@ -24,7 +24,7 @@ img { max-width: 100%; }
 /* Navigation */
 nav { position: sticky; top: 0; z-index: 10; background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
 nav .wrap { display: flex; align-items: center; justify-content: space-between; min-height: 56px; gap: 16px; }
-nav ul a[aria-current="page"] { color: var(--title); font-weight: 600; }
+nav ul a[aria-current="page"] { color: var(--title); font-weight: 600; box-shadow: inset 0 -2px 0 var(--accent); padding-bottom: 4px; }
 nav .brand { font-weight: 700; color: var(--title); }
 nav .brand:hover { text-decoration: none; }
 nav ul { list-style: none; display: flex; align-items: center; gap: 20px; margin: 0; padding: 0; font-size: 14px; }
@@ -65,7 +65,8 @@ nav .cta:hover { color: #111; filter: brightness(1.08); }
 
 /* Sections */
 section { padding: 40px 0; border-top: 1px solid var(--line); }
-h2 { font-size: 24px; margin: 0 0 18px; color: var(--title); letter-spacing: -.01em; }
+h2 { font-family: var(--mono); font-size: 13px; font-weight: 500; text-transform: uppercase; letter-spacing: .14em; color: var(--accent); margin: 0 0 22px; padding-bottom: 10px; border-bottom: 1px solid var(--line); }
+h2 .small { text-transform: none; letter-spacing: 0; font-family: 'Inter', system-ui, sans-serif; }
 .card { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); }
 
 /* Points forts */
@@ -92,8 +93,24 @@ a.hl:hover { text-decoration: none; border-color: var(--accent); }
 .row .when { font-family: var(--mono); font-size: 13px; color: var(--muted); white-space: nowrap; }
 @media (max-width: 640px) { .row { grid-template-columns: 1fr; } }
 
+/* Expérience et formation, façon CV */
+.entries { display: grid; gap: 0; }
+.entry { display: grid; grid-template-columns: 190px 1fr; gap: 6px 28px; padding: 16px 0; border-bottom: 1px solid var(--line); }
+.entry:last-child { border-bottom: 0; }
+.entry .side { display: flex; flex-direction: column; gap: 4px; }
+.entry .when { font-family: var(--mono); font-size: 13px; color: var(--muted); }
+.entry .org { font-weight: 700; color: var(--title); font-size: 17px; }
+.entry h3 { margin: 0 0 4px; font-size: 17px; color: var(--title); }
+.entry p { margin: 0 0 8px; }
+.entry .more { margin-top: 8px; }
+@media (max-width: 640px) { .entry { grid-template-columns: 1fr; } }
+
 /* Compétences */
-.skills { display: grid; gap: 8px; padding: 16px 18px; }
+.sk { display: grid; grid-template-columns: 210px 1fr; gap: 8px 16px; align-items: center; }
+.sk b { color: var(--title); font-weight: 600; }
+.sk .chip { font-size: 13px; padding: 3px 9px; }
+@media (max-width: 640px) { .sk { grid-template-columns: 1fr; } }
+.skills { display: grid; gap: 12px; padding: 18px 20px; }
 .skills p { margin: 0; }
 .skills b { display: inline-block; min-width: 210px; color: var(--title); font-weight: 600; }
 @media (max-width: 640px) { .skills b { display: block; min-width: 0; } }
@@ -122,6 +139,7 @@ footer { padding: 22px 0 30px; color: var(--muted); font-size: 13px; text-align:
 .page-head .back { font-size: 14px; }
 .page-head h1 { font-size: clamp(28px, 4.5vw, 40px); margin: 10px 0 6px; color: var(--title); }
 .page-head p { margin: 0; color: var(--muted); }
+.head-tools { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px 20px; margin-top: 18px; }
 .explain { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 0 0 18px; }
 @media (max-width: 760px) { .explain { grid-template-columns: 1fr; } }
 .explain > div { padding: 14px 16px; }

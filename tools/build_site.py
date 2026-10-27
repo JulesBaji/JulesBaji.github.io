@@ -26,8 +26,8 @@ L = {
            'Comparaison avant/après : méthode de référence à gauche, ma méthode à droite'),
   hl1=('Projet de master · 2024','Path tracer',"Moteur de rendu photoréaliste qui simule le trajet de la lumière, en C++.",'Path-Tracer'),
   hl2=('Projet de master · 2024','Simulation de fluide',"Fluide SPH incompressible avec turbulences, d'après un article de recherche.",'SPH-Fluid'),
-  exp=[('CEA Saclay','Stage de fin d\'études R&amp;D : reflets plus réalistes en Gaussian Splatting pour la VR (C++, CUDA, PyTorch).','01–07/2025', True),
-       ('Kreon Technologies','Stage : correction d\'algorithmes de géométrie dans un logiciel de CAO en production (C++).','04–05/2023', False)],
+  exp=[('CEA Saclay','Stage de fin d\'études · R&amp;D en rendu 3D','Des reflets plus réalistes en Gaussian Splatting pour la réalité virtuelle.','01–07/2025',['C++','CUDA','PyTorch'], True),
+       ('Kreon Technologies','Stage · logiciel de CAO','Correction d\'algorithmes de géométrie dans un logiciel en production.','04–05/2023',['C++'], False)],
   more='En savoir plus',
   skills=[('Rendu 3D','OpenGL · GLSL · Ray tracing · 3D Gaussian Splatting · WebGL'),
           ('Calcul GPU et parallèle','CUDA · OpenMP · MPI'),
@@ -80,8 +80,8 @@ L = {
            'Before/after comparison: reference method on the left, my method on the right'),
   hl1=("Master's project · 2024",'Path tracer',"Photorealistic renderer that simulates the path of light, in C++.",'Path-Tracer'),
   hl2=("Master's project · 2024",'Fluid simulation',"Incompressible SPH fluid with turbulence, based on a research paper.",'SPH-Fluid'),
-  exp=[('CEA Saclay',"R&amp;D master's thesis internship: more realistic reflections in Gaussian Splatting for VR (C++, CUDA, PyTorch).",'01–07/2025', True),
-       ('Kreon Technologies','Internship: fixes to geometry algorithms in production CAD software (C++).','04–05/2023', False)],
+  exp=[('CEA Saclay',"Master's thesis internship · 3D rendering R&amp;D",'More realistic reflections in Gaussian Splatting for virtual reality.','01–07/2025',['C++','CUDA','PyTorch'], True),
+       ('Kreon Technologies','Internship · CAD software','Fixes to geometry algorithms in production software.','04–05/2023',['C++'], False)],
   more='Learn more',
   skills=[('3D rendering','OpenGL · GLSL · Ray tracing · 3D Gaussian Splatting · WebGL'),
           ('GPU and parallel computing','CUDA · OpenMP · MPI'),
@@ -166,12 +166,14 @@ def home(t):
     p = t['p']; cp = t['cea_page']
     m = t['hl_main']
     exp = ''.join(f'''
-      <div class="card row"><span class="org">{o}</span><p class="what">{w}{f' <a href="{cp}">{t["more"]} →</a>' if more else ''}</p><span class="when">{d}</span></div>''' for o, w, d, more in t['exp'])
-    skills = ''.join(f'<p><b>{k}</b>{v}</p>' for k, v in t['skills'])
+      <div class="entry"><div class="side"><span class="when">{d}</span><span class="org">{o}</span></div><div class="main"><h3>{r}</h3><p>{w}</p>{chips(c)}{f'<a class="more" href="{cp}">{t["more"]} →</a>' if more else ''}</div></div>''' for o, r, w, d, c, more in t['exp'])
+    def sk(v, last):
+        return f'<span class="plain">{v}</span>' if last else chips([x.replace('Ray tracing', 'Ray Tracing') for x in v.split(' · ')])
+    skills = ''.join(f'<div class="sk"><b>{k}</b>{sk(v, i == len(t["skills"]) - 1)}</div>' for i, (k, v) in enumerate(t['skills']))
     projs = ''.join(f'''
       <article class="card proj"><h3>{n}</h3><p>{d}</p>{chips(c)}<div class="repo">{''.join(repo(r) for r in rs)}</div></article>''' for n, d, c, rs in t['projects'])
     form = ''.join(f'''
-      <div class="card row"><span class="org">{a}</span><p class="what">{b}</p><span class="when">{c}</span></div>''' for a, b, c in t['form'])
+      <div class="entry"><div class="side"><span class="when">{c}</span></div><div class="main"><h3>{a}</h3><p>{b}</p></div></div>''' for a, b, c in t['form'])
     def side(h):
         k, ti, d, r = h
         return f'<a class="card hl" href="https://github.com/JulesBaji/{r}" target="_blank" rel="noopener"><p class="kicker">{k}</p><h3>{ti}</h3><p>{d}</p><span class="more">GitHub ↗</span></a>'
@@ -207,7 +209,7 @@ def home(t):
 <section id="experience">
   <div class="wrap">
     <h2>{t['h_exp']}</h2>
-    <div class="rows">{exp}
+    <div class="entries">{exp}
     </div>
   </div>
 </section>
@@ -222,7 +224,7 @@ def home(t):
 <section id="formation">
   <div class="wrap">
     <h2>{t['h_form']}</h2>
-    <div class="rows">{form}
+    <div class="entries">{form}
     </div>
     <p class="small" style="margin:12px 0 0">{t['interests']}</p>
   </div>
@@ -267,6 +269,9 @@ window.CEA_TXT = {{ prefix: '{p}', ref: '{j['ref']}', mine: '{j['mine']}', photo
   <a class="back" href="./">{t['cea_back']}</a>
   <h1>{t['cea_title']}</h1>
   <p>{t['cea_meta']}</p>
+  <div class="head-tools">{chips(t['tech'])}
+    <a class="btn primary" href="{p}rapport/rapport_stage_cea_jules_baji.pdf" download>{DOC}{t['report']}</a>
+  </div>
 </div>
 
 <section style="border-top:0">
@@ -290,16 +295,6 @@ window.CEA_TXT = {{ prefix: '{p}', ref: '{j['ref']}', mine: '{j['mine']}', photo
   </div>
 </section>
 
-<section>
-  <div class="wrap">
-    <h2>{t['h_tech']}</h2>
-    {chips(t['tech'])}
-    <div class="links" style="margin-top:18px">
-      <a class="btn primary" href="{p}rapport/rapport_stage_cea_jules_baji.pdf" download>{DOC}{t['report']}</a>
-      <a class="btn" href="./">{t['cea_back']}</a>
-    </div>
-  </div>
-</section>
 </main>
 
 <footer>{t['footer']}</footer>
