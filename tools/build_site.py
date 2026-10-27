@@ -171,13 +171,20 @@ LOGOS = {
 UNILIM = ('<img class="logo logo-unilim on-dark" src="{p}images/logos/unilim-sombre.png" alt="Logo de l\'Université de Limoges" width="110" height="36">'
           '<img class="logo logo-unilim on-light" src="{p}images/logos/unilim.png" alt="" width="110" height="36">')
 
-PROJ_BG = {'Modelisation-Collision-Detection': 'collisions'}
+# Animated card backgrounds: repo -> (file in images/web or (dark, light) pair, invert in light theme, object-position)
+PROJ_BG = {'Modelisation-Collision-Detection': ('collisions', True, '70% 50%'),
+           'SPH-Fluid': (('fluide-dk', 'fluide-lt'), False, '50% 80%')}
+
+def _video(f, p, cls, pos):
+    return (f'<video class="{cls}" autoplay muted loop playsinline preload="metadata" aria-hidden="true" '
+            f'style="object-position:{pos}" poster="{p}images/web/{f}.jpg"><source src="{p}images/web/{f}.mp4" type="video/mp4"></video>')
 
 def proj_bg(r, p):
     if r not in PROJ_BG: return ''
-    f = PROJ_BG[r]
-    return (f'<video class="bg" autoplay muted loop playsinline preload="metadata" aria-hidden="true" '
-            f'poster="{p}images/web/{f}.jpg"><source src="{p}images/web/{f}.mp4" type="video/mp4"></video>')
+    f, inv, pos = PROJ_BG[r]
+    if isinstance(f, tuple):
+        return _video(f[0], p, 'bg on-dark', pos) + _video(f[1], p, 'bg on-light', pos)
+    return _video(f, p, 'bg inv' if inv else 'bg', pos)
 
 def home(t):
     p = t['p']; cp = t['cea_page']
