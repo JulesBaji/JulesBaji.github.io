@@ -125,6 +125,16 @@ a.hl:hover { text-decoration: none; border-color: var(--accent); }
 .proj { padding: 14px 16px; display: flex; flex-direction: column; gap: 6px; }
 .proj h3 { margin: 0; font-size: 16px; color: var(--title); }
 .proj p { margin: 0; font-size: 14.5px; flex: 1; }
+.proj.has-bg { position: relative; overflow: hidden; isolation: isolate; }
+.proj .bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 70% 50%; z-index: -2; }
+.proj.has-bg { background: #000; }
+.proj.has-bg::before { content: ''; position: absolute; inset: 0; z-index: -1;
+  background: linear-gradient(90deg, color-mix(in srgb, var(--card) 92%, transparent) 0%, color-mix(in srgb, var(--card) 70%, transparent) 45%, color-mix(in srgb, var(--card) 10%, transparent) 100%); }
+@media (prefers-color-scheme: light) {
+  .proj.has-bg { background: #fff; }
+  .proj .bg { filter: invert(1) hue-rotate(180deg); }
+}
+@media (prefers-reduced-motion: reduce) { .proj .bg { display: none; } }
 .chips { display: flex; flex-wrap: wrap; gap: 6px; }
 .chip { --k: var(--k-tool); font-family: var(--mono); font-size: 12px; padding: 2px 8px; border-radius: 6px; color: var(--k); border: 1px solid color-mix(in srgb, var(--k) 45%, transparent); background: color-mix(in srgb, var(--k) 12%, transparent); white-space: nowrap; }
 .chip.lang { --k: var(--k-lang); } .chip.gpu { --k: var(--k-gpu); } .chip.gfx { --k: var(--k-gfx); } .chip.ml { --k: var(--k-ml); } .chip.tool { --k: var(--k-tool); }

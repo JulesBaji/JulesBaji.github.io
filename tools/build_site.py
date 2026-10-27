@@ -312,10 +312,18 @@ window.CEA_TXT = {{ prefix: '{p}', ref: '{j['ref']}', mine: '{j['mine']}', photo
 </html>
 '''
 
+PROJ_BG = {'Modelisation-Collision-Detection': 'collisions'}
+
+def proj_bg(r, p):
+    if r not in PROJ_BG: return ''
+    f = PROJ_BG[r]
+    return (f'<video class="bg" autoplay muted loop playsinline preload="metadata" aria-hidden="true" '
+            f'poster="{p}images/web/{f}.jpg"><source src="{p}images/web/{f}.mp4" type="video/mp4"></video>')
+
 def projects_page(t):
     p = t['p']
     projs = ''.join(f'''
-      <article class="card proj"><h3>{n}</h3><p>{d}</p>{chips(c)}<div class="repo">{''.join(repo(r) for r in rs)}</div></article>''' for n, d, c, rs in t['projects'])
+      <article class="card proj{' has-bg' if rs[0] in PROJ_BG else ''}">{proj_bg(rs[0], p)}<h3>{n}</h3><p>{d}</p>{chips(c)}<div class="repo">{''.join(repo(r) for r in rs)}</div></article>''' for n, d, c, rs in t['projects'])
     other_href = 'en/projects.html' if t['lang'] == 'fr' else '../projets.html'
     return head(t, t['h_proj'] + ' · Jules Baji', t['desc'], p) + nav(t, './', other_href, '@proj') + f'''
 <main>
