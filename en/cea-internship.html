@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CEA internship: more realistic reflections in virtual reality · Jules Baji</title>
+<meta name="description" content="Jules Baji's master's thesis internship at CEA Saclay: better reflections in Gaussian Splatting for virtual reality.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<nav>
+  <div class="wrap">
+    <a class="brand" href="./">Jules Baji</a>
+    <ul>
+      <li class="opt"><a href="./#points-forts">Highlights</a></li><li class="opt"><a href="./#experience">Experience</a></li><li class="opt"><a href="./#projets">Projects</a></li><li class="opt"><a href="./#formation">Education</a></li>
+      <li><a class="lang" href="../stage-cea.html" hreflang="fr" lang="fr" title="Version française">FR</a></li>
+      <li><a class="cta" href="./#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+<div class="wrap page-head">
+  <a class="back" href="./">← Back to home</a>
+  <h1>CEA internship: more realistic reflections in virtual reality</h1>
+  <p>Master's thesis internship · CEA Saclay · January to July 2025</p>
+</div>
+
+<section style="border-top:0">
+  <div class="wrap">
+    <div class="explain"><div class="card"><p class="kicker">The problem</p><p>Gaussian Splatting recreates a 3D scene from photos and displays it in real time, but it renders reflections poorly (shiny surfaces, glass, metal objects).</p></div><div class="card"><p class="kicker">What I did</p><p>I first tested ray tracing, which simulates the path of light: accurate, but too slow for a virtual reality headset (60 frames per second minimum). I then added a mathematical model of reflections (Spherical Gaussians) to the standard renderer.</p></div><div class="card"><p class="kicker">The result</p><p>Much more realistic reflections, closer to the real photo on all three test scenes, at the same speed as the base method (about 300 frames per second).</p></div></div>
+    <h2>Compare</h2>
+    <p class="note">Drag the slider: the reference method (gsplat) on the left, my method on the right. PSNR measures similarity to the real photo (higher is closer).</p>
+    <div class="tabs" role="tablist" id="scene-tabs"></div>
+    <div class="card viewer">
+      <div class="top-line"><span class="meta" id="scene-meta"></span><div class="views" id="scene-views"></div></div>
+      <div class="compare" id="cmp"></div>
+      <div class="full" id="cmp-full"></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Videos: methods studied during the state-of-the-art review</h2>
+    <div class="videos"><figure><video controls muted loop playsinline preload="none" poster="../videos/web/comparaison_3dgs_rg.jpg" src="../videos/web/comparaison_3dgs_rg.mp4"></video><figcaption><b>3DGS and RayGauss</b> · SAC scene</figcaption></figure><figure><video controls muted loop playsinline preload="none" poster="../videos/web/3dgs_dr_sac.jpg" src="../videos/web/3dgs_dr_sac.mp4"></video><figcaption><b>3DGS-DR</b> · SAC scene</figcaption></figure><figure><video controls muted loop playsinline preload="none" poster="../videos/web/3d_grut_sac.jpg" src="../videos/web/3d_grut_sac.mp4"></video><figcaption><b>3D-GRUT</b> · SAC scene</figcaption></figure><figure><video controls muted loop playsinline preload="none" poster="../videos/web/3dgs_cbox.jpg" src="../videos/web/3dgs_cbox.mp4"></video><figcaption><b>3DGS</b> · Cornell Box</figcaption></figure><figure><video controls muted loop playsinline preload="none" poster="../videos/web/rg_cbox.jpg" src="../videos/web/rg_cbox.mp4"></video><figcaption><b>RayGauss</b> · Cornell Box</figcaption></figure><figure><video controls muted loop playsinline preload="none" poster="../videos/web/3dgs_dr_cbox.jpg" src="../videos/web/3dgs_dr_cbox.mp4"></video><figcaption><b>3DGS-DR</b> · Cornell Box</figcaption></figure></div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Technologies</h2>
+    <div class="chips"><span class="chip">C++</span><span class="chip">CUDA</span><span class="chip">OpenMP</span><span class="chip">PyTorch</span><span class="chip">Gaussian Splatting</span><span class="chip">Ray Tracing</span><span class="chip">VR</span></div>
+    <div class="links" style="margin-top:18px">
+      <a class="btn primary" href="../rapport/rapport_stage_cea_jules_baji.pdf" download><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2h9l5 5v15H6V2zm8 1.5V8h4.5L14 3.5zM8 12h10v1.6H8V12zm0 3.5h10v1.6H8v-1.6zm0 3.5h7v1.6H8V19z"/></svg>Internship report (PDF, French, 6 MB)</a>
+      <a class="btn" href="./">← Back to home</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>© 2026 Jules Baji · Paris</footer>
+<script>
+window.CEA_TXT = { prefix: '../', ref: 'Reference (gsplat)', mine: 'My method', photo: 'Real photo', dec: '.',
+  gtTab: 'Against the real photo', gtMeta: 'Real photo on the right', full: 'Full resolution:', view: 'View', compare: 'Compare',
+  meta1: function (a, b) { return 'Resolution 1:1 · PSNR <b>' + a + '</b> → <b>' + b + '</b>'; },
+  meta2: function (a, b) { return 'Resolution 1:2 · PSNR <b>' + a + '</b> → <b>' + b + '</b>'; } };
+</script>
+<script src="../assets/chips.js"></script>
+<script src="../assets/cea.js"></script>
+</body>
+</html>
