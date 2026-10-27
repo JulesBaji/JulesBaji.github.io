@@ -177,6 +177,7 @@ def home(t):
         return f'<a class="card hl" href="https://github.com/JulesBaji/{r}" target="_blank" rel="noopener"><p class="kicker">{k}</p><h3>{ti}</h3><p>{d}</p><span class="more">GitHub ↗</span></a>'
     return head(t, t['title'], t['desc'], p) + nav(t, '', t['other']) + f'''
 <header class="hero">
+  <canvas id="cornell" aria-hidden="true"></canvas>
   <div class="wrap">
     <div>
       <h1>Jules Baji</h1>
@@ -238,6 +239,7 @@ def home(t):
 
 <footer>{t['footer']}</footer>
 <script src="{p}assets/chips.js"></script>
+<script src="{p}assets/cornell.js"></script>
 </body>
 </html>
 '''

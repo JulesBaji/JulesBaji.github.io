@@ -42,7 +42,13 @@ nav .cta:hover { color: #111; filter: brightness(1.08); }
 @media (min-width: 721px) { nav .ctl-mobile { display: none; } }
 
 /* Hero */
-.hero { padding: 56px 0 44px; }
+.hero { position: relative; overflow: hidden; padding: 72px 0 60px; isolation: isolate; }
+.hero canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -2; opacity: 0; transition: opacity 1.2s; }
+.hero canvas.on { opacity: 1; }
+.hero::before { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background: linear-gradient(90deg, var(--bg) 0%, color-mix(in srgb, var(--bg) 92%, transparent) 38%, color-mix(in srgb, var(--bg) 25%, transparent) 62%, transparent 80%),
+              linear-gradient(0deg, var(--bg) 0%, transparent 22%); }
+@media (max-width: 900px) { .hero::before { background: color-mix(in srgb, var(--bg) 80%, transparent); } }
 .hero .wrap { display: block; }
 .hero .photo { width: 150px; height: 150px; border-radius: 50%; object-fit: cover; border: 3px solid var(--line); }
 .hero h1 { font-size: clamp(36px, 6vw, 52px); line-height: 1.05; margin: 0 0 6px; color: var(--title); letter-spacing: -.02em; }
