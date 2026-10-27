@@ -53,7 +53,7 @@ nav .cta:hover { color: #111; filter: brightness(1.08); }
 .hero .photo { width: 150px; height: 150px; border-radius: 50%; object-fit: cover; border: 3px solid var(--line); }
 .hero h1 { font-size: clamp(36px, 6vw, 52px); line-height: 1.05; margin: 0 0 6px; color: var(--title); letter-spacing: -.02em; }
 .hero .role { font-size: 19px; color: var(--accent); font-weight: 600; margin: 0 0 10px; }
-.hero .pitch { font-size: 17px; margin: 0 0 6px; max-width: 640px; }
+.hero .pitch { font-size: 17px; margin: 0 0 8px; max-width: 600px; }
 .hero .meta { font-size: 14.5px; color: var(--muted); margin: 0 0 18px; }
 @media (max-width: 640px) {
 }
@@ -100,6 +100,9 @@ a.hl:hover { text-decoration: none; border-color: var(--accent); }
 .entry .side { display: flex; flex-direction: column; gap: 4px; }
 .entry .when { font-family: var(--mono); font-size: 13px; color: var(--muted); }
 .entry .org { font-weight: 700; color: var(--title); font-size: 17px; }
+.entry .logo { display: block; margin: 4px 0 2px; height: auto; }
+.entry .logo-cea { width: 48px; border-radius: 6px; }
+.entry .logo-kreon { width: 110px; }
 .entry h3 { margin: 0 0 4px; font-size: 17px; color: var(--title); }
 .entry p { margin: 0 0 8px; }
 .entry .more { margin-top: 8px; }

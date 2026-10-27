@@ -17,8 +17,8 @@ L = {
   nav=[('@cea','Stage CEA'),('@proj','Projets')],
   contact='Contact',
   role='Ingénieur R&amp;D · Graphics, géométrie &amp; 3D ML',
-  pitch="Jeune diplômé en informatique graphique : je développe en C++ et CUDA des moteurs de rendu 3D et des outils de calcul.",
-  meta='Paris · disponible immédiatement · mobile en Europe',
+  pitch="Diplômé d’un Master en Informatique spécialisé en rendu, géométrie et performance pour la 3D. Machine learning en PyTorch et en C++/CUDA natif. Expérience récente au CEA Saclay sur le Gaussian Splatting pour la VR. Mobilité internationale.",
+  meta='Paris · disponible immédiatement',
   cv='CV (PDF)', cv_file='cv/CV_Jules_Baji.pdf', email='E-mail',
   h_hl='À la une', all_proj='Voir tous les projets →', h_exp='Expérience', h_skills='Compétences', h_proj='Projets de master', h_form='Formation', h_contact='Contact',
   hl_main=('Stage de fin d\'études · CEA Saclay · 2025', 'Des reflets plus réalistes en réalité virtuelle',
@@ -71,8 +71,8 @@ L = {
   nav=[('@cea','CEA internship'),('@proj','Projects')],
   contact='Contact',
   role='R&amp;D Engineer · Graphics, geometry &amp; 3D ML',
-  pitch="Recent computer graphics graduate: I build 3D rendering engines and computing tools in C++ and CUDA.",
-  meta='Paris · available immediately · open to relocation in Europe',
+  pitch="MSc in Computer Science specialising in rendering, geometry and performance for 3D. Machine learning in PyTorch and in native C++/CUDA. Recent experience at CEA Saclay on Gaussian Splatting for VR. Open to international relocation.",
+  meta='Paris · available immediately',
   cv='Resume (PDF)', cv_file='cv/Resume_Jules_Baji.pdf', email='Email',
   h_hl='Highlights', all_proj='See all projects →', h_exp='Experience', h_skills='Skills', h_proj="Master's projects", h_form='Education', h_contact='Contact',
   hl_main=("Master's thesis internship · CEA Saclay · 2025", 'More realistic reflections in virtual reality',
@@ -162,11 +162,16 @@ def links(t):
         <a class="btn" href="https://github.com/JulesBaji" target="_blank" rel="noopener">{GH}GitHub</a>
       </div>'''
 
+LOGOS = {
+    'CEA Saclay': '<img class="logo logo-cea" src="{p}images/logos/cea.svg" alt="Logo du CEA" width="48" height="48">',
+    'Kreon Technologies': '<img class="logo logo-kreon" src="{p}images/logos/kreon.png" alt="Logo de Kreon" width="110" height="28">',
+}
+
 def home(t):
     p = t['p']; cp = t['cea_page']
     m = t['hl_main']
     exp = ''.join(f'''
-      <div class="entry"><div class="side"><span class="when">{d}</span><span class="org">{o}</span></div><div class="main"><h3>{r}</h3><p>{w}</p>{chips(c)}{f'<a class="more" href="{cp}">{t["more"]} →</a>' if more else ''}</div></div>''' for o, r, w, d, c, more in t['exp'])
+      <div class="entry"><div class="side"><span class="when">{d}</span>{LOGOS.get(o, '').format(p=p)}<span class="org">{o}</span></div><div class="main"><h3>{r}</h3><p>{w}</p>{chips(c)}{f'<a class="more" href="{cp}">{t["more"]} →</a>' if more else ''}</div></div>''' for o, r, w, d, c, more in t['exp'])
     def sk(v, last):
         return f'<span class="plain">{v}</span>' if last else chips([x.replace('Ray tracing', 'Ray Tracing') for x in v.split(' · ')])
     skills = ''.join(f'<div class="sk"><b>{k}</b>{sk(v, i == len(t["skills"]) - 1)}</div>' for i, (k, v) in enumerate(t['skills']))
