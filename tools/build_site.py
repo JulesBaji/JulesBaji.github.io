@@ -166,6 +166,8 @@ LOGOS = {
     'CEA Saclay': '<img class="logo logo-cea" src="{p}images/logos/cea.svg" alt="Logo du CEA" width="48" height="48">',
     'Kreon Technologies': '<img class="logo logo-kreon" src="{p}images/logos/kreon.png" alt="Logo de Kreon" width="110" height="28">',
 }
+UNILIM = ('<picture><source srcset="{p}images/logos/unilim-sombre.png" media="(prefers-color-scheme: dark)">'
+          '<img class="logo logo-unilim" src="{p}images/logos/unilim.png" alt="Logo de l\'Université de Limoges" width="110" height="36"></picture>')
 
 def home(t):
     p = t['p']; cp = t['cea_page']
@@ -178,7 +180,7 @@ def home(t):
     projs = ''.join(f'''
       <article class="card proj"><h3>{n}</h3><p>{d}</p>{chips(c)}<div class="repo">{''.join(repo(r) for r in rs)}</div></article>''' for n, d, c, rs in t['projects'])
     form = ''.join(f'''
-      <div class="entry"><div class="side"><span class="when">{c}</span></div><div class="main"><h3>{a}</h3><p>{b}</p></div></div>''' for a, b, c in t['form'])
+      <div class="entry"><div class="side"><span class="when">{c}</span>{UNILIM.format(p=p)}</div><div class="main"><h3>{a}</h3><p>{b}</p></div></div>''' for a, b, c in t['form'])
     def side(h):
         k, ti, d, r = h
         return f'<a class="card hl" href="https://github.com/JulesBaji/{r}" target="_blank" rel="noopener"><p class="kicker">{k}</p><h3>{ti}</h3><p>{d}</p><span class="more">GitHub ↗</span></a>'

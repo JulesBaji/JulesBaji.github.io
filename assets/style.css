@@ -103,6 +103,7 @@ a.hl:hover { text-decoration: none; border-color: var(--accent); }
 .entry .logo { display: block; margin: 4px 0 2px; height: auto; }
 .entry .logo-cea { width: 48px; border-radius: 6px; }
 .entry .logo-kreon { width: 110px; }
+.entry .logo-unilim { width: 110px; }
 .entry h3 { margin: 0 0 4px; font-size: 17px; color: var(--title); }
 .entry p { margin: 0 0 8px; }
 .entry .more { margin-top: 8px; }
