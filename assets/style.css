@@ -229,14 +229,7 @@ nav ul li:not(.ctl) a[aria-current="page"] { color: #111; background: var(--acce
 .hl-main .more { margin-top: 14px; color: #111; background: var(--accent); padding: 9px 16px; border-radius: 9px; font-size: 15px; }
 .hl-main:hover .more { filter: brightness(1.08); }
 
-/* Animated before/after on the highlight card */
-.ba { position: relative; overflow: hidden; aspect-ratio: 1200 / 615; height: 100%; min-height: 100%; }
-.hl-main .ba img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; aspect-ratio: auto; }
-.ba-mine { clip-path: inset(0 0 0 50%); animation: ba-clip 7s ease-in-out infinite; }
-.ba-line { position: absolute; top: 0; bottom: 0; left: 50%; width: 2px; margin-left: -1px; background: #fff; box-shadow: 0 0 8px rgba(0,0,0,.5); animation: ba-line 7s ease-in-out infinite; }
-@keyframes ba-clip { 0%, 100% { clip-path: inset(0 0 0 18%); } 50% { clip-path: inset(0 0 0 82%); } }
-@keyframes ba-line { 0%, 100% { left: 18%; } 50% { left: 82%; } }
-@media (prefers-reduced-motion: reduce) { .ba-mine, .ba-line { animation: none; } }
+
 
 /* CEA page: skill chips as tall as the report button */
 .head-tools .chips { gap: 8px; }

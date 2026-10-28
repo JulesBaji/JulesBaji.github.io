@@ -26,7 +26,7 @@ L = {
   h_hl='À la une', h_exp='Expérience', h_skills='Compétences', h_proj='Projets de master', prev='Projets précédents', next='Projets suivants', theme_label='Changer de thème (sombre/clair)', h_form='Formation', h_contact='Contact',
   hl_main=('Stage de fin d\'études · CEA Saclay · 2025', 'Des reflets plus réalistes en réalité virtuelle',
            "Amélioration du Gaussian Splatting, une technique qui recrée une scène 3D à partir de photos.", 'Voir les résultats →',
-           'Comparaison avant/après : méthode de référence à gauche, ma méthode à droite'),
+           'Mosaïque de rendus obtenus avec ma méthode sur plusieurs scènes (vélo, bonsaï, jardin)'),
   exp=[('CEA Saclay','Stage de fin d\'études · R&amp;D en rendu 3D','Des reflets plus réalistes en Gaussian Splatting pour la réalité virtuelle.','01–07/2025',['C++','CUDA','PyTorch'], True),
        ('Kreon Technologies','Stage · logiciel de CAO','Correction d\'algorithmes de géométrie dans un logiciel en production.','04–05/2023',['C++'], False)],
   more='En savoir plus',
@@ -37,12 +37,12 @@ L = {
   proj_sub='Université de Limoges, 2023-2025',
   projects=[
    ("Synthèse d'image réaliste","Path tracer avec BRDF à microfacettes, géométrie SDF et CSG, accéléré par BVH.",['C++','OpenMP'],['Path-Tracer']),
-   ("Parallélisme","Kernels CUDA pour une carte de hauteur ; recherche de sous-image MPI et OpenMP.",['CUDA','MPI','OpenMP'],['GPGPU','Parallelisme']),
    ("Moteur 3D temps réel","Maillages, textures, caméras, lumières, shaders et rendu différé.",['C++','OpenGL','GLSL'],['Moteur3D']),
-   ("Détection de collisions 3D","Sweep and Prune, BVH et test triangle-triangle de Möller.",['WebGL','JavaScript'],['Modelisation-Collision-Detection']),
    ("Simulation de fluide","Fluide SPH incompressible avec turbulences, d'après un <a href=\"https://doi.org/10.1109/TVCG.2018.2832080\" target=\"_blank\" rel=\"noopener\">article de recherche</a>.",['Java'],['SPH-Fluid']),
-   ("Géométrie discrète","Suivi de contour, polygonisation et mesures de forme.",['C++'],['Geometrie-Discrete']),
+   ("Détection de collisions 3D","Sweep and Prune, BVH et test triangle-triangle de Möller.",['WebGL','JavaScript'],['Modelisation-Collision-Detection']),
+   ("Parallélisme","Kernels CUDA pour une carte de hauteur ; recherche de sous-image MPI et OpenMP.",['CUDA','MPI','OpenMP'],['GPGPU','Parallelisme']),
    ("Vision par ordinateur","Génération de visages, super-résolution et détection de photos recapturées d'après un <a href=\"https://doi.org/10.1016/j.image.2022.116662\" target=\"_blank\" rel=\"noopener\">article de recherche</a>.",['Python','Keras'],['Detection-Recapture']),
+   ("Géométrie discrète","Suivi de contour, polygonisation et mesures de forme.",['C++'],['Geometrie-Discrete']),
    ("Impression 3D","Découpe en couches : Delaunay et rastérisation GPU. Projet inachevé.",['Java','OpenGL'],['Impression-3D-GPU']),
   ],
   form=[('Master Informatique ISICG','Université de Limoges · informatique graphique','2023–2025'),
@@ -78,7 +78,7 @@ L = {
   h_hl='Highlights', h_exp='Experience', h_skills='Skills', h_proj="Master's projects", prev='Previous projects', next='Next projects', theme_label='Switch theme (dark/light)', h_form='Education', h_contact='Contact',
   hl_main=("Master's thesis internship · CEA Saclay · 2025", 'More realistic reflections in virtual reality',
            "Improving Gaussian Splatting, a technique that recreates a 3D scene from photos.", 'See the results →',
-           'Before/after comparison: reference method on the left, my method on the right'),
+           'Mosaic of renders obtained with my method on several scenes (bicycle, bonsai, garden)'),
   exp=[('CEA Saclay',"Master's thesis internship · 3D rendering R&amp;D",'More realistic reflections in Gaussian Splatting for virtual reality.','01–07/2025',['C++','CUDA','PyTorch'], True),
        ('Kreon Technologies','Internship · CAD software','Fixes to geometry algorithms in production software.','04–05/2023',['C++'], False)],
   more='Learn more',
@@ -89,12 +89,12 @@ L = {
   proj_sub='University of Limoges, 2023-2025',
   projects=[
    ("Realistic image synthesis","Path tracer with microfacet BRDFs, SDF geometry and CSG, accelerated by a BVH.",['C++','OpenMP'],['Path-Tracer']),
-   ("Parallel computing","CUDA kernels for a heightmap; MPI and OpenMP sub-image search.",['CUDA','MPI','OpenMP'],['GPGPU','Parallelisme']),
    ("Real-time 3D engine","Meshes, textures, cameras, lights, shaders and deferred rendering.",['C++','OpenGL','GLSL'],['Moteur3D']),
-   ("3D collision detection","Sweep and Prune, BVH and Möller's triangle-triangle test.",['WebGL','JavaScript'],['Modelisation-Collision-Detection']),
    ("Fluid simulation","Incompressible SPH fluid with turbulence, based on a <a href=\"https://doi.org/10.1109/TVCG.2018.2832080\" target=\"_blank\" rel=\"noopener\">research paper</a>.",['Java'],['SPH-Fluid']),
-   ("Discrete geometry","Contour tracking, polygonization and shape measures.",['C++'],['Geometrie-Discrete']),
+   ("3D collision detection","Sweep and Prune, BVH and Möller's triangle-triangle test.",['WebGL','JavaScript'],['Modelisation-Collision-Detection']),
+   ("Parallel computing","CUDA kernels for a heightmap; MPI and OpenMP sub-image search.",['CUDA','MPI','OpenMP'],['GPGPU','Parallelisme']),
    ("Computer vision","Face generation, image super-resolution and recaptured-photo detection based on a <a href=\"https://doi.org/10.1016/j.image.2022.116662\" target=\"_blank\" rel=\"noopener\">research paper</a>.",['Python','Keras'],['Detection-Recapture']),
+   ("Discrete geometry","Contour tracking, polygonization and shape measures.",['C++'],['Geometrie-Discrete']),
    ("3D printing","Layer slicing: Delaunay and GPU rasterization. Unfinished project.",['Java','OpenGL'],['Impression-3D-GPU']),
   ],
   form=[('MSc Computer Science, ISICG','University of Limoges · computer graphics','2023–2025'),
@@ -178,7 +178,7 @@ UNILIM = ('<img class="logo logo-unilim on-dark" src="{p}images/logos/unilim-som
 PROJ_BG = {'Modelisation-Collision-Detection': ('collisions', True, '70% 50%'),
            'SPH-Fluid': (('fluide-dk', 'fluide-lt'), False, '50% 80%'),
            'Moteur3D': ('moteur3d', False, '50% 40%'),
-           'Detection-Recapture': ('recapture.jpg', False, '50% 50%'),
+           'Detection-Recapture': ('recapture', False, '60% 40%'),
            'GPGPU': ('parallelisme', False, '70% 30%'),
            'Geometrie-Discrete': (('geometrie-dk', 'geometrie-lt'), False, '50% 50%'),
            'Impression-3D-GPU': ('impression3d.jpg', False, '60% 50%')}  # photo CC0, Wikimedia Commons (pxhere)
@@ -228,7 +228,7 @@ def home(t):
     <h2>{t['h_hl']}</h2>
     <div class="highlights">
       <a class="card hl-main" href="{cp}">
-        <div class="ba" role="img" aria-label="{m[4]}"><img src="{p}images/web/teaser_ref.webp" alt="" width="1200" height="615"><img class="ba-mine" src="{p}images/web/teaser_mine.webp" alt="" width="1200" height="615"><span class="ba-line" aria-hidden="true"></span></div>
+        <img src="{p}images/web/teaser_cea.webp" alt="{m[4]}" width="1200" height="615">
         <div class="body"><p class="kicker">{m[0]}</p><h3>{m[1]}</h3><p>{m[2]}</p><span class="more">{m[3]}</span></div>
       </a>
     </div>
