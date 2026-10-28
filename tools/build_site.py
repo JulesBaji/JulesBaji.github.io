@@ -210,7 +210,7 @@ def home(t):
       <div class="entry"><div class="side"><span class="when">{c}</span>{UNILIM.format(p=p)}</div><div class="main"><h3>{a}</h3><p>{b}</p></div></div>''' for a, b, c in t['form'])
     return head(t, t['title'], t['desc'], p) + nav(t, '', t['other']) + f'''
 <header class="hero">
-  <canvas id="cornell" aria-hidden="true"></canvas>
+  <img class="banner" src="{p}images/web/banniere.webp" alt="" aria-hidden="true">
   <div class="wrap">
     <div>
       <h1>Jules Baji</h1>
@@ -279,7 +279,6 @@ def home(t):
 <footer>{t['footer']}</footer>
 <script src="{p}assets/chips.js?v={V["chips.js"]}"></script>
 <script src="{p}assets/theme.js?v={V["theme.js"]}"></script>
-<script src="{p}assets/cornell.js?v={V["cornell.js"]}"></script>
 <script src="{p}assets/scroller.js?v={V["scroller.js"]}"></script>
 </body>
 </html>

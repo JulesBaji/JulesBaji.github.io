@@ -43,8 +43,7 @@ nav .cta:hover { color: #111; filter: brightness(1.08); }
 
 /* Hero */
 .hero { position: relative; overflow: hidden; padding: 72px 0 60px; isolation: isolate; }
-.hero canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -2; opacity: 0; transition: opacity 1.2s; }
-.hero canvas.on { opacity: 1; }
+.hero .banner { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 60% 40%; z-index: -2; }
 .hero::before { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
   background: linear-gradient(90deg, var(--bg) 0%, color-mix(in srgb, var(--bg) 92%, transparent) 38%, color-mix(in srgb, var(--bg) 25%, transparent) 62%, transparent 80%),
               linear-gradient(0deg, var(--bg) 0%, transparent 22%); }
