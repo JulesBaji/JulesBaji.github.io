@@ -181,7 +181,8 @@ PROJ_BG = {'Modelisation-Collision-Detection': ('collisions', True, '70% 50%'),
            'Detection-Recapture': ('recapture', False, '60% 40%'),
            'GPGPU': ('parallelisme', False, '70% 30%'),
            'Geometrie-Discrete': (('geometrie-dk', 'geometrie-lt'), False, '50% 50%'),
-           'Impression-3D-GPU': ('impression3d.jpg', False, '60% 50%')}  # photo CC0, Wikimedia Commons (pxhere)
+           'Impression-3D-GPU': ('impression3d.jpg', False, '60% 50%'),
+           'Path-Tracer': ('pathtracer.jpg', False, '60% 50%')}  # photo CC0, Wikimedia Commons (pxhere)
 
 def _video(f, p, cls, pos):
     return (f'<video class="{cls}" autoplay muted loop playsinline preload="metadata" aria-hidden="true" '
