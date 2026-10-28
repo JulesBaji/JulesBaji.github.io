@@ -136,9 +136,9 @@ a.hl:hover { text-decoration: none; border-color: var(--accent); }
 .chips { display: flex; flex-wrap: wrap; gap: 6px; }
 .chip { --k: var(--k-tool); font-family: var(--mono); font-size: 12px; padding: 2px 8px; border-radius: 6px; color: var(--k); border: 1px solid color-mix(in srgb, var(--k) 45%, transparent); background: color-mix(in srgb, var(--k) 12%, transparent); white-space: nowrap; }
 .chip.lang { --k: var(--k-lang); } .chip.gpu { --k: var(--k-gpu); } .chip.gfx { --k: var(--k-gfx); } .chip.ml { --k: var(--k-ml); } .chip.tool { --k: var(--k-tool); }
-.repo { display: flex; flex-direction: column; gap: 4px; }
-.repo a { display: inline-flex; align-items: center; gap: 7px; color: var(--muted); font-family: var(--mono); font-size: 12.5px; }
-.repo a:hover { color: var(--title); text-decoration: none; }
+.repo { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 2px; }
+.repo a { display: inline-flex; align-items: center; gap: 7px; color: var(--title); font-family: var(--mono); font-size: 12.5px; padding: 5px 10px; border-radius: 8px; border: 1px solid var(--line); background: color-mix(in srgb, var(--bg-2) 85%, transparent); backdrop-filter: blur(4px); position: relative; z-index: 1; }
+.repo a:hover { color: var(--title); text-decoration: none; border-color: var(--accent-2); }
 .repo svg { width: 16px; height: 16px; fill: currentColor; }
 
 /* Contact */
@@ -208,9 +208,32 @@ figcaption b { color: var(--title); font-weight: 600; }
 .scroller { display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-left: 2px; padding: 2px 2px 12px; margin: 0 -2px;
   scrollbar-width: thin; scrollbar-color: var(--line) transparent; overscroll-behavior-x: contain; }
 .scroller:focus-visible { outline: 2px solid var(--accent-2); outline-offset: 4px; border-radius: 8px; }
-.scroller > .proj { flex: 0 0 300px; scroll-snap-align: start; min-height: 190px; }
+.scroller > .proj { flex: 0 0 380px; scroll-snap-align: start; min-height: 250px; padding: 20px 22px; gap: 9px; }
+.scroller > .proj h3 { font-size: 19px; }
+.scroller > .proj p { font-size: 15.5px; }
 @media (max-width: 720px) { .scroller > .proj { flex-basis: 82%; } .scroll-btns { display: none; } }
 .scroller { --fl: 0px; --fr: 40px; -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 var(--fl), #000 calc(100% - var(--fr)), transparent 100%); mask-image: linear-gradient(90deg, transparent 0, #000 var(--fl), #000 calc(100% - var(--fr)), transparent 100%); }
 .scroller.not-start { --fl: 40px; }
 .scroller.at-end { --fr: 0px; }
 .proj.has-bg:has(.bg.on-dark) { background: var(--card); }
+
+/* "Stage CEA" in the nav: highlighted */
+nav ul li:not(.ctl) a { color: var(--accent); font-weight: 600; border: 1px solid color-mix(in srgb, var(--accent) 55%, transparent); padding: 6px 12px; border-radius: 8px; }
+nav ul li:not(.ctl) a:hover { color: var(--title); border-color: var(--accent); }
+nav ul li:not(.ctl) a[aria-current="page"] { color: #111; background: var(--accent); box-shadow: none; padding: 6px 12px; }
+@media (max-width: 720px) { nav ul { padding-top: 12px; } }
+
+/* "Voir les résultats": a real button */
+.hl-main .more { margin-top: 14px; color: #111; background: var(--accent); padding: 9px 16px; border-radius: 9px; font-size: 15px; }
+.hl-main:hover .more { filter: brightness(1.08); }
+
+/* Animated before/after on the highlight card */
+.ba { position: relative; overflow: hidden; aspect-ratio: 1200 / 615; height: 100%; min-height: 100%; }
+.hl-main .ba img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; aspect-ratio: auto; }
+.ba-mine { clip-path: inset(0 0 0 50%); animation: ba-clip 7s ease-in-out infinite; }
+.ba-line { position: absolute; top: 0; bottom: 0; left: 50%; width: 2px; margin-left: -1px; background: #fff; box-shadow: 0 0 8px rgba(0,0,0,.5); animation: ba-line 7s ease-in-out infinite; }
+.ba-tag { position: absolute; bottom: 10px; font-size: 12px; font-weight: 600; color: #fff; background: rgba(0,0,0,.55); padding: 3px 8px; border-radius: 6px; }
+.ba-tag.l { left: 10px; } .ba-tag.r { right: 10px; }
+@keyframes ba-clip { 0%, 100% { clip-path: inset(0 0 0 18%); } 50% { clip-path: inset(0 0 0 82%); } }
+@keyframes ba-line { 0%, 100% { left: 18%; } 50% { left: 82%; } }
+@media (prefers-reduced-motion: reduce) { .ba-mine, .ba-line { animation: none; } }

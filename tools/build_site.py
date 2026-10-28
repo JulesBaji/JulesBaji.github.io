@@ -17,10 +17,10 @@ L = {
   nav=[('@cea','Stage CEA')],
   contact='Contact',
   role='Ingénieur R&amp;D · Graphics, géométrie &amp; 3D ML',
-  pitch="Diplômé d’un Master en Informatique spécialisé en rendu, géométrie et performance pour la 3D. Machine learning en PyTorch et en C++/CUDA natif. Expérience récente au CEA Saclay sur le Gaussian Splatting pour la VR. Mobilité internationale.",
+  pitch="Jeune diplômé en informatique graphique : je développe en C++ et CUDA des moteurs de rendu 3D et des outils de calcul.",
   meta='Paris · disponible immédiatement',
   cv='CV (PDF)', cv_file='cv/CV_Jules_Baji.pdf', email='E-mail',
-  h_hl='À la une', h_exp='Expérience', h_skills='Compétences', h_proj='Projets de master', prev='Projets précédents', next='Projets suivants', theme_label='Changer de thème (sombre/clair)', h_form='Formation', h_contact='Contact',
+  h_hl='À la une', hl_ref='Référence', hl_mine='Ma méthode', h_exp='Expérience', h_skills='Compétences', h_proj='Projets de master', prev='Projets précédents', next='Projets suivants', theme_label='Changer de thème (sombre/clair)', h_form='Formation', h_contact='Contact',
   hl_main=('Stage de fin d\'études · CEA Saclay · 2025', 'Des reflets plus réalistes en réalité virtuelle',
            "Amélioration du Gaussian Splatting, une technique qui recrée une scène 3D à partir de photos.", 'Voir les résultats →',
            'Comparaison avant/après : méthode de référence à gauche, ma méthode à droite'),
@@ -69,10 +69,10 @@ L = {
   nav=[('@cea','CEA internship')],
   contact='Contact',
   role='R&amp;D Engineer · Graphics, geometry &amp; 3D ML',
-  pitch="MSc in Computer Science specialising in rendering, geometry and performance for 3D. Machine learning in PyTorch and in native C++/CUDA. Recent experience at CEA Saclay on Gaussian Splatting for VR. Open to international relocation.",
+  pitch="Recent computer graphics graduate: I build 3D rendering engines and computing tools in C++ and CUDA.",
   meta='Paris · available immediately',
   cv='Resume (PDF)', cv_file='cv/Resume_Jules_Baji.pdf', email='Email',
-  h_hl='Highlights', h_exp='Experience', h_skills='Skills', h_proj="Master's projects", prev='Previous projects', next='Next projects', theme_label='Switch theme (dark/light)', h_form='Education', h_contact='Contact',
+  h_hl='Highlights', hl_ref='Baseline', hl_mine='My method', h_exp='Experience', h_skills='Skills', h_proj="Master's projects", prev='Previous projects', next='Next projects', theme_label='Switch theme (dark/light)', h_form='Education', h_contact='Contact',
   hl_main=("Master's thesis internship · CEA Saclay · 2025", 'More realistic reflections in virtual reality',
            "Improving Gaussian Splatting, a technique that recreates a 3D scene from photos.", 'See the results →',
            'Before/after comparison: reference method on the left, my method on the right'),
@@ -153,7 +153,7 @@ def nav(t, home_prefix, other_href, current=''):
 '''
 
 def chips(xs): return '<div class="chips">' + ''.join(f'<span class="chip">{x}</span>' for x in xs) + '</div>'
-def repo(r): return f'<a href="https://github.com/JulesBaji/{r}" target="_blank" rel="noopener" aria-label="GitHub {r}">{GH}<span>{r}</span><span aria-hidden="true">↗</span></a>'
+def repo(r): return f'<a href="https://github.com/JulesBaji/{r}" target="_blank" rel="noopener" aria-label="GitHub {r}">{GH}<span>{r}</span></a>'
 
 def links(t):
     p = t['p']
@@ -225,7 +225,7 @@ def home(t):
     <h2>{t['h_hl']}</h2>
     <div class="highlights">
       <a class="card hl-main" href="{cp}">
-        <img src="{p}images/web/teaser_cea.webp" alt="{m[4]}" width="1200" height="615">
+        <div class="ba" role="img" aria-label="{m[4]}"><img src="{p}images/web/teaser_ref.webp" alt="" width="1200" height="615"><img class="ba-mine" src="{p}images/web/teaser_mine.webp" alt="" width="1200" height="615"><span class="ba-line" aria-hidden="true"></span><span class="ba-tag l">{t['hl_ref']}</span><span class="ba-tag r">{t['hl_mine']}</span></div>
         <div class="body"><p class="kicker">{m[0]}</p><h3>{m[1]}</h3><p>{m[2]}</p><span class="more">{m[3]}</span></div>
       </a>
     </div>
