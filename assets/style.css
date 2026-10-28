@@ -35,7 +35,7 @@ nav .cta { color: #111; background: var(--accent); padding: 7px 14px; border-rad
 nav .cta:hover { color: #111; filter: brightness(1.08); }
 @media (max-width: 720px) {
   nav .wrap { flex-wrap: wrap; gap: 0 12px; padding-top: 8px; padding-bottom: 8px; }
-  nav ul { order: 3; width: 100%; overflow-x: auto; gap: 18px; padding: 10px 0 2px; scrollbar-width: none; white-space: nowrap; }
+  nav ul { order: 3; width: 100%; gap: 18px; padding: 8px 0 2px; white-space: nowrap; }
   nav ul li.ctl { display: none; }
   nav .ctl-mobile { display: flex; gap: 8px; align-items: center; }
 }
@@ -222,7 +222,11 @@ figcaption b { color: var(--title); font-weight: 600; }
 nav ul li:not(.ctl) a { color: var(--accent); font-weight: 600; border: 1px solid color-mix(in srgb, var(--accent) 55%, transparent); padding: 6px 12px; border-radius: 8px; }
 nav ul li:not(.ctl) a:hover { color: var(--title); border-color: var(--accent); }
 nav ul li:not(.ctl) a[aria-current="page"] { color: #111; background: var(--accent); box-shadow: none; padding: 6px 12px; }
-@media (max-width: 720px) { nav ul { padding-top: 12px; } }
+@media (max-width: 720px) {
+  nav ul li:not(.ctl) a { display: inline-flex; align-items: center; height: 34px; padding: 0 12px; font-size: 14px; }
+  nav .ctl-mobile .theme, nav .ctl-mobile .lang, nav .ctl-mobile .cta { height: 34px; display: inline-flex; align-items: center; box-sizing: border-box; }
+  nav .ctl-mobile .lang { padding: 0 10px; } nav .ctl-mobile .cta { padding: 0 14px; } nav .ctl-mobile .theme { width: 34px; }
+}
 
 /* "Voir les résultats": a real button */
 .hl-main .more { margin-top: 14px; color: #111; background: var(--accent); padding: 9px 16px; border-radius: 9px; font-size: 15px; }
