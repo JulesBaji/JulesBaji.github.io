@@ -37,14 +37,12 @@
 
 <section style="border-top:0">
   <div class="wrap">
-    <div class="explain"><div class="card"><p class="kicker">The problem</p><p>Gaussian Splatting recreates a 3D scene from photos and displays it in real time, but it renders reflections poorly (shiny surfaces, glass, metal objects).</p></div><div class="card"><p class="kicker">What I did</p><p>I first tested ray tracing, which simulates the path of light: accurate, but too slow for a virtual reality headset (60 frames per second minimum). I then added a mathematical model of reflections (Spherical Gaussians) to the standard renderer.</p></div><div class="card"><p class="kicker">The result</p><p>Much more realistic reflections, closer to the real photo on all three test scenes, at the same speed as the base method (about 300 frames per second).</p></div></div>
+    <div class="explain"><div class="card"><p class="kicker">The problem</p><p>Gaussian Splatting recreates a 3D scene from photos and displays it in real time, but it renders reflections poorly (shiny surfaces, glass, metal objects).</p></div><div class="card"><p class="kicker">What I did</p><p>I first tested ray tracing, which simulates the path of light: accurate, but too slow for a virtual reality headset. I then added a mathematical model of reflections to the standard renderer.</p></div><div class="card"><p class="kicker">The result</p><p>Much more realistic reflections, closer to the real photo on all three test scenes, at the same speed as the base method.</p></div></div>
     <h2>Compare</h2>
-    <p class="note">Drag the slider: the reference method (gsplat) on the left, my method on the right. PSNR measures similarity to the real photo (higher is closer).</p>
     <div class="tabs" role="tablist" id="scene-tabs"></div>
     <div class="card viewer">
-      <div class="top-line"><span class="meta" id="scene-meta"></span><div class="views" id="scene-views"></div></div>
+      <div class="top-line"><div class="views" id="scene-views"></div></div>
       <div class="compare" id="cmp"></div>
-      <div class="full" id="cmp-full"></div>
     </div>
   </div>
 </section>
@@ -67,6 +65,6 @@ window.CEA_TXT = { prefix: '../', ref: 'Reference (gsplat)', mine: 'My method', 
 </script>
 <script src="../assets/chips.js?v=0b14bcaf"></script>
 <script src="../assets/theme.js?v=edba93ed"></script>
-<script src="../assets/cea.js?v=742552e8"></script>
+<script src="../assets/cea.js?v=581910be"></script>
 </body>
 </html>

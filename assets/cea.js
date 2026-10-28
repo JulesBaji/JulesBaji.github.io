@@ -25,12 +25,12 @@
       var x = e.target.value;
       top.style.clipPath = 'inset(0 0 0 ' + x + '%)'; bar.style.left = x + '%'; knob.style.left = x + '%';
     });
-    full.innerHTML = T.full + ' <a href="' + v.fa + '">' + v.la.toLowerCase() + '</a> · <a href="' + v.fb + '">' + v.lb.toLowerCase() + '</a>';
+    if (full) full.innerHTML = T.full + ' <a href="' + v.fa + '">' + v.la.toLowerCase() + '</a> · <a href="' + v.fb + '">' + v.lb.toLowerCase() + '</a>';
   }
   function showScene(i) {
     var sc = SCENES[i];
     tabs.querySelectorAll('.tab').forEach(function (t, j) { t.setAttribute('aria-selected', j === i ? 'true' : 'false'); });
-    meta.innerHTML = sc.meta; views.innerHTML = '';
+    if (meta) meta.innerHTML = sc.meta; views.innerHTML = '';
     if (sc.views.length > 1) sc.views.forEach(function (v, j) {
       var b = document.createElement('button');
       b.textContent = v.tag || (T.view + ' ' + (j + 1));

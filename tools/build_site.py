@@ -56,8 +56,8 @@ L = {
   cea_desc="Stage de fin d'études de Jules Baji au CEA Saclay : amélioration des reflets en Gaussian Splatting pour la réalité virtuelle.",
   cea_back='← Retour à l\'accueil', cea_meta='Stage de fin d\'études · CEA Saclay · janvier à juillet 2025',
   boxes=[('Le problème',"Le Gaussian Splatting recrée une scène 3D à partir de photos et l'affiche en temps réel, mais il rend mal les reflets (surfaces brillantes, vitres, objets métalliques)."),
-         ("Ce que j'ai fait","J'ai d'abord testé le lancer de rayons, qui simule le trajet de la lumière : fidèle, mais trop lent pour un casque de réalité virtuelle (60 images par seconde minimum). J'ai ensuite ajouté au rendu classique un modèle mathématique des reflets (Gaussiennes Sphériques)."),
-         ('Le résultat',"Des reflets nettement plus réalistes, plus proches de la photo réelle sur les trois scènes testées, à la même vitesse que la méthode de base (environ 300 images par seconde).")],
+         ("Ce que j'ai fait","J'ai d'abord testé le lancer de rayons, qui simule le trajet de la lumière : fidèle, mais trop lent pour un casque de réalité virtuelle. J'ai ensuite ajouté au rendu classique un modèle mathématique des reflets."),
+         ('Le résultat',"Des reflets nettement plus réalistes, plus proches de la photo réelle sur les trois scènes testées, à la même vitesse que la méthode de base.")],
   h_cmp='Comparer', cmp_note="Faites glisser le curseur : à gauche la méthode de référence (gsplat), à droite ma méthode. Le PSNR mesure la ressemblance avec la photo réelle (plus haut = plus proche).",
   h_vid="Vidéos : méthodes étudiées pendant l'état de l'art", scene_sac='scène SAC', and_='et',
   h_tech='Technologies', tech=['C++','CUDA','OpenMP','PyTorch','Gaussian Splatting','Ray Tracing','VR'],
@@ -107,8 +107,8 @@ L = {
   cea_desc="Jules Baji's master's thesis internship at CEA Saclay: better reflections in Gaussian Splatting for virtual reality.",
   cea_back='← Back to home', cea_meta="Master's thesis internship · CEA Saclay · January to July 2025",
   boxes=[('The problem',"Gaussian Splatting recreates a 3D scene from photos and displays it in real time, but it renders reflections poorly (shiny surfaces, glass, metal objects)."),
-         ('What I did',"I first tested ray tracing, which simulates the path of light: accurate, but too slow for a virtual reality headset (60 frames per second minimum). I then added a mathematical model of reflections (Spherical Gaussians) to the standard renderer."),
-         ('The result',"Much more realistic reflections, closer to the real photo on all three test scenes, at the same speed as the base method (about 300 frames per second).")],
+         ('What I did',"I first tested ray tracing, which simulates the path of light: accurate, but too slow for a virtual reality headset. I then added a mathematical model of reflections to the standard renderer."),
+         ('The result',"Much more realistic reflections, closer to the real photo on all three test scenes, at the same speed as the base method.")],
   h_cmp='Compare', cmp_note="Drag the slider: the reference method (gsplat) on the left, my method on the right. PSNR measures similarity to the real photo (higher is closer).",
   h_vid='Videos: methods studied during the state-of-the-art review', scene_sac='SAC scene', and_='and',
   h_tech='Technologies', tech=['C++','CUDA','OpenMP','PyTorch','Gaussian Splatting','Ray Tracing','VR'],
@@ -317,12 +317,10 @@ window.CEA_TXT = {{ prefix: '{p}', ref: '{j['ref']}', mine: '{j['mine']}', photo
   <div class="wrap">
     <div class="explain">{boxes}</div>
     <h2>{t['h_cmp']}</h2>
-    <p class="note">{t['cmp_note']}</p>
     <div class="tabs" role="tablist" id="scene-tabs"></div>
     <div class="card viewer">
-      <div class="top-line"><span class="meta" id="scene-meta"></span><div class="views" id="scene-views"></div></div>
+      <div class="top-line"><div class="views" id="scene-views"></div></div>
       <div class="compare" id="cmp"></div>
-      <div class="full" id="cmp-full"></div>
     </div>
   </div>
 </section>
