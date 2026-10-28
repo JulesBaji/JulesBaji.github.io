@@ -15,7 +15,7 @@ L = {
  'fr': dict(
   lang='fr', other='en/', other_label='EN', other_title='English version', other_hreflang='en',
   home='', p='', cea_page='stage-cea.html', proj_page='projets.html',
-  title='Jules Baji · Ingénieur en informatique graphique',
+  title='Jules Baji · Computer Graphics Engineer',
   desc="Jules Baji, ingénieur en informatique graphique : rendu 3D, calcul GPU et IA pour la 3D. Stage au CEA Saclay sur le Gaussian Splatting pour la réalité virtuelle.",
   nav=[('@cea','Stage CEA')],
   contact='Contact',
@@ -67,7 +67,7 @@ L = {
  'en': dict(
   lang='en', other='../', other_label='FR', other_title='Version française', other_hreflang='fr',
   home='', p='../', cea_page='cea-internship.html', proj_page='projects.html',
-  title='Jules Baji · Computer graphics engineer',
+  title='Jules Baji · Computer Graphics Engineer',
   desc="Jules Baji, computer graphics engineer: 3D rendering, GPU computing and AI for 3D. Internship at CEA Saclay on Gaussian Splatting for virtual reality.",
   nav=[('@cea','CEA internship')],
   contact='Contact',
