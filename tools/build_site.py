@@ -8,6 +8,9 @@ MAIL = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 5h20v14H2V5zm2 2
 IN = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3V9zm7 0h3.8v1.7h.1c.5-1 1.8-2 3.7-2 4 0 4.7 2.6 4.7 6V21h-4v-5.6c0-1.3 0-3-1.9-3s-2.1 1.4-2.1 2.9V21h-4V9z"/></svg>'
 DOC = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2h9l5 5v15H6V2zm8 1.5V8h4.5L14 3.5zM8 12h10v1.6H8V12zm0 3.5h10v1.6H8v-1.6zm0 3.5h7v1.6H8V19z"/></svg>'
 
+import hashlib as _h, glob as _g
+V = {os.path.basename(f): _h.md5(open(f, 'rb').read()).hexdigest()[:8] for f in _g.glob(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'assets', '*'))}
+
 L = {
  'fr': dict(
   lang='fr', other='en/', other_label='EN', other_title='English version', other_hreflang='en',
@@ -20,7 +23,7 @@ L = {
   pitch="Jeune diplômé en informatique graphique : je développe en C++ et CUDA des moteurs de rendu 3D et des outils de calcul.",
   meta='Paris · disponible immédiatement',
   cv='CV (PDF)', cv_file='cv/CV_Jules_Baji.pdf', email='E-mail',
-  h_hl='À la une', hl_ref='Référence', hl_mine='Ma méthode', h_exp='Expérience', h_skills='Compétences', h_proj='Projets de master', prev='Projets précédents', next='Projets suivants', theme_label='Changer de thème (sombre/clair)', h_form='Formation', h_contact='Contact',
+  h_hl='À la une', h_exp='Expérience', h_skills='Compétences', h_proj='Projets de master', prev='Projets précédents', next='Projets suivants', theme_label='Changer de thème (sombre/clair)', h_form='Formation', h_contact='Contact',
   hl_main=('Stage de fin d\'études · CEA Saclay · 2025', 'Des reflets plus réalistes en réalité virtuelle',
            "Amélioration du Gaussian Splatting, une technique qui recrée une scène 3D à partir de photos.", 'Voir les résultats →',
            'Comparaison avant/après : méthode de référence à gauche, ma méthode à droite'),
@@ -72,7 +75,7 @@ L = {
   pitch="Recent computer graphics graduate: I build 3D rendering engines and computing tools in C++ and CUDA.",
   meta='Paris · available immediately',
   cv='Resume (PDF)', cv_file='cv/Resume_Jules_Baji.pdf', email='Email',
-  h_hl='Highlights', hl_ref='Baseline', hl_mine='My method', h_exp='Experience', h_skills='Skills', h_proj="Master's projects", prev='Previous projects', next='Next projects', theme_label='Switch theme (dark/light)', h_form='Education', h_contact='Contact',
+  h_hl='Highlights', h_exp='Experience', h_skills='Skills', h_proj="Master's projects", prev='Previous projects', next='Next projects', theme_label='Switch theme (dark/light)', h_form='Education', h_contact='Contact',
   hl_main=("Master's thesis internship · CEA Saclay · 2025", 'More realistic reflections in virtual reality',
            "Improving Gaussian Splatting, a technique that recreates a 3D scene from photos.", 'See the results →',
            'Before/after comparison: reference method on the left, my method on the right'),
@@ -125,7 +128,7 @@ def head(t, title, desc, p):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="{p}assets/style.css">
+<link rel="stylesheet" href="{p}assets/style.css?v={V["style.css"]}">
 <script>try{{if(localStorage.getItem('theme')==='light')document.documentElement.dataset.theme='light'}}catch(e){{}}</script>
 </head>
 <body>
@@ -225,7 +228,7 @@ def home(t):
     <h2>{t['h_hl']}</h2>
     <div class="highlights">
       <a class="card hl-main" href="{cp}">
-        <div class="ba" role="img" aria-label="{m[4]}"><img src="{p}images/web/teaser_ref.webp" alt="" width="1200" height="615"><img class="ba-mine" src="{p}images/web/teaser_mine.webp" alt="" width="1200" height="615"><span class="ba-line" aria-hidden="true"></span><span class="ba-tag l">{t['hl_ref']}</span><span class="ba-tag r">{t['hl_mine']}</span></div>
+        <div class="ba" role="img" aria-label="{m[4]}"><img src="{p}images/web/teaser_ref.webp" alt="" width="1200" height="615"><img class="ba-mine" src="{p}images/web/teaser_mine.webp" alt="" width="1200" height="615"><span class="ba-line" aria-hidden="true"></span></div>
         <div class="body"><p class="kicker">{m[0]}</p><h3>{m[1]}</h3><p>{m[2]}</p><span class="more">{m[3]}</span></div>
       </a>
     </div>
@@ -274,10 +277,10 @@ def home(t):
 </main>
 
 <footer>{t['footer']}</footer>
-<script src="{p}assets/chips.js"></script>
-<script src="{p}assets/theme.js"></script>
-<script src="{p}assets/cornell.js"></script>
-<script src="{p}assets/scroller.js"></script>
+<script src="{p}assets/chips.js?v={V["chips.js"]}"></script>
+<script src="{p}assets/theme.js?v={V["theme.js"]}"></script>
+<script src="{p}assets/cornell.js?v={V["cornell.js"]}"></script>
+<script src="{p}assets/scroller.js?v={V["scroller.js"]}"></script>
 </body>
 </html>
 '''
@@ -335,9 +338,9 @@ window.CEA_TXT = {{ prefix: '{p}', ref: '{j['ref']}', mine: '{j['mine']}', photo
 
 <footer>{t['footer']}</footer>
 {jsconf}
-<script src="{p}assets/chips.js"></script>
-<script src="{p}assets/theme.js"></script>
-<script src="{p}assets/cea.js"></script>
+<script src="{p}assets/chips.js?v={V["chips.js"]}"></script>
+<script src="{p}assets/theme.js?v={V["theme.js"]}"></script>
+<script src="{p}assets/cea.js?v={V["cea.js"]}"></script>
 </body>
 </html>
 '''
