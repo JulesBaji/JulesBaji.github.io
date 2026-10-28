@@ -233,3 +233,4 @@ nav ul li:not(.ctl) a[aria-current="page"] { color: #111; background: var(--acce
 /* CEA page: skill chips as tall as the report button */
 .head-tools .chips { gap: 8px; }
 .head-tools .chip { font-size: 14px; height: 42px; display: inline-flex; align-items: center; padding: 0 14px; border-radius: 9px; }
+footer .credit { font-size: 12.5px; color: var(--muted); }

@@ -50,7 +50,7 @@ L = {
   interests="Centres d'intérêt : trompette au conservatoire (2011-2019), trésorier de l'association étudiante du master, escalade.",
   contact_line="Référence : ingénieur-chercheur au CEA, mon encadrant de stage, contact sur demande.",
   report='Rapport de stage (PDF, 6 Mo)',
-  footer='© 2026 Jules Baji · Paris',
+  footer='© 2026 Jules Baji · Paris<br><span class="credit">Image d\'en-tête : <a href="https://github.com/gue-ni/raytracer" target="_blank" rel="noopener">raytracer de Jakob Maier</a> (licence MIT)</span>',
   # page du stage
   cea_title='Stage au CEA : des reflets plus réalistes en réalité virtuelle',
   cea_desc="Stage de fin d'études de Jules Baji au CEA Saclay : amélioration des reflets en Gaussian Splatting pour la réalité virtuelle.",
@@ -102,7 +102,7 @@ L = {
   interests="Interests: trumpet at the conservatory (2011-2019), treasurer of the master's student association, climbing.",
   contact_line="Reference: research engineer at CEA, my internship supervisor, contact on request.",
   report='Internship report (PDF, French, 6 MB)',
-  footer='© 2026 Jules Baji · Paris',
+  footer='© 2026 Jules Baji · Paris<br><span class="credit">Header image: <a href="https://github.com/gue-ni/raytracer" target="_blank" rel="noopener">Jakob Maier\'s raytracer</a> (MIT licence)</span>',
   cea_title='CEA internship: more realistic reflections in virtual reality',
   cea_desc="Jules Baji's master's thesis internship at CEA Saclay: better reflections in Gaussian Splatting for virtual reality.",
   cea_back='← Back to home', cea_meta="Master's thesis internship · CEA Saclay · January to July 2025",
