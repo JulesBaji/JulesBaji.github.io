@@ -208,10 +208,11 @@ figcaption b { color: var(--title); font-weight: 600; }
 .scroller { display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-left: 2px; padding: 2px 2px 12px; margin: 0 -2px;
   scrollbar-width: thin; scrollbar-color: var(--line) transparent; overscroll-behavior-x: contain; }
 .scroller:focus-visible { outline: 2px solid var(--accent-2); outline-offset: 4px; border-radius: 8px; }
-.scroller > .proj { flex: 0 0 470px; scroll-snap-align: start; min-height: 320px; padding: 26px 28px; gap: 12px; }
-.scroller > .proj h3 { font-size: 22px; }
-.scroller > .proj p { font-size: 16.5px; }
-.scroller > .proj .chip { font-size: 13px; }
+.scroller > .proj { flex: 0 0 calc((100% - 24px) / 3); scroll-snap-align: start; min-height: 280px; padding: 22px 24px; gap: 10px; }
+.scroller > .proj h3 { font-size: 19px; }
+.scroller > .proj p { font-size: 15.5px; }
+.scroller > .proj .chip { font-size: 12.5px; }
+@media (max-width: 1000px) and (min-width: 721px) { .scroller > .proj { flex-basis: calc((100% - 12px) / 2); } }
 @media (max-width: 720px) { .scroller > .proj { flex-basis: 82%; } .scroll-btns { display: none; } }
 .scroller { --fl: 0px; --fr: 40px; -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 var(--fl), #000 calc(100% - var(--fr)), transparent 100%); mask-image: linear-gradient(90deg, transparent 0, #000 var(--fl), #000 calc(100% - var(--fr)), transparent 100%); }
 .scroller.not-start { --fl: 40px; }
@@ -236,3 +237,7 @@ nav ul li:not(.ctl) a[aria-current="page"] { color: #111; background: var(--acce
 @keyframes ba-clip { 0%, 100% { clip-path: inset(0 0 0 18%); } 50% { clip-path: inset(0 0 0 82%); } }
 @keyframes ba-line { 0%, 100% { left: 18%; } 50% { left: 82%; } }
 @media (prefers-reduced-motion: reduce) { .ba-mine, .ba-line { animation: none; } }
+
+/* CEA page: skill chips as tall as the report button */
+.head-tools .chips { gap: 8px; }
+.head-tools .chip { font-size: 14px; height: 42px; display: inline-flex; align-items: center; padding: 0 14px; border-radius: 9px; }
