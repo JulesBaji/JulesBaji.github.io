@@ -36,8 +36,8 @@ L = {
           ('Langues','Français · Anglais C1')],
   proj_sub='Université de Limoges, 2023-2025',
   projects=[
-   ("Synthèse d'image réaliste","Path tracer avec BRDF à microfacettes, géométrie SDF et CSG, accéléré par BVH.",['C++','OpenMP'],['Path-Tracer']),
    ("Moteur 3D temps réel","Maillages, textures, caméras, lumières, shaders et rendu différé.",['C++','OpenGL','GLSL'],['Moteur3D']),
+   ("Synthèse d'image réaliste","Path tracer avec BRDF à microfacettes, géométrie SDF et CSG, accéléré par BVH.",['C++','OpenMP'],['Path-Tracer']),
    ("Simulation de fluide","Fluide SPH incompressible avec turbulences, d'après un <a href=\"https://doi.org/10.1109/TVCG.2018.2832080\" target=\"_blank\" rel=\"noopener\">article de recherche</a>.",['Java'],['SPH-Fluid']),
    ("Détection de collisions 3D","Sweep and Prune, BVH et test triangle-triangle de Möller.",['WebGL','JavaScript'],['Modelisation-Collision-Detection']),
    ("Parallélisme","Kernels CUDA pour une carte de hauteur ; recherche de sous-image MPI et OpenMP.",['CUDA','MPI','OpenMP'],['GPGPU','Parallelisme']),
@@ -88,8 +88,8 @@ L = {
           ('Spoken languages','French · English C1')],
   proj_sub='University of Limoges, 2023-2025',
   projects=[
-   ("Realistic image synthesis","Path tracer with microfacet BRDFs, SDF geometry and CSG, accelerated by a BVH.",['C++','OpenMP'],['Path-Tracer']),
    ("Real-time 3D engine","Meshes, textures, cameras, lights, shaders and deferred rendering.",['C++','OpenGL','GLSL'],['Moteur3D']),
+   ("Realistic image synthesis","Path tracer with microfacet BRDFs, SDF geometry and CSG, accelerated by a BVH.",['C++','OpenMP'],['Path-Tracer']),
    ("Fluid simulation","Incompressible SPH fluid with turbulence, based on a <a href=\"https://doi.org/10.1109/TVCG.2018.2832080\" target=\"_blank\" rel=\"noopener\">research paper</a>.",['Java'],['SPH-Fluid']),
    ("3D collision detection","Sweep and Prune, BVH and Möller's triangle-triangle test.",['WebGL','JavaScript'],['Modelisation-Collision-Detection']),
    ("Parallel computing","CUDA kernels for a heightmap; MPI and OpenMP sub-image search.",['CUDA','MPI','OpenMP'],['GPGPU','Parallelisme']),
