@@ -19,6 +19,7 @@ L = {
   desc="Jules Baji, ingénieur en informatique graphique : rendu 3D, calcul GPU et IA pour la 3D. Stage au CEA Saclay sur le Gaussian Splatting pour la réalité virtuelle.",
   nav=[('@cea','Stage CEA')],
   contact='Contact',
+  photo_alt='Photo de Jules Baji',
   role='Ingénieur R&amp;D · Graphics, géométrie &amp; 3D ML',
   pitch="Jeune diplômé en informatique graphique : je développe en C++ et CUDA des moteurs de rendu 3D et des outils de calcul.",
   meta='Paris · disponible immédiatement',
@@ -71,6 +72,7 @@ L = {
   desc="Jules Baji, computer graphics engineer: 3D rendering, GPU computing and AI for 3D. Internship at CEA Saclay on Gaussian Splatting for virtual reality.",
   nav=[('@cea','CEA internship')],
   contact='Contact',
+  photo_alt='Photo of Jules Baji',
   role='R&amp;D Engineer · Graphics, geometry &amp; 3D ML',
   pitch="Recent computer graphics graduate: I build 3D rendering engines and computing tools in C++ and CUDA.",
   meta='Paris · available immediately',
@@ -214,8 +216,13 @@ def home(t):
   <img class="banner" src="{p}images/web/banniere.webp" alt="" aria-hidden="true">
   <div class="wrap">
     <div>
-      <h1>Jules Baji</h1>
-      <p class="role">{t['role']}</p>
+      <div class="id">
+        <img class="photo" src="{p}images/web/jules-baji.jpg" alt="{t['photo_alt']}" width="400" height="400">
+        <div>
+          <h1>Jules Baji</h1>
+          <p class="role">{t['role']}</p>
+        </div>
+      </div>
       <p class="pitch">{t['pitch']}</p>
       <p class="meta">{t['meta']}</p>
       {links(t)}
