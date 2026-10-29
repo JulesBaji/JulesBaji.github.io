@@ -51,8 +51,8 @@ nav .cta:hover { color: #111; filter: brightness(1.08); }
 .hero .wrap { display: block; }
 .hero .id { display: flex; align-items: center; gap: 22px; margin: 0 0 12px; }
 .hero .id .role { margin: 0; }
-.hero .photo { flex: none; width: 116px; height: 116px; border-radius: 50%; object-fit: cover; border: 3px solid var(--line); }
-@media (max-width: 640px) { .hero .id { gap: 16px; } .hero .photo { width: 88px; height: 88px; } }
+.hero .photo { flex: none; width: 136px; height: 136px; border-radius: 50%; object-fit: cover; border: 3px solid var(--line); }
+@media (max-width: 640px) { .hero .id { gap: 16px; } .hero .photo { width: 96px; height: 96px; } }
 .hero h1 { font-size: clamp(36px, 6vw, 52px); line-height: 1.05; margin: 0 0 6px; color: var(--title); letter-spacing: -.02em; }
 .hero .role { font-size: 19px; color: var(--accent); font-weight: 600; margin: 0 0 10px; }
 .hero .pitch { font-size: 17px; margin: 0 0 8px; max-width: 600px; }
