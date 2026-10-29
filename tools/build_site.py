@@ -217,7 +217,7 @@ def home(t):
   <div class="wrap">
     <div>
       <div class="id">
-        <img class="photo" src="{p}images/web/jules-baji.jpg?v=2" alt="{t['photo_alt']}" width="400" height="400">
+        <img class="photo" src="{p}images/web/jules-baji.jpg?v=3" alt="{t['photo_alt']}" width="400" height="400">
         <div>
           <h1>Jules Baji</h1>
           <p class="role">{t['role']}</p>
