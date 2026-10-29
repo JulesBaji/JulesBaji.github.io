@@ -180,7 +180,7 @@ UNILIM = ('<img class="logo logo-unilim on-dark" src="{p}images/logos/unilim-som
 PROJ_BG = {'Modelisation-Collision-Detection': ('collisions', True, '70% 50%'),
            'SPH-Fluid': (('fluide-dk', 'fluide-lt'), False, '50% 80%'),
            'Moteur3D': ('moteur3d', False, '50% 40%'),
-           'Detection-Recapture': ('recapture', False, '60% 40%'),
+           'Detection-Recapture': ('recapture.jpg', False, '50% 50%'),  # coupe diagonale : photo directe | recapture
            'GPGPU': ('parallelisme', False, '70% 30%'),
            'Geometrie-Discrete': (('geometrie-dk', 'geometrie-lt'), False, '50% 50%'),
            'Impression-3D-GPU': ('impression3d.jpg', False, '60% 50%'),
