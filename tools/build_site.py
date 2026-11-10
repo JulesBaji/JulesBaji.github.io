@@ -39,7 +39,7 @@ L = {
   projects=[
    ("Géométrie discrète","Suivi de contour, polygonisation et mesures de forme.",['C'],['Geometrie-Discrete']),
    ("Détection de collisions 3D","Sweep and Prune, BVH et test triangle-triangle de Möller.",['WebGL','JavaScript'],['Modelisation-Collision-Detection']),
-   ("Impression 3D","Découpe d'un maillage en couches : intersections plan-triangle, triangulation de Delaunay et simplification de contours.",['Java','OpenGL'],['Impression-3D-GPU']),
+   ("Impression 3D","Découpe en couches : Delaunay et rastérisation GPU.",['Java','OpenGL'],['Impression-3D-GPU']),
    ("Synthèse d'image réaliste","Path tracer avec BRDF à microfacettes, géométrie SDF et CSG, accéléré par BVH.",['C++','OpenMP'],['Path-Tracer']),
    ("Moteur 3D temps réel","Maillages, textures, caméras, lumières, shaders et rendu différé.",['C++','OpenGL','GLSL'],['Moteur3D']),
    ("Parallélisme","Kernels CUDA pour une carte de hauteur ; recherche de sous-image MPI et OpenMP.",['CUDA','MPI','OpenMP'],['GPGPU','Parallelisme']),
@@ -92,7 +92,7 @@ L = {
   projects=[
    ("Discrete geometry","Contour tracking, polygonization and shape measures.",['C'],['Geometrie-Discrete']),
    ("3D collision detection","Sweep and Prune, BVH and Möller's triangle-triangle test.",['WebGL','JavaScript'],['Modelisation-Collision-Detection']),
-   ("3D printing","Mesh slicing into layers: plane-triangle intersections, Delaunay triangulation and contour simplification.",['Java','OpenGL'],['Impression-3D-GPU']),
+   ("3D printing","Layer slicing: Delaunay and GPU rasterization.",['Java','OpenGL'],['Impression-3D-GPU']),
    ("Realistic image synthesis","Path tracer with microfacet BRDFs, SDF geometry and CSG, accelerated by a BVH.",['C++','OpenMP'],['Path-Tracer']),
    ("Real-time 3D engine","Meshes, textures, cameras, lights, shaders and deferred rendering.",['C++','OpenGL','GLSL'],['Moteur3D']),
    ("Parallel computing","CUDA kernels for a heightmap; MPI and OpenMP sub-image search.",['CUDA','MPI','OpenMP'],['GPGPU','Parallelisme']),
