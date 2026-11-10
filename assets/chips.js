@@ -5,7 +5,9 @@
     'CUDA':'gpu','OpenMP':'gpu','MPI':'gpu',
     '3D Gaussian Splatting':'gfx','Gaussian Splatting':'gfx','OpenGL':'gfx','WebGL':'gfx','Ray Tracing':'gfx','VR':'gfx',
     'PyTorch':'ml','NumPy':'ml','Keras':'ml',
-    'Linux':'tool','Git':'tool'
+    'Linux':'tool','Git':'tool',
+    'Triangulation de Delaunay':'gfx','Demi-arêtes':'gfx','Tessellation':'gfx','B-splines':'gfx','BVH':'gfx',"Tests d'intersection":'gfx',
+    'Delaunay triangulation':'gfx','Half-edge meshes':'gfx','Intersection tests':'gfx'
   };
   document.querySelectorAll('.chip').forEach(function (c) { c.classList.add(CAT[c.textContent.trim()] || 'tool'); });
 })();
