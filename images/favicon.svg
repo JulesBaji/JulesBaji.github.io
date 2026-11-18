@@ -8,7 +8,7 @@
     </radialGradient>
   </defs>
   <rect width="64" height="64" rx="14" fill="#141920"/>
-  <ellipse cx="33" cy="53" rx="17" ry="4" fill="#000" opacity="0.45"/>
-  <circle cx="32" cy="30" r="20" fill="url(#g)"/>
-  <circle cx="25" cy="22" r="4.5" fill="#fff8ec" opacity="0.9"/>
+  <ellipse cx="33" cy="59" rx="19" ry="2.6" fill="#000" opacity="0.45"/>
+  <circle cx="32" cy="30.5" r="27" fill="url(#g)"/>
+  <circle cx="22.5" cy="19.5" r="6" fill="#fff8ec" opacity="0.9"/>
 </svg>
